@@ -230,6 +230,9 @@ body.timer-on #timer{display:flex;flex-direction:column}
   --display:"Space Grotesk","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
 }
 h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter-spacing:-.01em}
+
+details.tnote{display:none}
+body.teacher details.tnote{display:block}
 </style>
 </head>
 <body>
@@ -424,7 +427,7 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
     <div class="kit-col">
       <h4>Printed sheets</h4>
       <ul class="check">
-        <li>Recovery record sheet — one per student</li>
+        <li>Recovery record sheet — now includes the plant resin questions (section 7) — one per student</li>
         <li>Supported version — method steps to sequence</li>
         <li>Exit ticket slips</li>
         <li>Rust log (already with the jars)</li>
@@ -648,14 +651,17 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
   <p>Years later, out on Country, a long way from anywhere, the tool breaks.</p>
   <p>You do not need a new one. You warm the resin again, it softens again, you reset the point, and it hardens again. <strong>The same material, as many times as you need.</strong></p>
 
+  <div class="note"><span class="lab">Answer these on your sheet</span>
+    Section 7 of your Lesson 3 sheet in OneNote — <strong>Plant resin, the part that matters</strong>. Write straight onto the sheet.</div>
+
   <ol>
-    <li>Is softening and resetting resin a reversible or an irreversible change?</li>
-    <li>Which change we have studied is it most like — melting chocolate, or toasting bread?</li>
+    <li>Is softening and resetting resin a reversible or an irreversible change? How do you know?</li>
+    <li>Which change we have studied is it most like — melting chocolate, or toasting bread? Say why.</li>
     <li>Why would being reversible be exactly the property you would want in a glue?</li>
     <li>Superglue cannot be undone. When would that be better, and when would it be worse?</li>
   </ol>
 
-  <details>
+  <details class="tnote">
     <summary>Show the answers</summary>
     <div class="body">
       <p><strong>1.</strong> Reversible. Nothing new is made — the same resin goes soft and hard, over and over.</p>
