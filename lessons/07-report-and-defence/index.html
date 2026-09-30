@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 7 · Report and defence — Year 6 Chemical Sciences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1b2a4a; --navy-soft:#2c3f66; --amber:#e8930c; --amber-deep:#9a5f00;
+  --teal:#0e7c7b; --teal-soft:#e2f0ef; --paper:#fbf9f4; --line:#dcd9d0;
+  --ink:#23272e; --muted:#5a6478; --white:#fff;
+  --rust:#8a4a22; --rust-soft:#f6e9e0;
+  --ok:#2e6b3f; --warn:#b4560a; --stop:#a32020;
+  --radius:10px;
+  --sans:"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:var(--sans); color:var(--ink); background:var(--paper);
+  font-size:17px; line-height:1.62; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+
+/* ---------- header ---------- */
+header.top{background:var(--navy);color:#fff;padding:22px 0 0}
+.crumb{font-size:14px;color:#a9b6cf;text-decoration:none;display:inline-block;margin-bottom:14px}
+.crumb:hover{color:#fff}
+.meta{font-size:13.5px;color:#9fb0cd;letter-spacing:.02em;margin-bottom:6px}
+h1{font-size:2.05rem;line-height:1.18;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.subtitle{color:#c3d0e6;font-size:1.02rem;margin:0 0 16px}
+.badges{display:flex;flex-wrap:wrap;gap:7px;padding-bottom:18px}
+.badge{font-size:12.5px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#e7edf7;border:1px solid rgba(255,255,255,.18)}
+.badge.code{background:var(--amber);color:#33240a;border-color:transparent;font-weight:600}
+
+/* teacher toggle */
+.tmrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:0 0 18px}
+.tmbtn{
+  display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.26);color:#fff;padding:8px 14px;border-radius:999px;
+  font-size:14px;cursor:pointer;font-family:inherit
+}
+.tmbtn:hover{background:rgba(255,255,255,.18)}
+.tmbtn .dot{width:9px;height:9px;border-radius:50%;background:#7c8aa5}
+body.teacher #tmToggle .dot{background:#5fd08a}
+body.teacher #tmToggle{background:var(--amber);color:#2e2105;border-color:transparent;font-weight:600}
+.tmbtn.lit .dot{background:#5fd08a}
+.tmbtn.lit{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4)}
+.tmhint{font-size:13px;color:#9fb0cd}
+
+/* ---------- tabs ---------- */
+nav.tabs{position:sticky;top:0;z-index:40;background:var(--navy-soft);border-bottom:2px solid var(--amber)}
+.tabscroll{max-width:880px;margin:0 auto;display:flex;overflow-x:auto;padding:0 12px;scrollbar-width:thin}
+.tab{
+  flex:0 0 auto;background:none;border:none;font-family:inherit;font-size:14px;color:#c6d2e6;
+  padding:12px 13px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap
+}
+.tab:hover{color:#fff}
+.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--amber);font-weight:600}
+.tab.tonly{display:none}
+body.teacher .tab.tonly{display:block}
+
+/* ---------- panels ---------- */
+main{padding:26px 0 170px}
+.panel{display:none}
+.panel.active{display:block}
+h2{font-size:1.45rem;color:var(--navy);margin:0 0 4px;letter-spacing:-.01em}
+h3{font-size:1.12rem;color:var(--teal);margin:26px 0 6px}
+h4{font-size:1rem;margin:20px 0 4px;color:var(--navy)}
+p{margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:5px 0}
+.lede{font-size:1.06rem;color:var(--muted);margin-bottom:20px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:16px 0}
+.card h4:first-child,.card h3:first-child{margin-top:0}
+
+.note{border-left:4px solid var(--amber);background:#fdf6e8;padding:13px 16px;margin:15px 0;border-radius:0 8px 8px 0}
+.note .lab{font-weight:700;color:var(--amber-deep);display:block;margin-bottom:3px;font-size:14.5px}
+.note.teal{border-left-color:var(--teal);background:var(--teal-soft)}
+.note.teal .lab{color:var(--teal)}
+.note.stop{border-left-color:var(--stop);background:#fbeaea}
+.note.stop .lab{color:var(--stop)}
+.tnote{display:none}
+body.teacher .tnote{display:block}
+.snote{display:block}
+body.teacher .snote{display:block}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15.5px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff;font-weight:600;font-size:14.5px}
+tbody tr:nth-child(even){background:#faf8f3}
+
+.timechip{display:inline-block;background:var(--teal);color:#fff;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:middle}
+
+details{border:1px solid var(--line);border-radius:8px;background:#fff;padding:0;margin:13px 0}
+summary{cursor:pointer;padding:11px 15px;font-weight:600;color:var(--navy);font-size:15.5px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"▸ ";color:var(--amber);font-weight:700}
+details[open] summary:before{content:"▾ "}
+details .body{padding:0 15px 14px;border-top:1px solid var(--line)}
+
+.paths{display:grid;gap:13px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin:16px 0}
+.path{border:1px solid var(--line);border-top:4px solid var(--teal);border-radius:8px;background:#fff;padding:14px 15px}
+.path.core{border-top-color:var(--navy)}
+.path.push{border-top-color:var(--amber)}
+.path .pt{font-weight:700;margin-bottom:5px;color:var(--navy);font-size:15.5px}
+.path ul{padding-left:19px;margin-bottom:0;font-size:15px}
+
+.stations{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.st{border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}
+.st .hd{background:var(--navy);color:#fff;padding:9px 13px;font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.st .hd .n{background:var(--amber);color:#33240a;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;font-size:13px;flex:0 0 auto}
+.st .bd{padding:12px 14px;font-size:15px}
+.st .bd p{margin-bottom:8px}
+.st .kit{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.st.teacherrun .hd{background:var(--stop)}
+
+.kitgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(245px,1fr))}
+.kit-col{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.kit-col h4{margin-top:0}
+.kit-col ul{font-size:15px;padding-left:19px;margin-bottom:0}
+.check{list-style:none;padding-left:0}
+.check li{position:relative;padding-left:26px}
+.check li:before{content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border:2px solid var(--teal);border-radius:3px}
+
+.vocab{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.vocab span{background:#fff;border:1px solid var(--line);border-radius:6px;padding:5px 11px;font-size:15px}
+.vocab b{color:var(--navy)}
+
+/* ---------- downloads ---------- */
+.dl{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));margin:16px 0}
+.dlitem{
+  display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:9px;padding:13px 14px;text-decoration:none;color:inherit;border-left:4px solid var(--teal)
+}
+.dlitem:hover{border-color:var(--amber);border-left-color:var(--amber);background:#fffdf7}
+.dlitem .ic{
+  flex:0 0 auto;width:38px;height:38px;border-radius:7px;background:var(--teal-soft);color:var(--teal);
+  display:grid;place-items:center;font-size:11px;font-weight:700;letter-spacing:.02em
+}
+.dlitem.doc .ic{background:#e8eefb;color:#2b4a8a}
+.dlitem.doc{border-left-color:#2b4a8a}
+.dlitem.all .ic{background:#fdf0dc;color:var(--amber-deep)}
+.dlitem.all{border-left-color:var(--amber)}
+.dlitem .tt{font-weight:700;font-size:15.5px;color:var(--navy);display:block;margin-bottom:2px;line-height:1.3}
+.dlitem .ds{font-size:13.5px;color:var(--muted);display:block;line-height:1.45}
+.dlitem .sz{font-size:12px;color:#8c95a8;display:block;margin-top:3px}
+.tree{
+  background:var(--navy);color:#dfe6f2;border-radius:9px;padding:15px 17px;margin:14px 0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.75;
+  overflow-x:auto;white-space:pre
+}
+.tree b{color:#ffc978;font-weight:600}
+
+/* ---------- TIMER ---------- */
+#timer{display:none}
+body.timer-on #timer{display:flex;flex-direction:column}
+#timer{
+  position:fixed;right:18px;bottom:18px;z-index:70;width:310px;
+  touch-action:none;
+  background:var(--navy);color:#fff;border-radius:14px;
+  box-shadow:0 10px 34px rgba(16,24,40,.34);overflow:hidden;
+  border:1px solid rgba(255,255,255,.14)
+}
+#timer.min{width:206px}
+.t-hd{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(0,0,0,.2);gap:8px;cursor:grab;user-select:none;-webkit-user-select:none}
+.t-hd:active{cursor:grabbing}
+#timer.dragging{transition:none;box-shadow:0 18px 46px rgba(16,24,40,.5)}
+#timer.dragging .bar i{transition:none}
+.t-hd .grip{display:inline-block;width:13px;height:13px;opacity:.5;flex:0 0 auto;
+  background-image:radial-gradient(currentColor 1px, transparent 1px);
+  background-size:4px 4px;background-position:0 1px}
+.t-hd .ttl{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.t-hd .ttl{font-size:13px;color:#b9c6dd;font-weight:600}
+.t-hd .ctl{display:flex;gap:4px}
+.iconbtn{background:rgba(255,255,255,.12);border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:13px;line-height:1;display:grid;place-items:center;font-family:inherit}
+.iconbtn:hover{background:rgba(255,255,255,.26)}
+.iconbtn.on{background:var(--amber);color:#2e2105}
+.t-body{padding:13px 14px 14px}
+.t-phase{font-size:14.5px;font-weight:600;margin-bottom:2px;line-height:1.3}
+.t-sub{font-size:12px;color:#9fb0cd;margin-bottom:9px}
+.t-clock{font-size:2.9rem;font-weight:700;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-bottom:3px}
+#timer.over .t-clock{color:#ff9a9a}
+#timer.warn .t-clock{color:#ffc978}
+.t-rot{font-size:13px;color:#ffd79a;margin-bottom:9px;display:none}
+#timer.rotating .t-rot{display:block}
+.bar{height:6px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;margin-bottom:11px}
+.bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .4s linear}
+#timer.over .bar i{background:#e06060}
+.t-btns{display:flex;gap:7px;margin-bottom:11px}
+.btn{flex:1;background:rgba(255,255,255,.14);border:none;color:#fff;padding:9px 6px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn:hover{background:rgba(255,255,255,.26)}
+.btn.go{background:var(--amber);color:#2e2105}
+.btn.go:hover{background:#f7a626}
+.t-list{max-height:184px;overflow-y:auto;border-top:1px solid rgba(255,255,255,.14);padding-top:9px}
+.t-row{display:flex;justify-content:space-between;gap:8px;padding:5px 7px;border-radius:6px;font-size:13px;color:#c2cfe4;cursor:pointer;align-items:baseline}
+.t-row:hover{background:rgba(255,255,255,.1)}
+.t-row.cur{background:rgba(232,147,12,.24);color:#fff;font-weight:600}
+.t-row.done{color:#7e8da8}
+.t-row .d{color:#9fb0cd;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.t-row.cur .d{color:#ffd79a}
+.t-foot{font-size:12px;color:#9fb0cd;border-top:1px solid rgba(255,255,255,.14);margin-top:9px;padding-top:8px;display:flex;justify-content:space-between}
+#timer.min .t-body>*:not(.t-clock):not(.t-phase):not(.t-btns){display:none}
+#timer.min .t-clock{font-size:2.1rem}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:1.6rem}
+  #timer{right:10px;bottom:10px;width:calc(100% - 20px);max-width:320px}
+  #timer.min{width:210px}
+  .t-list{max-height:120px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+@media print{
+  header.top,nav.tabs,#timer,.tmrow{display:none}
+  .panel{display:block!important;page-break-before:always}
+  body{background:#fff;font-size:12pt}
+  .card,.note,.st{break-inside:avoid}
+}
+
+/* ---- house style typography ---- */
+:root{
+  --sans:"Atkinson Hyperlegible","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --display:"Space Grotesk","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter-spacing:-.01em}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="crumb" href="../../index.html">← All lessons</a>
+    <div class="meta">Year 6 Science · Can we get it back? · Lesson 7 of 7</div>
+    <h1>Report and defence</h1>
+    <p class="subtitle">Telling a real person what you found — and being asked how you know</p>
+    <div class="badges">
+      <span class="badge code">AC9S6I05</span>
+      <span class="badge">AC9S6I06</span>
+      <span class="badge">AC9S6H01</span>
+      <span class="badge">AC9S6H02</span>
+      <span class="badge">90 minutes</span>
+      <span class="badge">Term 4 · Week 7</span>
+      <span class="badge">★ CP3 submitted</span>
+    </div>
+    <div class="tmrow">
+      <button class="tmbtn" id="tmToggle" aria-pressed="false"><span class="dot"></span> Teacher mode</button>
+      <button class="tmbtn" id="timerToggle" aria-pressed="true"><span class="dot"></span> Lesson timer</button>
+      <span class="tmhint">Drag the timer by its title bar to move it. Double-click the bar to send it back.</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabscroll" role="tablist">
+    <button class="tab tonly" role="tab" data-p="notes" aria-selected="false">Teaching notes</button>
+    <button class="tab" role="tab" data-p="overview" aria-selected="true">Overview</button>
+    <button class="tab" role="tab" data-p="intentions" aria-selected="false">Intentions</button>
+    <button class="tab" role="tab" data-p="final" aria-selected="false">Final reading</button>
+    <button class="tab" role="tab" data-p="write" aria-selected="false">Write it</button>
+    <button class="tab" role="tab" data-p="defence" aria-selected="false">The defence</button>
+    <button class="tab" role="tab" data-p="close" aria-selected="false">Send it</button>
+    <button class="tab" role="tab" data-p="resources" aria-selected="false">Resources</button>
+  </div>
+</nav>
+
+<main><div class="wrap">
+
+<!-- ============ TEACHING NOTES ============ -->
+<section class="panel" id="p-notes">
+  <h2>Teaching notes</h2>
+  <p class="lede">Read before the lesson. Hidden from students when teacher mode is off.</p>
+
+  <div class="note teal"><span class="lab">Where this sits</span>
+    The last lesson. Everything collected since Week 1 gets turned into one page that a real person will read and reply to. The defence is what makes the writing honest — students who know they will be asked "how do you know that?" write differently from students who only have to hand something in.</div>
+
+  <h3>The thing that makes this lesson work</h3>
+  <p>The client is real, and they reply. That single fact does more for the quality of the writing than any amount of scaffolding. If the reply has not been arranged, arrange it before this lesson — even three sentences back from the groundsman is enough. A recommendation nobody reads is just another worksheet.</p>
+
+  <div class="note stop"><span class="lab">Confirm before the lesson</span>
+    That [CLIENT NAME] is expecting the recommendations, knows roughly when they will arrive, and understands that a short written reply is all that is needed. Tell them the students have been at this for seven weeks and that a few specific sentences will land better than a long thank-you.</div>
+
+  <h3>The two moments that matter</h3>
+  <div class="card">
+    <h4>1 · When a group is asked how they know</h4>
+    <p>The gap between "we think jelly works best" and "jelly kept three out of three jars at zero rust for thirty minutes, and the bare control was at three" is the entire Communicating criterion. The challenge questions exist to open that gap in public, where everyone can hear the difference.</p>
+  </div>
+  <div class="card">
+    <h4>2 · When a group names their own weakness first</h4>
+    <p>Watch for it. A group that says "our coatings were not the same thickness, so this result is less certain than it looks" is doing the highest-level thing in the evaluation criterion — and doing it before being caught. Say so out loud when it happens; it teaches the room faster than any instruction.</p>
+  </div>
+
+  <h3>Running the defence</h3>
+  <ul>
+    <li><strong>Six groups, five minutes each.</strong> Three minutes to present, two for challenges. It is tight and it needs to be — the discipline is what keeps the room listening.</li>
+    <li><strong>Challenge cards drawn at random.</strong> Groups cannot rehearse for a specific question, which is the point. Two cards per group.</li>
+    <li><strong>The audience has a job.</strong> Every student writes down one thing they would challenge about another group's claim. It keeps them listening and it generates more evidence for the evaluation criterion.</li>
+    <li><strong>Every group member answers at least one question.</strong> Nominate if the group defaults to one confident speaker.</li>
+    <li>Note against Communicating as you go. You are listening for whether the answer contains evidence or just conviction.</li>
+  </ul>
+
+  <div class="note"><span class="lab">If a group's data was inconclusive</span>
+    Some groups will find that every jar rusted about the same, or nothing rusted at all. That is a legitimate result and it can score well. Steer them toward: what we found, why our test could not separate the options, what the class data suggests instead, and what we would change. A report that honestly says "our test did not work and here is why" demonstrates the evaluation criterion better than a confident recommendation built on nothing.</div>
+
+  <h3>What you are collecting</h3>
+  <table>
+    <thead><tr><th style="width:34%">Criterion</th><th>Where it comes from</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Finding</strong></td><td>The Lesson 6 observation grid, already done.</td></tr>
+      <tr><td><strong>Analysing</strong></td><td>The report's results section and its graph.</td></tr>
+      <tr><td><strong>Interpreting and Evaluating</strong></td><td>The confidence section, the named weaknesses, and the answers under challenge.</td></tr>
+      <tr><td><strong>Communicating</strong></td><td>The report as a whole, plus the defence.</td></tr>
+      <tr><td><strong>H01 and H02</strong></td><td>What the report says about using the other class's work, and the recommendation itself. No separate task.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note tnote"><span class="lab">The discriminator in the report</span>
+    A C-grade report states a recommendation. An A-grade report states a recommendation <em>and how much to trust it</em> — and the confidence is proportionate to the evidence, neither hedged into uselessness nor oversold. Look at the confidence paragraph first when you mark; it tells you more about the student's understanding than the results section does.</div>
+
+  <h3>If the term has collapsed</h3>
+  <p>If this lesson gets cut short or lost, CP1 and CP2 are already banked and give a defensible judgement on Science Understanding, Questioning and predicting, and Planning and conducting. The Lesson 6 grid covers Finding. What you would lose is Analysing, Interpreting and Evaluating, and Communicating — so if you only have half a lesson, <strong>run the writing and drop the defence</strong>. The report carries three criteria; the defence deepens one.</p>
+
+  <h3>Afterwards</h3>
+  <ul>
+    <li>Send the recommendations to the client the same day if you can.</li>
+    <li>Share the reply with both classes when it arrives, whenever that is.</li>
+    <li>Nails, jars and steel wool disposed of as per the risk assessment — sharps in a rigid sealed container.</li>
+    <li>Complete the Evaluate band of the unit plan while the term is still fresh.</li>
+  </ul>
+</section>
+
+<!-- ============ OVERVIEW ============ -->
+<section class="panel active" id="p-overview">
+  <h2>Overview</h2>
+  <p class="lede">Seven weeks of work comes down to one page and three minutes.</p>
+
+  <h3>Shape of the lesson</h3>
+  <table>
+    <thead><tr><th style="width:30%">Phase</th><th style="width:14%">Time</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Final reading</strong></td><td>10 min</td><td>Last look at the jars from Week 6. Rate, photograph, add to the table.</td></tr>
+      <tr><td><strong>Write it</strong></td><td>40 min</td><td>One page to the client. Written individually.</td></tr>
+      <tr><td><strong>The defence</strong></td><td>30 min</td><td>Three minutes each, then challenge questions drawn at random.</td></tr>
+      <tr><td><strong>Send it</strong></td><td>10 min</td><td>Reports collected and sent. Benches cleared.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note tnote"><span class="lab">If you are short of time</span>
+    Run the writing and drop the defence. The report carries Analysing, Interpreting and Evaluating, and Communicating. The defence deepens one of them. Do not sacrifice writing time to fit presentations in.</div>
+
+  <h3>Everything you need</h3>
+
+  <div class="kitgrid">
+    <div class="kit-col">
+      <h4>Prepare before the lesson</h4>
+      <ul class="check">
+        <li><strong>Confirm the client is expecting the reports and will reply</strong></li>
+        <li>Return every student's Lesson 6 data sheet</li>
+        <li>Have both classes' rust datasets displayed or printed</li>
+        <li>Print the report scaffolds and challenge cards</li>
+        <li>Cut the challenge cards and put them in something to draw from</li>
+        <li>Have the Week 5 graphs available</li>
+        <li>Photograph of the client's asset on the board</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Per student</h4>
+      <ul class="check">
+        <li>Their Lesson 6 investigation record, returned</li>
+        <li>Report scaffold — core or supported</li>
+        <li>Audience listening sheet for the defence</li>
+        <li>Their Week 5 graph</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Whole class</h4>
+      <ul class="check">
+        <li>Challenge question cards, cut and shuffled</li>
+        <li>Both classes' pooled rust data</li>
+        <li>The criteria chart from Lessons 1, 2 and 4</li>
+        <li>Timer visible for the three-minute presentations</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Teacher</h4>
+      <ul class="check">
+        <li>CP3 marking guide — <strong>from the Assessment Pack</strong></li>
+        <li>Lesson 6 observation grids, already completed</li>
+        <li>Class list for noting the defence</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Clearing up</h4>
+      <ul class="check">
+        <li>Liquids down the sink with running water</li>
+        <li>Steel wool and nails into a rigid sealed container</li>
+        <li>Jars washed and returned, or discarded if chipped</li>
+        <li>Coverage scale and criteria chart kept for next year</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Not needed today</h4>
+      <ul>
+        <li>Any equipment beyond the jars already set up</li>
+        <li>Scales, thermometers, heat sources</li>
+        <li>Safety glasses — no practical work today</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTENTIONS ============ -->
+<section class="panel" id="p-intentions">
+  <h2>What we are learning</h2>
+
+  <div class="card">
+    <h4>Learning intention</h4>
+    <p style="font-size:1.1rem;margin-bottom:0">We are learning to communicate findings for a particular purpose and audience.</p>
+  </div>
+
+  <h3>I will be successful when I can…</h3>
+  <ul>
+    <li>write a recommendation the client can actually act on</li>
+    <li>support my recommendation with evidence I collected myself</li>
+    <li>say how confident I am, and why</li>
+    <li>answer a challenge question with evidence rather than opinion</li>
+  </ul>
+
+  <h3>Stretch</h3>
+  <ul>
+    <li>I can name the weakest part of my own method before somebody else does.</li>
+    <li>I can use the other class's data and say where I did not trust it.</li>
+  </ul>
+
+  <div class="note teal"><span class="lab">Curriculum</span>
+    <strong>AC9S6I05</strong> — compare methods and findings with those of others, recognise possible sources of error, pose questions for further investigation and select evidence to support reasoned conclusions.<br>
+    <strong>AC9S6I06</strong> — write and create texts to communicate ideas and findings for specific purposes and audiences, including selection of language features.<br>
+    <strong>AC9S6H01</strong> — examine why advances in science are often the result of collaboration.<br>
+    <strong>AC9S6H02</strong> — investigate how scientific knowledge is used by individuals and communities to identify problems, consider responses and make decisions.</div>
+
+  <div class="note"><span class="lab">Who you are writing to</span>
+    [CLIENT NAME] has a real problem with rusting metal at this school, and will read what you write and write back. Your recommendation could be wrong. That is why you have to say how sure you are.</div>
+
+  <div class="card">
+    <h4>Your goal for today</h4>
+    <textarea style="width:100%;min-height:74px;border:1px solid var(--line);border-radius:8px;padding:10px;font-family:inherit;font-size:16px" placeholder="Today I want to…"></textarea>
+  </div>
+</section>
+
+<!-- ============ FINAL READING ============ -->
+<section class="panel" id="p-final">
+  <h2>Final reading <span class="timechip">10 min</span></h2>
+  <p class="lede">One week on. Last look.</p>
+
+  <ol>
+    <li>Collect your jars without moving or opening them.</li>
+    <li>Rate all three separately against the scale, one last time.</li>
+    <li>Photograph from the same angle you have used all along.</li>
+    <li>Add the readings to the bottom row of your table.</li>
+  </ol>
+
+  <div class="note"><span class="lab">Compare with your 30-minute reading</span>
+    Has the order changed? A treatment that looked strong after half an hour may have given up over a week. That is worth knowing — and worth telling the client, because they care about months, not minutes.</div>
+
+  <h3>Before you start writing</h3>
+  <ol>
+    <li>Which treatment is ahead after a week?</li>
+    <li>Is it the same one that was ahead at 30 minutes?</li>
+    <li>If it changed, which reading matters more for the client's problem?</li>
+  </ol>
+
+  <details>
+    <summary>Thinking about question 3</summary>
+    <div class="body">
+      <p style="margin-bottom:0">The client's gate has to survive years, not half an hour. A coating that works brilliantly at first and then fails is worse than one that starts slower and holds. If your two readings disagree, the week-long one is the better guide — and saying so shows you understand what the evidence is <em>for</em>.</p>
+    </div>
+  </details>
+
+  <div class="note tnote"><span class="lab">Keep this to ten minutes</span>
+    Readings, photographs, back to the desk. The analysis belongs in the writing, and writing time is the thing that cannot be compressed.</div>
+</section>
+
+<!-- ============ WRITE ============ -->
+<section class="panel" id="p-write">
+  <h2>Write it <span class="timechip">40 min</span></h2>
+  <p class="lede">One page. To a person who has to decide something.</p>
+
+  <div class="card">
+    <p style="margin-bottom:0">You each write your own, but you share the group's data. Six sections, in this order.</p>
+  </div>
+
+  <h3>The six sections</h3>
+  <table>
+    <thead><tr><th style="width:30%">Section</th><th>What goes in it</th></tr></thead>
+    <tbody>
+      <tr><td><strong>What we tested</strong></td><td>Your question and what you changed. Two sentences.</td></tr>
+      <tr><td><strong>What we found</strong></td><td>Your results as a table and a graph. Include the other class's data where it helps.</td></tr>
+      <tr><td><strong>What it means</strong></td><td>The pattern, in words. Not a list of numbers again.</td></tr>
+      <tr><td><strong>What we recommend</strong></td><td>One clear thing the client could do on Monday.</td></tr>
+      <tr><td><strong>How confident we are</strong></td><td>What could have gone wrong, in your method and the other class's.</td></tr>
+      <tr><td><strong>What we would do next</strong></td><td>One question your data cannot answer.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note"><span class="lab">Write it for them, not for me</span>
+    The client is not a scientist and is not marking you. They need to know what to do and how much to trust it. Use scientific words where they earn their place and plain words everywhere else.</div>
+
+  <h3>The section people get wrong</h3>
+  <div class="card">
+    <p><strong>How confident we are.</strong> Two ways to lose marks here:</p>
+    <p style="margin-bottom:0">Hedging so hard the client cannot act — <em>"it might work but we're not sure about anything"</em>. Or overselling — <em>"this definitely stops rust forever"</em>. Neither is honest. What you want is: <strong>here is what we found, here is what would make it more certain, here is how much weight to put on it for now.</strong></p>
+  </div>
+
+  <h3>Using the other class's work</h3>
+  <ol>
+    <li>What did you take from their data?</li>
+    <li>Where did you not trust it, and why?</li>
+  </ol>
+  <div class="note"><span class="lab">Say both</span>
+    Using someone else's results without saying where they came from is not honest. Using them without saying what you thought of them is not careful. Do both in a sentence each.</div>
+
+  <div class="note tnote"><span class="lab">Circulate for the confidence paragraph</span>
+    That is where the marks separate and it is the section most students leave until they have run out of time. Prompt for it at the twenty-minute mark. A student with three sentences of confidence writing and a thin results section will score better than the reverse.</div>
+
+  <div class="paths">
+    <div class="path"><div class="pt">Need a hand</div><ul><li>Use the scaffold with section headings and sentence starters.</li><li>Write the recommendation first, then work backwards.</li></ul></div>
+    <div class="path core"><div class="pt">Keep going</div><ul><li>All six sections, your own graph, evidence from your own data.</li></ul></div>
+    <div class="path push"><div class="pt">Push me</div><ul><li>Name the weakness in your own method before anyone asks.</li><li>Say what result would have changed your recommendation.</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ DEFENCE ============ -->
+<section class="panel" id="p-defence">
+  <h2>The defence <span class="timechip">30 min</span></h2>
+  <p class="lede">Three minutes to present. Then two questions you have not seen.</p>
+
+  <div class="card">
+    <p><strong>Three minutes:</strong> what you tested, what you found, what you recommend, how confident you are.</p>
+    <p style="margin-bottom:0"><strong>Then two challenge cards</strong>, drawn at random. Everyone in the group answers at least one.</p>
+  </div>
+
+  <h3>The kind of question you will get</h3>
+  <ul>
+    <li>How do you know that?</li>
+    <li>The other class got a different result. Why?</li>
+    <li>What would change your mind?</li>
+    <li>What is the weakest part of your method?</li>
+    <li>Why should the client believe you rather than a website?</li>
+    <li>If you only had one of your three jars, would you still say the same thing?</li>
+  </ul>
+
+  <div class="note"><span class="lab">A good answer contains evidence</span>
+    "We think jelly is best" is an opinion. "Jelly kept all three jars at zero after thirty minutes, and the bare control was at three" is an answer. If you do not know, say so and say what you would need to find out — that scores better than guessing.</div>
+
+  <h3>While other groups present</h3>
+  <div class="card">
+    <p style="margin-bottom:0">Write down <strong>one thing you would challenge</strong> about another group's claim. You may get to ask it.</p>
+  </div>
+
+  <div class="note teal tnote"><span class="lab">Why the cards are drawn at random</span>
+    Groups cannot prepare a rehearsed answer for a question they have not seen, so what comes out is what they actually understand. It also removes the sense that you are picking on anyone — the card did it.</div>
+
+  <div class="note tnote"><span class="lab">Timing discipline</span>
+    Six groups at five minutes is exactly thirty. Use the timer and hold it. If a group overruns, the last group loses their turn, which is unfair and avoidable. Announce the format before the first group starts.</div>
+
+  <div class="note tnote"><span class="lab">What to note</span>
+    You are listening for whether answers contain evidence or conviction. Note the moment a group names their own weakness unprompted — that is the top of the evaluation criterion and it is worth saying aloud when it happens.</div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="panel" id="p-close">
+  <h2>Send it <span class="timechip">10 min</span></h2>
+
+  <h3>Collecting</h3>
+  <ol>
+    <li>Reports in, with your name and your group on them.</li>
+    <li>Data sheets in as well — they are part of the evidence.</li>
+    <li>Jars emptied and cleared as directed.</li>
+  </ol>
+
+  <div class="note"><span class="lab">What happens next</span>
+    Your recommendations go to [CLIENT NAME]. They will read them and write back. You will hear what they said — including if they disagree.</div>
+
+  <h3>Seven weeks, looking back</h3>
+  <ol>
+    <li>What is the most surprising thing you found out in this unit?</li>
+    <li>What would you do differently if you started again?</li>
+    <li>Where else have you noticed a reversible or irreversible change since we started?</li>
+  </ol>
+
+  <div class="card">
+    <h4>Where we got to</h4>
+    <p>You started by sorting cards into two piles with nothing to go on but instinct.</p>
+    <p style="margin-bottom:0">You finished by weighing oxygen out of the air, arguing with another class about their method, and telling an adult what to do about a real problem — with a number to back it up.</p>
+  </div>
+
+  <div class="note teal"><span class="lab">The idea worth keeping</span>
+    An irreversible change is not automatically a bad thing. Cooking, setting concrete, curing glue, and a cross at a school entrance are all changes somebody chose. What matters is understanding them well enough to decide.</div>
+
+  <div class="note tnote"><span class="lab">Before you close the unit</span>
+    Send the reports the same day if you can, and share the reply with both classes whenever it lands. Complete the Evaluate band of the unit plan while it is fresh — particularly whether the rust investigation survived the term, whether the mass gain registered, and whether the cross-class swap produced genuine critique or politeness.</div>
+</section>
+
+<!-- ============ RESOURCES ============ -->
+<section class="panel" id="p-resources">
+  <h2>Resources</h2>
+  <p class="lede">Print before the lesson.</p>
+
+  <a class="dlitem all" href="resources/l7-00-all-student-sheets.pdf" download style="margin-bottom:6px">
+    <span class="ic">PDF</span>
+    <span><span class="tt">All student sheets</span>
+    <span class="ds">Report scaffolds, listening sheet and challenge cards in one file.</span></span>
+  </a>
+
+  <h3>Student sheets</h3>
+  <div class="dl">
+    <a class="dlitem" href="resources/l7-01-report-scaffold.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Report scaffold</span>
+      <span class="ds">Core version. Six sections with space for each, and a graph frame.</span></span>
+    </a>
+    <a class="dlitem" href="resources/l7-02-report-scaffold-support.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Report scaffold — supported</span>
+      <span class="ds">Same six sections with sentence starters and a word bank.</span></span>
+    </a>
+    <a class="dlitem" href="resources/l7-03-listening-sheet.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Defence listening sheet</span>
+      <span class="ds">One thing to challenge about each group's claim. Keeps the audience working.</span></span>
+    </a>
+    <a class="dlitem doc" href="resources/l7-student-sheets-EDITABLE.docx" download>
+      <span class="ic">DOCX</span>
+      <span><span class="tt">Editable master</span>
+      <span class="ds">All sheets in one Word file. Tables import into OneNote as typeable cells.</span></span>
+    </a>
+  </div>
+
+  <h3>Teacher printable</h3>
+  <div class="dl">
+    <a class="dlitem" href="resources/l7-04-challenge-cards.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Challenge question cards</span>
+      <span class="ds">Twelve cards to cut and draw from. Two per group, unseen.</span></span>
+    </a>
+    <a class="dlitem doc" href="resources/l7-challenge-cards-EDITABLE.docx" download>
+      <span class="ic">DOCX</span>
+      <span><span class="tt">Challenge cards — editable</span>
+      <span class="ds">Add your own questions before printing.</span></span>
+    </a>
+  </div>
+
+  <div class="note stop"><span class="lab">CP3 is not published here</span>
+    The task sheet and marking guide are deliberately absent from this site. Print them from the Assessment Pack on your own machine.</div>
+
+  <div class="tree tnote">lessons/
+└── 07-report-and-defence/
+    ├── lesson-07-report-and-defence.html   <b>this page</b>
+    └── resources/
+        ├── l7-00-all-student-sheets.pdf
+        ├── l7-01-report-scaffold.pdf
+        ├── l7-02-report-scaffold-support.pdf
+        ├── l7-03-listening-sheet.pdf
+        ├── l7-04-challenge-cards.pdf
+        ├── l7-student-sheets-EDITABLE.docx
+        └── l7-challenge-cards-EDITABLE.docx</div>
+</section>
+
+</div></main>
+
+<!-- ============ TIMER ============ -->
+<div id="timer" role="region" aria-label="Lesson timer">
+  <div class="t-hd">
+    <span class="grip" aria-hidden="true"></span><span class="ttl">Lesson timer</span>
+    <span class="ctl">
+      <button class="iconbtn on" id="tSound" title="Sound on or off" aria-pressed="true">♪</button>
+      <button class="iconbtn" id="tMin" title="Shrink or expand">–</button>
+      <button class="iconbtn" id="tClose" title="Hide the timer">×</button>
+    </span>
+  </div>
+  <div class="t-body">
+    <div class="t-phase" id="tPhase">Final reading</div>
+    <div class="t-sub" id="tSub">Phase 1 of 4</div>
+    <div class="t-clock" id="tClock">10:00</div>
+    <div class="t-rot" id="tRot"></div>
+    <div class="bar"><i id="tBar"></i></div>
+    <div class="t-btns">
+      <button class="btn go" id="tGo">Start</button>
+      <button class="btn" id="tNext">Next</button>
+      <button class="btn" id="tReset">Reset</button>
+    </div>
+    <div class="t-list" id="tList"></div>
+    <div class="t-foot"><span id="tElapsed">Elapsed 0:00</span><span id="tLeft">90 min total</span></div>
+    <div class="t-foot" style="border-top:none;margin-top:2px;padding-top:0;justify-content:center"><span id="tDeadline">Writing starts in 10:00</span></div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- teacher mode ---------- */
+  var tm = document.getElementById('tmToggle');
+  tm.addEventListener('click', function(){
+    var on = document.body.classList.toggle('teacher');
+    tm.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if(!on){
+      var cur = document.querySelector('.tab[aria-selected="true"]');
+      if(cur && cur.classList.contains('tonly')) show('overview');
+    }
+  });
+
+  /* ---------- timer visibility (independent of teacher mode) ---------- */
+  document.body.classList.add('timer-on');
+  var tv = document.getElementById('timerToggle');
+  function setTimerVisible(on){
+    document.body.classList.toggle('timer-on', on);
+    tv.setAttribute('aria-pressed', on ? 'true' : 'false');
+    tv.classList.toggle('lit', on);
+  }
+  tv.classList.add('lit');
+  tv.addEventListener('click', function(){
+    setTimerVisible(!document.body.classList.contains('timer-on'));
+  });
+
+  /* ---------- tabs ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function show(id){
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.p===id ? 'true':'false'); });
+    document.querySelectorAll('.panel').forEach(function(p){
+      p.classList.toggle('active', p.id==='p-'+id);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.p); }); });
+
+  /* ---------- timer ---------- */
+  var PHASES = [
+    {name:'Final reading',        mins:10, tab:'final'},
+    {name:'Write it',             mins:40, tab:'write'},
+    {name:'The defence',          mins:30, tab:'defence', rotations:6},
+    {name:'Send it',              mins:10, tab:'close'}
+  ];
+  var TOTAL = PHASES.reduce(function(a,p){ return a+p.mins; },0);
+
+  var idx=0, left=PHASES[0].mins*60, running=false, elapsed=0, sound=true, tick=null;
+  var rotLeft=0, rotIdx=0, rotLen=0;
+
+  var el = {
+    box:document.getElementById('timer'), phase:document.getElementById('tPhase'),
+    sub:document.getElementById('tSub'), clock:document.getElementById('tClock'),
+    rot:document.getElementById('tRot'), bar:document.getElementById('tBar'),
+    go:document.getElementById('tGo'), next:document.getElementById('tNext'),
+    reset:document.getElementById('tReset'), list:document.getElementById('tList'),
+    elapsed:document.getElementById('tElapsed'), left:document.getElementById('tLeft'),
+    snd:document.getElementById('tSound'), min:document.getElementById('tMin')
+  };
+
+  function mmss(s){
+    var neg = s<0; s = Math.abs(s);
+    var m = Math.floor(s/60), r = s%60;
+    return (neg?'+':'') + m + ':' + (r<10?'0':'') + r;
+  }
+
+  function beep(times){
+    if(!sound) return;
+    try{
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if(!Ctx) return;
+      var ac = new Ctx();
+      for(var i=0;i<times;i++){
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.connect(g); g.connect(ac.destination);
+        o.frequency.value = 784;
+        var t0 = ac.currentTime + i*0.28;
+        g.gain.setValueAtTime(0.0001,t0);
+        g.gain.exponentialRampToValueAtTime(0.25,t0+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,t0+0.22);
+        o.start(t0); o.stop(t0+0.24);
+      }
+      setTimeout(function(){ try{ac.close();}catch(e){} }, times*300+500);
+    }catch(e){}
+  }
+
+  function buildList(){
+    el.list.innerHTML='';
+    PHASES.forEach(function(p,i){
+      var row=document.createElement('div');
+      row.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+      row.innerHTML='<span>'+p.name+'</span><span class="d">'+p.mins+'m</span>';
+      row.addEventListener('click',function(){ goTo(i); });
+      el.list.appendChild(row);
+    });
+  }
+
+  function render(){
+    var p = PHASES[idx];
+    el.phase.textContent = p.name;
+    el.sub.textContent = 'Phase '+(idx+1)+' of '+PHASES.length+' · '+p.mins+' min';
+    el.clock.textContent = mmss(left);
+    var pct = Math.max(0, Math.min(100, ((p.mins*60-left)/(p.mins*60))*100));
+    el.bar.style.width = pct+'%';
+    el.box.classList.toggle('over', left<0);
+    el.box.classList.toggle('warn', left>=0 && left<=120);
+    el.box.classList.toggle('rotating', !!p.rotations);
+    if(p.rotations){
+      el.rot.textContent = 'Group '+Math.min(rotIdx+1,p.rotations)+' of '+p.rotations+' · '+mmss(rotLeft);
+    }
+    el.elapsed.textContent = 'Elapsed '+mmss(elapsed);
+    var dl = document.getElementById('tDeadline');
+    if(dl){
+      var toCp = 10*60 - elapsed;
+      if(idx >= 1){ dl.textContent = 'Writing under way'; dl.style.color = '#7fd6a0'; }
+      else if(toCp > 0){ dl.textContent = 'Writing starts in ' + mmss(toCp); dl.style.color = toCp < 300 ? '#ffc978' : '#9fb0cd'; }
+      else { dl.textContent = 'Writing ' + mmss(toCp) + ' late'; dl.style.color = '#ff9a9a'; }
+    }
+    var rem = TOTAL*60 - elapsed;
+    el.left.textContent = rem>=0 ? mmss(rem)+' of lesson left' : mmss(rem)+' over';
+    el.go.textContent = running ? 'Pause' : (elapsed===0 && left===PHASES[0].mins*60 ? 'Start' : 'Resume');
+    Array.prototype.forEach.call(el.list.children,function(r,i){
+      r.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+    });
+  }
+
+  function setPhase(i){
+    idx = Math.max(0, Math.min(PHASES.length-1, i));
+    var p = PHASES[idx];
+    left = p.mins*60;
+    if(p.rotations){ rotLen = Math.floor(p.mins*60/p.rotations); rotIdx=0; rotLeft=rotLen; }
+    if(p.tab) show(p.tab);
+    render();
+  }
+
+  function goTo(i){ setPhase(i); }
+
+  function step(){
+    left--; elapsed++;
+    var p = PHASES[idx];
+    if(p.rotations){
+      rotLeft--;
+      if(rotLeft<=0 && rotIdx < p.rotations-1){ rotIdx++; rotLeft=rotLen; beep(1); }
+    }
+    if(left===0){ beep(2); }
+    render();
+  }
+
+  function toggle(){
+    running = !running;
+    if(running){ tick = setInterval(step,1000); } else { clearInterval(tick); }
+    render();
+  }
+
+  el.go.addEventListener('click', toggle);
+  el.next.addEventListener('click', function(){ setPhase(idx+1); });
+  el.reset.addEventListener('click', function(){
+    running=false; clearInterval(tick); elapsed=0; setPhase(0);
+  });
+  el.snd.addEventListener('click', function(){
+    sound=!sound;
+    el.snd.classList.toggle('on',sound);
+    el.snd.setAttribute('aria-pressed', sound?'true':'false');
+    if(sound) beep(1);
+  });
+  el.min.addEventListener('click', function(){
+    var m = el.box.classList.toggle('min');
+    el.min.textContent = m ? '+' : '–';
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(!document.body.classList.contains('teacher')) return;
+    if(/^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if(e.code==='Space'){ e.preventDefault(); toggle(); }
+    if(e.code==='ArrowRight'){ setPhase(idx+1); }
+    if(e.code==='ArrowLeft'){ setPhase(idx-1); }
+  });
+
+  el.box.querySelector('#tClose').addEventListener('click', function(){
+    setTimerVisible(false);
+  });
+
+  /* ---------- drag ---------- */
+  (function(){
+    var hd = el.box.querySelector('.t-hd');
+    var dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+
+    function place(x, y){
+      var r = el.box.getBoundingClientRect();
+      var maxX = window.innerWidth  - r.width  - 6;
+      var maxY = window.innerHeight - r.height - 6;
+      x = Math.max(6, Math.min(x, Math.max(6, maxX)));
+      y = Math.max(6, Math.min(y, Math.max(6, maxY)));
+      el.box.style.left = x + 'px';
+      el.box.style.top  = y + 'px';
+      el.box.style.right = 'auto';
+      el.box.style.bottom = 'auto';
+    }
+
+    function reset(){
+      el.box.style.left = ''; el.box.style.top = '';
+      el.box.style.right = ''; el.box.style.bottom = '';
+    }
+
+    hd.addEventListener('pointerdown', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      var r = el.box.getBoundingClientRect();
+      dragging = true;
+      sx = e.clientX; sy = e.clientY; ox = r.left; oy = r.top;
+      place(r.left, r.top);
+      el.box.classList.add('dragging');
+      hd.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+
+    hd.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      place(ox + (e.clientX - sx), oy + (e.clientY - sy));
+    });
+
+    function stop(e){
+      if(!dragging) return;
+      dragging = false;
+      el.box.classList.remove('dragging');
+      try{ hd.releasePointerCapture(e.pointerId); }catch(err){}
+    }
+    hd.addEventListener('pointerup', stop);
+    hd.addEventListener('pointercancel', stop);
+    hd.addEventListener('dblclick', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      reset();
+    });
+
+    window.addEventListener('resize', function(){
+      if(el.box.style.left){
+        var r = el.box.getBoundingClientRect();
+        place(r.left, r.top);
+      }
+    });
+  })();
+
+  buildList(); render();
+})();
+</script>
+</body>
+</html>

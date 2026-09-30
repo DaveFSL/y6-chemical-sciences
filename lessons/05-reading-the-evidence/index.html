@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5 · Reading the evidence — Year 6 Chemical Sciences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1b2a4a; --navy-soft:#2c3f66; --amber:#e8930c; --amber-deep:#9a5f00;
+  --teal:#0e7c7b; --teal-soft:#e2f0ef; --paper:#fbf9f4; --line:#dcd9d0;
+  --ink:#23272e; --muted:#5a6478; --white:#fff;
+  --rust:#8a4a22; --rust-soft:#f6e9e0;
+  --ok:#2e6b3f; --warn:#b4560a; --stop:#a32020;
+  --radius:10px;
+  --sans:"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:var(--sans); color:var(--ink); background:var(--paper);
+  font-size:17px; line-height:1.62; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+
+/* ---------- header ---------- */
+header.top{background:var(--navy);color:#fff;padding:22px 0 0}
+.crumb{font-size:14px;color:#a9b6cf;text-decoration:none;display:inline-block;margin-bottom:14px}
+.crumb:hover{color:#fff}
+.meta{font-size:13.5px;color:#9fb0cd;letter-spacing:.02em;margin-bottom:6px}
+h1{font-size:2.05rem;line-height:1.18;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.subtitle{color:#c3d0e6;font-size:1.02rem;margin:0 0 16px}
+.badges{display:flex;flex-wrap:wrap;gap:7px;padding-bottom:18px}
+.badge{font-size:12.5px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#e7edf7;border:1px solid rgba(255,255,255,.18)}
+.badge.code{background:var(--amber);color:#33240a;border-color:transparent;font-weight:600}
+
+/* teacher toggle */
+.tmrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:0 0 18px}
+.tmbtn{
+  display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.26);color:#fff;padding:8px 14px;border-radius:999px;
+  font-size:14px;cursor:pointer;font-family:inherit
+}
+.tmbtn:hover{background:rgba(255,255,255,.18)}
+.tmbtn .dot{width:9px;height:9px;border-radius:50%;background:#7c8aa5}
+body.teacher #tmToggle .dot{background:#5fd08a}
+body.teacher #tmToggle{background:var(--amber);color:#2e2105;border-color:transparent;font-weight:600}
+.tmbtn.lit .dot{background:#5fd08a}
+.tmbtn.lit{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4)}
+.tmhint{font-size:13px;color:#9fb0cd}
+
+/* ---------- tabs ---------- */
+nav.tabs{position:sticky;top:0;z-index:40;background:var(--navy-soft);border-bottom:2px solid var(--amber)}
+.tabscroll{max-width:880px;margin:0 auto;display:flex;overflow-x:auto;padding:0 12px;scrollbar-width:thin}
+.tab{
+  flex:0 0 auto;background:none;border:none;font-family:inherit;font-size:14px;color:#c6d2e6;
+  padding:12px 13px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap
+}
+.tab:hover{color:#fff}
+.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--amber);font-weight:600}
+.tab.tonly{display:none}
+body.teacher .tab.tonly{display:block}
+
+/* ---------- panels ---------- */
+main{padding:26px 0 170px}
+.panel{display:none}
+.panel.active{display:block}
+h2{font-size:1.45rem;color:var(--navy);margin:0 0 4px;letter-spacing:-.01em}
+h3{font-size:1.12rem;color:var(--teal);margin:26px 0 6px}
+h4{font-size:1rem;margin:20px 0 4px;color:var(--navy)}
+p{margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:5px 0}
+.lede{font-size:1.06rem;color:var(--muted);margin-bottom:20px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:16px 0}
+.card h4:first-child,.card h3:first-child{margin-top:0}
+
+.note{border-left:4px solid var(--amber);background:#fdf6e8;padding:13px 16px;margin:15px 0;border-radius:0 8px 8px 0}
+.note .lab{font-weight:700;color:var(--amber-deep);display:block;margin-bottom:3px;font-size:14.5px}
+.note.teal{border-left-color:var(--teal);background:var(--teal-soft)}
+.note.teal .lab{color:var(--teal)}
+.note.stop{border-left-color:var(--stop);background:#fbeaea}
+.note.stop .lab{color:var(--stop)}
+.tnote{display:none}
+body.teacher .tnote{display:block}
+.snote{display:block}
+body.teacher .snote{display:block}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15.5px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff;font-weight:600;font-size:14.5px}
+tbody tr:nth-child(even){background:#faf8f3}
+
+.timechip{display:inline-block;background:var(--teal);color:#fff;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:middle}
+
+details{border:1px solid var(--line);border-radius:8px;background:#fff;padding:0;margin:13px 0}
+summary{cursor:pointer;padding:11px 15px;font-weight:600;color:var(--navy);font-size:15.5px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"▸ ";color:var(--amber);font-weight:700}
+details[open] summary:before{content:"▾ "}
+details .body{padding:0 15px 14px;border-top:1px solid var(--line)}
+
+.paths{display:grid;gap:13px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin:16px 0}
+.path{border:1px solid var(--line);border-top:4px solid var(--teal);border-radius:8px;background:#fff;padding:14px 15px}
+.path.core{border-top-color:var(--navy)}
+.path.push{border-top-color:var(--amber)}
+.path .pt{font-weight:700;margin-bottom:5px;color:var(--navy);font-size:15.5px}
+.path ul{padding-left:19px;margin-bottom:0;font-size:15px}
+
+.stations{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.st{border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}
+.st .hd{background:var(--navy);color:#fff;padding:9px 13px;font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.st .hd .n{background:var(--amber);color:#33240a;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;font-size:13px;flex:0 0 auto}
+.st .bd{padding:12px 14px;font-size:15px}
+.st .bd p{margin-bottom:8px}
+.st .kit{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.st.teacherrun .hd{background:var(--stop)}
+
+.kitgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(245px,1fr))}
+.kit-col{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.kit-col h4{margin-top:0}
+.kit-col ul{font-size:15px;padding-left:19px;margin-bottom:0}
+.check{list-style:none;padding-left:0}
+.check li{position:relative;padding-left:26px}
+.check li:before{content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border:2px solid var(--teal);border-radius:3px}
+
+.vocab{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.vocab span{background:#fff;border:1px solid var(--line);border-radius:6px;padding:5px 11px;font-size:15px}
+.vocab b{color:var(--navy)}
+
+/* ---------- downloads ---------- */
+.dl{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));margin:16px 0}
+.dlitem{
+  display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:9px;padding:13px 14px;text-decoration:none;color:inherit;border-left:4px solid var(--teal)
+}
+.dlitem:hover{border-color:var(--amber);border-left-color:var(--amber);background:#fffdf7}
+.dlitem .ic{
+  flex:0 0 auto;width:38px;height:38px;border-radius:7px;background:var(--teal-soft);color:var(--teal);
+  display:grid;place-items:center;font-size:11px;font-weight:700;letter-spacing:.02em
+}
+.dlitem.doc .ic{background:#e8eefb;color:#2b4a8a}
+.dlitem.doc{border-left-color:#2b4a8a}
+.dlitem.all .ic{background:#fdf0dc;color:var(--amber-deep)}
+.dlitem.all{border-left-color:var(--amber)}
+.dlitem .tt{font-weight:700;font-size:15.5px;color:var(--navy);display:block;margin-bottom:2px;line-height:1.3}
+.dlitem .ds{font-size:13.5px;color:var(--muted);display:block;line-height:1.45}
+.dlitem .sz{font-size:12px;color:#8c95a8;display:block;margin-top:3px}
+.tree{
+  background:var(--navy);color:#dfe6f2;border-radius:9px;padding:15px 17px;margin:14px 0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.75;
+  overflow-x:auto;white-space:pre
+}
+.tree b{color:#ffc978;font-weight:600}
+
+/* ---------- TIMER ---------- */
+#timer{display:none}
+body.timer-on #timer{display:flex;flex-direction:column}
+#timer{
+  position:fixed;right:18px;bottom:18px;z-index:70;width:310px;
+  touch-action:none;
+  background:var(--navy);color:#fff;border-radius:14px;
+  box-shadow:0 10px 34px rgba(16,24,40,.34);overflow:hidden;
+  border:1px solid rgba(255,255,255,.14)
+}
+#timer.min{width:206px}
+.t-hd{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(0,0,0,.2);gap:8px;cursor:grab;user-select:none;-webkit-user-select:none}
+.t-hd:active{cursor:grabbing}
+#timer.dragging{transition:none;box-shadow:0 18px 46px rgba(16,24,40,.5)}
+#timer.dragging .bar i{transition:none}
+.t-hd .grip{display:inline-block;width:13px;height:13px;opacity:.5;flex:0 0 auto;
+  background-image:radial-gradient(currentColor 1px, transparent 1px);
+  background-size:4px 4px;background-position:0 1px}
+.t-hd .ttl{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.t-hd .ttl{font-size:13px;color:#b9c6dd;font-weight:600}
+.t-hd .ctl{display:flex;gap:4px}
+.iconbtn{background:rgba(255,255,255,.12);border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:13px;line-height:1;display:grid;place-items:center;font-family:inherit}
+.iconbtn:hover{background:rgba(255,255,255,.26)}
+.iconbtn.on{background:var(--amber);color:#2e2105}
+.t-body{padding:13px 14px 14px}
+.t-phase{font-size:14.5px;font-weight:600;margin-bottom:2px;line-height:1.3}
+.t-sub{font-size:12px;color:#9fb0cd;margin-bottom:9px}
+.t-clock{font-size:2.9rem;font-weight:700;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-bottom:3px}
+#timer.over .t-clock{color:#ff9a9a}
+#timer.warn .t-clock{color:#ffc978}
+.t-rot{font-size:13px;color:#ffd79a;margin-bottom:9px;display:none}
+#timer.rotating .t-rot{display:block}
+.bar{height:6px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;margin-bottom:11px}
+.bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .4s linear}
+#timer.over .bar i{background:#e06060}
+.t-btns{display:flex;gap:7px;margin-bottom:11px}
+.btn{flex:1;background:rgba(255,255,255,.14);border:none;color:#fff;padding:9px 6px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn:hover{background:rgba(255,255,255,.26)}
+.btn.go{background:var(--amber);color:#2e2105}
+.btn.go:hover{background:#f7a626}
+.t-list{max-height:184px;overflow-y:auto;border-top:1px solid rgba(255,255,255,.14);padding-top:9px}
+.t-row{display:flex;justify-content:space-between;gap:8px;padding:5px 7px;border-radius:6px;font-size:13px;color:#c2cfe4;cursor:pointer;align-items:baseline}
+.t-row:hover{background:rgba(255,255,255,.1)}
+.t-row.cur{background:rgba(232,147,12,.24);color:#fff;font-weight:600}
+.t-row.done{color:#7e8da8}
+.t-row .d{color:#9fb0cd;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.t-row.cur .d{color:#ffd79a}
+.t-foot{font-size:12px;color:#9fb0cd;border-top:1px solid rgba(255,255,255,.14);margin-top:9px;padding-top:8px;display:flex;justify-content:space-between}
+#timer.min .t-body>*:not(.t-clock):not(.t-phase):not(.t-btns){display:none}
+#timer.min .t-clock{font-size:2.1rem}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:1.6rem}
+  #timer{right:10px;bottom:10px;width:calc(100% - 20px);max-width:320px}
+  #timer.min{width:210px}
+  .t-list{max-height:120px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+@media print{
+  header.top,nav.tabs,#timer,.tmrow{display:none}
+  .panel{display:block!important;page-break-before:always}
+  body{background:#fff;font-size:12pt}
+  .card,.note,.st{break-inside:avoid}
+}
+
+/* ---- house style typography ---- */
+:root{
+  --sans:"Atkinson Hyperlegible","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --display:"Space Grotesk","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter-spacing:-.01em}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="crumb" href="../../index.html">← All lessons</a>
+    <div class="meta">Year 6 Science · Can we get it back? · Lesson 5 of 7</div>
+    <h1>Reading the evidence</h1>
+    <p class="subtitle">Five weeks of data, and somebody else's method to pull apart</p>
+    <div class="badges">
+      <span class="badge code">AC9S6U04</span>
+      <span class="badge">AC9S6I04</span>
+      <span class="badge">AC9S6I05</span>
+      <span class="badge">AC9S6H01</span>
+      <span class="badge">90 minutes</span>
+      <span class="badge">Term 4 · Week 5</span>
+      <span class="badge">★ Assessment CP2</span>
+    </div>
+    <div class="tmrow">
+      <button class="tmbtn" id="tmToggle" aria-pressed="false"><span class="dot"></span> Teacher mode</button>
+      <button class="tmbtn" id="timerToggle" aria-pressed="true"><span class="dot"></span> Lesson timer</button>
+      <span class="tmhint">Drag the timer by its title bar to move it. Double-click the bar to send it back.</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabscroll" role="tablist">
+    <button class="tab tonly" role="tab" data-p="notes" aria-selected="false">Teaching notes</button>
+    <button class="tab" role="tab" data-p="overview" aria-selected="true">Overview</button>
+    <button class="tab" role="tab" data-p="intentions" aria-selected="false">Intentions</button>
+    <button class="tab" role="tab" data-p="weigh" aria-selected="false">The weigh-in</button>
+    <button class="tab" role="tab" data-p="graph" aria-selected="false">Graph it</button>
+    <button class="tab" role="tab" data-p="swap" aria-selected="false">The swap</button>
+    <button class="tab" role="tab" data-p="cross" aria-selected="false">The cross</button>
+    <button class="tab" role="tab" data-p="cp2" aria-selected="false">★ CP2</button>
+    <button class="tab" role="tab" data-p="resources" aria-selected="false">Resources</button>
+  </div>
+</nav>
+
+<main><div class="wrap">
+
+<!-- ============ TEACHING NOTES ============ -->
+<section class="panel" id="p-notes">
+  <h2>Teaching notes</h2>
+  <p class="lede">Read before the lesson. Hidden from students when teacher mode is off.</p>
+
+  <div class="note teal"><span class="lab">Where this sits</span>
+    The biggest lesson in the unit, and the one everything since Week 1 has been building toward. The nails come out heavier, which is the single most convincing evidence a Year 6 student can personally generate that an irreversible change makes a new substance. Then each class pulls apart the other's method, which is the half of the evaluation criterion that cannot be faked. CP2 is written at the end.</div>
+
+  <h3>The number that decides whether this works</h3>
+  <p>Three 65 mm nails weigh about 13.8 g. A realistic mass gain over five weeks is:</p>
+  <table>
+    <thead><tr><th style="width:26%">Iron converted</th><th style="width:24%">Mass gained</th><th>On 0.01 g scales</th></tr></thead>
+    <tbody>
+      <tr><td>0.5% — light rust</td><td>0.03 g</td><td>3 divisions</td></tr>
+      <tr><td>1%</td><td>0.06 g</td><td>6 divisions</td></tr>
+      <tr><td>2% — typical Jar B</td><td>0.12 g</td><td>12 divisions</td></tr>
+      <tr><td>5% — heavy rust</td><td>0.30 g</td><td>30 divisions</td></tr>
+    </tbody>
+  </table>
+  <p>Readable, and comfortably so. On 1 g scales every one of those rounds to zero, which is why the 0.01 g scales matter today and nowhere else in the unit.</p>
+
+  <div class="note stop"><span class="lab">Drying is not fussiness — it is the experiment</span>
+    A single drop of water left on the nails weighs 0.05 g. That is <strong>five divisions</strong> — bigger than the entire signal from a lightly rusted jar. Half a millilitre is 50 divisions and would invent a result several times larger than the real one.<br><br>
+    Dry properly: rinse briefly under the tap, blot hard with paper towel, then spread on a tray in the sun or in the frypan on low for a few minutes. Leave them until they look and feel completely dry, then leave them a bit longer. <strong>Weigh the Jar A dry control alongside</strong> — it should read within a division or two of its setup mass. If it has gained, your drying has failed and every other number is wrong.</div>
+
+  <h3>The two moments that matter</h3>
+  <div class="card">
+    <h4>1 · When the first group reads a bigger number</h4>
+    <p>Stop the room. Ask what they expected. Almost everyone predicts lighter, because rust flakes off and looks like decay. Heavier is genuinely surprising. Then: where did the extra mass come from? Nothing was added to a sealed jar. It came out of the air, and it is now part of the nail. That is Lesson 2's logic running in reverse — mass went up, so something joined.</p>
+  </div>
+  <div class="card">
+    <h4>2 · When they get the other class's data</h4>
+    <p>Students will critique another class in ways they will never critique their friends, and they cannot fall back on "I know what we meant." Insist on written critiques <em>before</em> any discussion. The writing is the assessment evidence; the discussion afterwards is where they find out whether they were right.</p>
+  </div>
+
+  <h3>Running the weigh-in</h3>
+  <ul>
+    <li><strong>Do the drying first, before anything else.</strong> Fifteen minutes of lesson time is the drying. Get nails out and onto trays in the first five minutes.</li>
+    <li><strong>Tongs or gloves only.</strong> Rusted nails are sharp and carry a tetanus risk. Count them out and count them back in.</li>
+    <li><strong>One weighing station.</strong> Two scales, six groups, three jars each — that is 18 weighings per class. Queue them; do not try to run it in parallel with other work.</li>
+    <li><strong>Record to 0.01 g.</strong> Two decimal places, every time, including trailing zeros. 13.80 g is a different statement from 13.8 g.</li>
+    <li><strong>Vinegar jars will misbehave.</strong> Jar E often <em>loses</em> mass, because acid dissolves iron away rather than just oxidising it. That is a real result and worth naming, not hiding.</li>
+  </ul>
+
+  <div class="note"><span class="lab">If the drying fails or the scales have not arrived</span>
+    Run the whole analysis on the coverage ratings instead. They are five weeks of honest data and they answer the question perfectly well. Say plainly what went wrong and why the mass numbers cannot be trusted. A teacher modelling an honest account of a failed measurement is worth more here than clean data — and it is exactly the reasoning CP3 asks students to do.</div>
+
+  <h3>What the data should show</h3>
+  <table>
+    <thead><tr><th style="width:30%">Tuesday — what causes rust</th><th>Expected</th></tr></thead>
+    <tbody>
+      <tr><td>B — half-submerged</td><td><strong>Most rust.</strong> Water and oxygen together at the waterline.</td></tr>
+      <tr><td>D — salt water</td><td>Close second. Salt speeds up the reaction.</td></tr>
+      <tr><td>C — fully submerged</td><td>Less than B. Limited oxygen.</td></tr>
+      <tr><td>E — vinegar</td><td>Erratic. May lose mass as iron dissolves.</td></tr>
+      <tr><td>A — dry sealed</td><td>Almost none. No water.</td></tr>
+      <tr><td>F — boiled water under oil</td><td>Almost none. No oxygen.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>B beating C is the result that teaches.</strong> Students predicted more water means more rust. A and F together establish that rusting needs both water and oxygen — remove either and it stops.</p>
+
+  <h3>Running CP2</h3>
+  <ul>
+    <li>Groups draft the plan together; <strong>each student submits their own</strong>.</li>
+    <li>The peer critique happens before submission and is written on the proforma. That box is assessable — it shows whether the student could take a criticism and act on it.</li>
+    <li>Approve every plan before Week 6. A plan you have not signed off is a group that cannot start.</li>
+    <li>Fifteen minutes is enough to draft, not to polish. Finishing at home or in a spare slot is fine.</li>
+  </ul>
+
+  <div class="note tnote"><span class="lab">The discriminator in CP2</span>
+    An A-grade plan names controlled variables that would actually wreck the result — nail size, water volume, position on the shelf, start date. A C-grade plan lists whatever comes to mind. The difference is whether the student is thinking about their own method or reciting a category.</div>
+
+  <h3>Misconceptions to expect</h3>
+  <table>
+    <thead><tr><th style="width:27%">Misconception</th><th style="width:33%">How it shows today</th><th>Response</th></tr></thead>
+    <tbody>
+      <tr><td>Rusting makes metal lighter</td><td>Predicting a loss before the weigh-in</td><td>The scale. Rust is made <em>from</em> the iron plus something from the air, and it stays attached.</td></tr>
+      <tr><td>Rust is dirt sitting on the surface</td><td>"You could scrub it off"</td><td>The nail is heavier than the steel it started as. You cannot scrub something off and end up with more.</td></tr>
+      <tr><td>More water means more rust</td><td>Predicting C beats B</td><td>The data. Rusting needs water and oxygen together, and the waterline has both.</td></tr>
+      <tr><td>A different result means someone failed</td><td>During the swap</td><td>Different methods lose and gain in different places. Ask what they did differently before assuming error.</td></tr>
+      <tr><td>Our data is fine, theirs is flawed</td><td>Very common in the swap</td><td>Turn it around — what would the other class say about ours? Name two things they could legitimately attack.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>What comes next</h3>
+  <p>Lesson 6 is the assessment investigation. Every plan needs signing off before then, and the equipment for each group's chosen variable needs to be available. Check the approved list against what groups have actually asked for.</p>
+</section>
+
+<!-- ============ OVERVIEW ============ -->
+<section class="panel active" id="p-overview">
+  <h2>Overview</h2>
+  <p class="lede">Five weeks of waiting ends today. The nails come out, they go on the good scales, and the number is not what anyone expects.</p>
+
+  <h3>Shape of the lesson</h3>
+  <table>
+    <thead><tr><th style="width:30%">Phase</th><th style="width:14%">Time</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td><strong>The weigh-in</strong></td><td>15 min</td><td>Nails out, rinsed, dried, weighed to 0.01 g against the setup mass.</td></tr>
+      <tr><td><strong>Graph it</strong></td><td>20 min</td><td>Each group graphs its three jars, then the class pools all six conditions.</td></tr>
+      <tr><td><strong>The swap</strong></td><td>20 min</td><td>The other class's raw data, with no explanation. Find what is wrong with it.</td></tr>
+      <tr><td><strong>The cross explained</strong></td><td>20 min</td><td>Why the nails gained mass. Then why somebody wanted the cross to do this.</td></tr>
+      <tr><td><strong>★ CP2</strong></td><td>15 min</td><td>Investigation plan drafted and peer-critiqued.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note stop tnote"><span class="lab">Get the nails drying immediately</span>
+    The drying is the lesson's critical path. Nails out and onto trays in the first five minutes, then let them dry while you set up the graphing. A wet nail reads five divisions heavy per drop, which is bigger than the whole signal on a lightly rusted jar.</div>
+
+  <h3>Everything you need</h3>
+
+  <div class="kitgrid">
+    <div class="kit-col">
+      <h4>Prepare before the lesson</h4>
+      <ul class="check">
+        <li><strong>Check the 0.01 g scales work and read zero</strong></li>
+        <li>Set out drying trays lined with paper towel, one per group</li>
+        <li>Frypan on low, or a sunny windowsill spot cleared</li>
+        <li>Print the graph frames, critique proformas and CP2 proformas</li>
+        <li>Have each class's Week 1 setup masses ready to hand back</li>
+        <li>Print or display the other class's raw data — with no method attached</li>
+        <li>Photograph of the cross, and the client's asset, ready</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>For the weigh-in</h4>
+      <ul class="check">
+        <li>2 × scales, 0.01 g resolution</li>
+        <li>Tongs or disposable gloves — <strong>no bare hands</strong></li>
+        <li>Drying trays and paper towel</li>
+        <li>Frypan on low (teacher-operated) or windowsill</li>
+        <li>Rigid sealed container for nail disposal</li>
+        <li>Safety glasses</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Per student</h4>
+      <ul class="check">
+        <li>Their group's rust log from Weeks 1–4</li>
+        <li>Graph frame (pre-scaled version available)</li>
+        <li>Method critique proforma</li>
+        <li>CP2 Investigation Plan proforma — <strong>from your Assessment Pack</strong></li>
+        <li>Ruler, pencil, coloured pencils</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Whole class</h4>
+      <ul class="check">
+        <li>Criteria chart from Lessons 1, 2 and 4</li>
+        <li>Board space for the pooled six-condition data</li>
+        <li>The other class's raw dataset</li>
+        <li>Week 1 setup masses for every jar</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Tidying up</h4>
+      <ul class="check">
+        <li>Liquids down the sink with running water</li>
+        <li>Nails into a rigid sealed container, not loose waste</li>
+        <li>Jars washed, inspected, returned or discarded if chipped</li>
+        <li>Benches and sink cleaned after disposal</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Not needed today</h4>
+      <ul>
+        <li>Frypan for cooking — only for drying, on low</li>
+        <li>Funnels, basins, thermometers</li>
+        <li>Any consumables: this is a data lesson</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTENTIONS ============ -->
+<section class="panel" id="p-intentions">
+  <h2>What we are learning</h2>
+
+  <div class="card">
+    <h4>Learning intention</h4>
+    <p style="font-size:1.1rem;margin-bottom:0">We are learning to analyse data, including data that somebody else collected.</p>
+  </div>
+
+  <h3>I will be successful when I can…</h3>
+  <ul>
+    <li>construct a graph that shows what my data actually says</li>
+    <li>describe a pattern or trend in the results</li>
+    <li>find a weakness in a method I did not carry out myself</li>
+    <li>plan an investigation that another group could run</li>
+  </ul>
+
+  <h3>Stretch</h3>
+  <ul>
+    <li>I can tell a real difference from ordinary variation between my three jars.</li>
+    <li>I can name two things the other class could fairly criticise about our method.</li>
+  </ul>
+
+  <div class="note teal"><span class="lab">Curriculum</span>
+    <strong>AC9S6I04</strong> — construct and use appropriate representations, including tables and graphs, to organise and process data and describe patterns, trends and relationships.<br>
+    <strong>AC9S6I05</strong> — compare methods and findings with those of others, recognise possible sources of error, pose questions for further investigation and select evidence to support reasoned conclusions.<br>
+    <strong>AC9S6H01</strong> — examine why advances in science are often the result of collaboration or build on the work of others.</div>
+
+  <div class="note"><span class="lab">Assessment today</span>
+    The last fifteen minutes is your <strong>Investigation Plan</strong> for next week. You draft it as a group, another group reads it and asks one hard question, and then you submit your own. It has to be good enough for someone else to run.</div>
+
+  <div class="card">
+    <h4>Your goal for today</h4>
+    <textarea style="width:100%;min-height:74px;border:1px solid var(--line);border-radius:8px;padding:10px;font-family:inherit;font-size:16px" placeholder="Today I want to…"></textarea>
+  </div>
+</section>
+
+<!-- ============ WEIGH-IN ============ -->
+<section class="panel" id="p-weigh">
+  <h2>The weigh-in <span class="timechip">15 min</span></h2>
+  <p class="lede">Five weeks. Let us find out.</p>
+
+  <div class="note stop"><span class="lab">Safety first</span>
+    Rusted nails are sharp and rust carries a tetanus risk. <strong>Tongs or gloves only — never bare hands.</strong> Count your nails out and count them back in. Tell the teacher immediately if anyone gets scratched.</div>
+
+  <h3>Getting them dry</h3>
+  <ol>
+    <li>Lift your nails out with tongs. Keep each jar's three together and labelled.</li>
+    <li>Rinse briefly under the tap.</li>
+    <li>Blot hard with paper towel. Then blot again.</li>
+    <li>Spread them on your tray and leave them to dry properly.</li>
+  </ol>
+
+  <div class="card">
+    <p><strong>Why we are being this fussy about drying.</strong></p>
+    <p style="margin-bottom:0">One drop of water weighs <strong>0.05 g</strong>. The mass your nails have actually gained might only be 0.06 g. So a single drop left behind could <em>double</em> your result and you would never know. Water is not rust, and the scale cannot tell the difference.</p>
+  </div>
+
+  <h3>Weighing</h3>
+  <ol>
+    <li>Wait until the nails look <em>and feel</em> completely dry.</li>
+    <li>Weigh all three together, exactly as you did in Week 1.</li>
+    <li>Record to <strong>two decimal places</strong>, always — 13.80 g, not 13.8 g.</li>
+    <li>Subtract the setup mass. That difference is your result.</li>
+  </ol>
+
+  <div class="note"><span class="lab">The check that tells you whether to trust any of it</span>
+    The dry sealed jar should weigh what it weighed in Week 1, give or take a division. If it has gained, the drying has failed and every other number in the class is too high.</div>
+
+  <h3>What happened?</h3>
+  <ol>
+    <li>Did your nails get heavier, lighter, or stay the same?</li>
+    <li>Is that what you expected five weeks ago?</li>
+    <li>Nothing was added to your jar. So where did the extra mass come from?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> Heavier — most conditions gain between 0.03 g and 0.30 g. The vinegar jar may lose mass, because acid dissolves iron away rather than just rusting it.</p>
+      <p><strong>2.</strong> Almost nobody expects heavier. Rust flakes and looks like decay, so lighter feels obvious.</p>
+      <p style="margin-bottom:0"><strong>3.</strong> Out of the air. Rust is iron joined to oxygen, and the oxygen came from inside the jar. The nail is now iron <em>plus</em> something it collected — which is exactly why it weighs more. In Lesson 2 the mass dropped when a gas escaped. Here it rose because a gas joined.</p>
+    </div>
+  </details>
+
+  <div class="note teal tnote"><span class="lab">This is the payoff of the whole unit</span>
+    Week 2 established that mass is conserved and a loss means something left. Here mass increases, which means something joined. The oxygen came from the air and is now part of the nail. It is the single most convincing piece of evidence a Year 6 student can personally generate that an irreversible change makes a new substance — and they generated it themselves over five weeks.</div>
+</section>
+
+<!-- ============ GRAPH ============ -->
+<section class="panel" id="p-graph">
+  <h2>Graph it <span class="timechip">20 min</span></h2>
+
+  <h3>Your three jars first</h3>
+  <p>Plot your own condition. Three bars, one per jar.</p>
+  <ol>
+    <li>Are your three bars the same height?</li>
+    <li>Should they be? You set all three up identically.</li>
+    <li>How different would two jars have to be before you would say it was a real difference rather than just wobble?</li>
+  </ol>
+
+  <div class="note"><span class="lab">Why we ran three</span>
+    If you had only run one jar, you would have no idea whether your number was typical or a fluke. Three tells you how much your own results wobble — and that tells you how big a difference has to be before it means anything.</div>
+
+  <h3>Then the whole class</h3>
+  <p>Six conditions on one graph. Use the average of each group's three jars.</p>
+  <ol>
+    <li>Which condition rusted the most?</li>
+    <li>Which two conditions barely rusted at all? What do they have in common?</li>
+    <li>Compare the half-submerged jar with the fully submerged one. Which won?</li>
+    <li>Is that what you predicted in Week 1?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers — Tuesday, what causes rust</summary>
+    <div class="body">
+      <p><strong>1.</strong> Jar B, half-submerged, usually by a clear margin. Salt water (D) is often close behind.</p>
+      <p><strong>2.</strong> Jar A (dry, sealed) and Jar F (boiled water under oil). A had air but no water. F had water but no oxygen. <strong>Neither rusted, and between them they prove you need both.</strong></p>
+      <p><strong>3.</strong> Half-submerged beats fully submerged — which surprises nearly everyone.</p>
+      <p style="margin-bottom:0"><strong>4.</strong> Most people predicted more water means more rust. The waterline is where water and oxygen meet, and rusting needs both at once. Under the surface there is far less oxygen available.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Show the answers — Thursday, what stops rust</summary>
+    <div class="body">
+      <p><strong>1.</strong> The bare control, by a long way. That is the point — everything else was trying to beat it.</p>
+      <p><strong>2.</strong> The galvanised nail and whichever coating stayed intact. A tape or polish coating with a gap in it often does <em>worse</em> than expected, because water gets underneath and cannot dry out.</p>
+      <p style="margin-bottom:0"><strong>3–4.</strong> The useful surprise is that a damaged barrier can be worse than no barrier at all. That matters for the client's recommendation: a coating only works if it is complete and stays complete.</p>
+    </div>
+  </details>
+
+  <div class="note tnote"><span class="lab">Draw out the A and F pair deliberately</span>
+    Two conditions that both failed to rust, for opposite reasons. Together they are a controlled experiment in miniature: remove water, nothing happens; remove oxygen, nothing happens. That is far stronger evidence than the winner, and students tend to skip straight past it to look at which bar is tallest.</div>
+
+  <div class="paths">
+    <div class="path"><div class="pt">Need a hand</div><ul><li>Use the pre-scaled graph frame.</li><li>Plot your three jars, then the class averages.</li></ul></div>
+    <div class="path core"><div class="pt">Keep going</div><ul><li>Build and scale both graphs yourself.</li><li>Write the pattern in words underneath.</li></ul></div>
+    <div class="path push"><div class="pt">Push me</div><ul><li>Express the gain as a percentage of the starting mass. Does that change which condition won?</li><li>Is the gap between conditions bigger than the gap between your own three jars? What does your answer mean?</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ SWAP ============ -->
+<section class="panel" id="p-swap">
+  <h2>The swap <span class="timechip">20 min</span></h2>
+  <p class="lede">Here is the other class's data. You were not there. You do not know how they did it.</p>
+
+  <div class="card">
+    <p style="margin-bottom:0">They tested something you did not. You tested something they did not. <strong>Neither class can answer the client's question alone.</strong> But before you use their numbers, you have to decide whether you trust them.</p>
+  </div>
+
+  <h3>Write these down before you discuss anything</h3>
+  <ol>
+    <li><strong>Two things you cannot tell from this data.</strong> What did they not write down that you would need to know?</li>
+    <li><strong>One thing you think may have gone wrong.</strong> Be specific — name the step.</li>
+    <li><strong>One question you would ask them</strong> if they were standing here.</li>
+  </ol>
+
+  <div class="note"><span class="lab">Written first, talking afterwards</span>
+    Do this on your own paper before anyone says anything out loud. Once someone announces what they think, it gets very hard to notice anything different.</div>
+
+  <details>
+    <summary>Things worth looking for</summary>
+    <div class="body">
+      <ul>
+        <li>Did they dry the nails the same way you did? Would you know if they had not?</li>
+        <li>Did every jar start on the same day?</li>
+        <li>Were the jars all in the same place — same light, same temperature?</li>
+        <li>Did they use the same size nails?</li>
+        <li>Is one of their three jars wildly different from the other two? Did they say why?</li>
+        <li>Did they record to two decimal places, or round?</li>
+        <li>Is anything missing — a week's reading, a jar, a mass?</li>
+      </ul>
+    </div>
+  </details>
+
+  <h3>Now turn it around</h3>
+  <div class="card">
+    <p style="margin-bottom:0"><strong>What would the other class say about ours?</strong> Name two things they could fairly attack about our method.</p>
+  </div>
+
+  <div class="note teal tnote"><span class="lab">The highest-value fifteen minutes in the unit</span>
+    Students critique another class in ways they will never critique their friends, and they cannot fall back on "I know what we meant". Insist on written critiques before any discussion — the writing is the evidence and the discussion is where they find out whether they were right.<br><br>
+    The turn-it-around question is the harder half and the more important one. A student who can name a weakness in their own method is doing what the evaluation criterion actually asks. Expect resistance; most groups will defend their own data instinctively.</div>
+
+  <h3>Why this matters</h3>
+  <ol>
+    <li>Could either class have answered the client's question alone?</li>
+    <li>Real scientists do this to each other constantly. Why would that make science better rather than worse?</li>
+  </ol>
+
+  <details>
+    <summary>Where this is going</summary>
+    <div class="body">
+      <p>No. One class found out what makes rust happen. The other found out what slows it down. The client needs both, and neither class had the time or the jars to do it all.</p>
+      <p style="margin-bottom:0">Scientists publish their methods precisely so other people can attack them. A finding that survives other people trying to pull it apart is worth far more than one nobody checked. That is not scientists being difficult with each other — <strong>it is the part that makes the answer trustworthy.</strong></p>
+    </div>
+  </details>
+
+  <div class="note tnote"><span class="lab">AC9S6H01, evidenced</span>
+    This is "examine why advances in science are often the result of collaboration or build on the work of others" — done, not narrated. Students have just experienced needing someone else's data and having to judge whether to trust it. Name it explicitly so they can write about it in CP3, because they will need it there.</div>
+</section>
+
+<!-- ============ CROSS ============ -->
+<section class="panel" id="p-cross">
+  <h2>The cross explained <span class="timechip">20 min</span></h2>
+
+  <h3>First — what actually happened to your nails</h3>
+  <div class="card">
+    <p><strong>Iron + oxygen → iron oxide.</strong> That is rust.</p>
+    <p style="margin-bottom:0">The oxygen came out of the air in your jar. It is now locked into the surface of the nail, which is why the nail weighs more than the steel you started with. A new substance was made, and it was made <em>from</em> the nail.</p>
+  </div>
+
+  <ol>
+    <li>Why can you not scrub rust off and get your nail back to new?</li>
+    <li>Rust flakes off and exposes fresh metal underneath. What happens next?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> Because the rust is not sitting <em>on</em> the nail — it is made <em>of</em> the nail. Scrub it off and you take some of the nail with it. The iron that turned into rust is not coming back.</p>
+      <p style="margin-bottom:0"><strong>2.</strong> It rusts too. Then that flakes off, and the metal underneath rusts. On ordinary steel this never stops. Given enough time, there is no steel left.</p>
+    </div>
+  </details>
+
+  <h3>Now — the question from Week 1</h3>
+  <div class="card">
+    <p style="font-size:1.1rem">The cross at our entrance has been rusting for years. Nobody has ever tried to stop it.</p>
+    <p style="font-size:1.1rem;margin-bottom:0"><strong>Somebody chose that. Why?</strong></p>
+  </div>
+
+  <p>It is made from <strong>weathering steel</strong>, which has other metals mixed into it. It rusts like any steel — but then something different happens.</p>
+
+  <div class="stations">
+    <div class="st"><div class="hd"><span>Ordinary steel</span><span class="n">1</span></div><div class="bd">
+      <p>Rust forms. It is flaky and loose.</p>
+      <p>It falls off, exposing clean metal.</p>
+      <p style="margin-bottom:0"><strong>That rusts too. It never stops.</strong></p>
+      <div class="kit">Your client's asset is doing this right now.</div></div></div>
+    <div class="st"><div class="hd"><span>Weathering steel</span><span class="n">2</span></div><div class="bd">
+      <p>Rust forms. It is tight and it sticks.</p>
+      <p>It seals the surface instead of falling off.</p>
+      <p style="margin-bottom:0"><strong>Water and air cannot get past it, so it stops.</strong></p>
+      <div class="kit">The cross at our entrance.</div></div></div>
+  </div>
+
+  <ol>
+    <li>Both are irreversible changes. Why is one a problem and the other a solution?</li>
+    <li>So does knowing a change is irreversible tell you whether it is bad?</li>
+    <li>What would you need to know to decide?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> Identical chemistry — iron and oxygen making iron oxide. The difference is what the rust <em>does</em> once it has formed. Loose rust keeps the reaction going. Tight rust shuts it down.</p>
+      <p><strong>2.</strong> No. Irreversible means it cannot be undone. It says nothing about whether you wanted it.</p>
+      <p style="margin-bottom:0"><strong>3.</strong> What the change is for. Cooking, setting concrete and curing glue are all irreversible and all deliberate. The cross was designed to do this. The gate was not.</p>
+    </div>
+  </details>
+
+  <div class="note teal"><span class="lab">The idea this whole unit is built on</span>
+    An irreversible change can be exactly what you want — if you understand it well enough to control it. The people who built that cross knew precisely what would happen to it, and chose it anyway.</div>
+
+  <div class="note teal tnote"><span class="lab">Optional — worth the two minutes if the room is with you</span>
+    A cross made of something that changes permanently and cannot be returned to what it was, placed at the entrance. You are already having this conversation when you take them out there. Offer it as a question rather than a point: why might someone choose that material for that object?</div>
+
+  <h3>Words we have used</h3>
+  <div class="vocab">
+    <span><b>iron oxide</b></span><span><b>oxygen</b></span><span><b>corrosion</b></span>
+    <span><b>galvanised</b></span><span><b>weathering steel</b></span><span><b>source of error</b></span>
+    <span><b>trend</b></span><span><b>replicate</b></span><span><b>collaboration</b></span>
+  </div>
+</section>
+
+<!-- ============ CP2 ============ -->
+<section class="panel" id="p-cp2">
+  <h2>★ Investigation Plan <span class="timechip">15 min</span></h2>
+  <p class="lede">Assessment. Drafted in your group, critiqued by another, submitted individually.</p>
+
+  <div class="card">
+    <p>Next week you run your own investigation, and the results go to [CLIENT NAME].</p>
+    <p style="margin-bottom:0">The shared question is <strong>how to protect metal from rusting</strong>. Your group picks what to change. Your plan has to be good enough that another group could run it without asking you anything.</p>
+  </div>
+
+  <h3>What the plan needs</h3>
+  <ul>
+    <li>Your question — naming what you will change and what you will measure</li>
+    <li>Your prediction, and the evidence from the last five weeks that led you to it</li>
+    <li>Your variables: changed, measured, and at least three controlled</li>
+    <li>Your method, numbered</li>
+    <li>How many times you will run it, and why that many</li>
+    <li>Your risks and what you will do about them</li>
+    <li>Your equipment</li>
+    <li>What another group asked, and what you changed because of it</li>
+  </ul>
+
+  <div class="note"><span class="lab">The part people lose marks on</span>
+    <strong>Controlled variables.</strong> Do not list everything you can think of. List the things that would actually wreck your result if they were different — nail size, how much water, where the jars sit, what day you start. Ask yourself: if this changed, would my answer change?</div>
+
+  <div class="note"><span class="lab">Use what you have just learnt</span>
+    You spent twenty minutes finding holes in another class's method. Your plan is about to get the same treatment. What would <em>you</em> attack?</div>
+
+  <h3>The swap</h3>
+  <p>Draft it, hand it to another group, and get one hard question back. Write down what they asked and what you changed. That box is part of the assessment — it shows whether you can take a criticism and use it.</p>
+
+  <div class="note stop tnote"><span class="lab">The proforma is not on this site</span>
+    CP2's proforma and marking guide are in the Assessment Pack on your own machine. This page is public and teacher mode only hides things with a style rule. Print from the pack.</div>
+
+  <div class="note tnote"><span class="lab">Administration</span>
+    Groups of up to four draft together; every student submits their own plan. Peer critique before submission, written on the proforma. <strong>Approve every plan before Week 6</strong> — an unapproved plan is a group that cannot start. Fifteen minutes is enough to draft but not to polish; finishing later is fine.</div>
+
+  <h3>Next week</h3>
+  <p>You run it. Bring your plan — you will be following it, and you will be watched while you do.</p>
+</section>
+
+<!-- ============ RESOURCES ============ -->
+<section class="panel" id="p-resources">
+  <h2>Resources</h2>
+  <p class="lede">Print before the lesson.</p>
+
+  <a class="dlitem all" href="resources/l5-00-all-student-sheets.pdf" download style="margin-bottom:6px">
+    <span class="ic">PDF</span>
+    <span><span class="tt">All student sheets</span>
+    <span class="ds">Every sheet below in one file.</span></span>
+  </a>
+
+  <h3>Individual sheets</h3>
+  <div class="dl">
+    <a class="dlitem" href="resources/l5-01-weigh-in-and-graph.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Weigh-in and graphing</span>
+      <span class="ds">Final masses, the difference, both graph frames, and the pattern in words.</span></span>
+    </a>
+    <a class="dlitem" href="resources/l5-02-graph-frames-support.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Graph frames — pre-scaled</span>
+      <span class="ds">Support tier. Axes drawn and scaled, sentence starters for the pattern.</span></span>
+    </a>
+    <a class="dlitem" href="resources/l5-03-method-critique.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Method critique proforma</span>
+      <span class="ds">Two things you cannot tell, one thing that may have gone wrong, one question — then turn it around.</span></span>
+    </a>
+    <a class="dlitem doc" href="resources/l5-student-sheets-EDITABLE.docx" download>
+      <span class="ic">DOCX</span>
+      <span><span class="tt">Editable master</span>
+      <span class="ds">All sheets in one Word file.</span></span>
+    </a>
+  </div>
+
+  <div class="note stop"><span class="lab">CP2 is not published here</span>
+    The Investigation Plan proforma and its marking guide are deliberately absent from this site. Print them from the Assessment Pack on your own machine.</div>
+
+  <div class="tree tnote">lessons/
+└── 05-reading-the-evidence/
+    ├── lesson-05-reading-the-evidence.html   <b>this page</b>
+    └── resources/
+        ├── l5-00-all-student-sheets.pdf
+        ├── l5-01-weigh-in-and-graph.pdf
+        ├── l5-02-graph-frames-support.pdf
+        ├── l5-03-method-critique.pdf
+        └── l5-student-sheets-EDITABLE.docx</div>
+</section>
+
+</div></main>
+
+<!-- ============ TIMER ============ -->
+<div id="timer" role="region" aria-label="Lesson timer">
+  <div class="t-hd">
+    <span class="grip" aria-hidden="true"></span><span class="ttl">Lesson timer</span>
+    <span class="ctl">
+      <button class="iconbtn on" id="tSound" title="Sound on or off" aria-pressed="true">♪</button>
+      <button class="iconbtn" id="tMin" title="Shrink or expand">–</button>
+      <button class="iconbtn" id="tClose" title="Hide the timer">×</button>
+    </span>
+  </div>
+  <div class="t-body">
+    <div class="t-phase" id="tPhase">The weigh-in</div>
+    <div class="t-sub" id="tSub">Phase 1 of 5</div>
+    <div class="t-clock" id="tClock">15:00</div>
+    <div class="t-rot" id="tRot"></div>
+    <div class="bar"><i id="tBar"></i></div>
+    <div class="t-btns">
+      <button class="btn go" id="tGo">Start</button>
+      <button class="btn" id="tNext">Next</button>
+      <button class="btn" id="tReset">Reset</button>
+    </div>
+    <div class="t-list" id="tList"></div>
+    <div class="t-foot"><span id="tElapsed">Elapsed 0:00</span><span id="tLeft">90 min total</span></div>
+    <div class="t-foot" style="border-top:none;margin-top:2px;padding-top:0;justify-content:center"><span id="tDeadline">CP2 starts in 75:00</span></div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- teacher mode ---------- */
+  var tm = document.getElementById('tmToggle');
+  tm.addEventListener('click', function(){
+    var on = document.body.classList.toggle('teacher');
+    tm.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if(!on){
+      var cur = document.querySelector('.tab[aria-selected="true"]');
+      if(cur && cur.classList.contains('tonly')) show('overview');
+    }
+  });
+
+  /* ---------- timer visibility (independent of teacher mode) ---------- */
+  document.body.classList.add('timer-on');
+  var tv = document.getElementById('timerToggle');
+  function setTimerVisible(on){
+    document.body.classList.toggle('timer-on', on);
+    tv.setAttribute('aria-pressed', on ? 'true' : 'false');
+    tv.classList.toggle('lit', on);
+  }
+  tv.classList.add('lit');
+  tv.addEventListener('click', function(){
+    setTimerVisible(!document.body.classList.contains('timer-on'));
+  });
+
+  /* ---------- tabs ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function show(id){
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.p===id ? 'true':'false'); });
+    document.querySelectorAll('.panel').forEach(function(p){
+      p.classList.toggle('active', p.id==='p-'+id);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.p); }); });
+
+  /* ---------- timer ---------- */
+  var PHASES = [
+    {name:'The weigh-in',                mins:15, tab:'weigh'},
+    {name:'Graph it',                    mins:20, tab:'graph', rotations:2},
+    {name:'The swap',                    mins:20, tab:'swap'},
+    {name:'The cross explained',         mins:20, tab:'cross'},
+    {name:'★ CP2 Investigation Plan', mins:15, tab:'cp2'}
+  ];
+  var TOTAL = PHASES.reduce(function(a,p){ return a+p.mins; },0);
+
+  var idx=0, left=PHASES[0].mins*60, running=false, elapsed=0, sound=true, tick=null;
+  var rotLeft=0, rotIdx=0, rotLen=0;
+
+  var el = {
+    box:document.getElementById('timer'), phase:document.getElementById('tPhase'),
+    sub:document.getElementById('tSub'), clock:document.getElementById('tClock'),
+    rot:document.getElementById('tRot'), bar:document.getElementById('tBar'),
+    go:document.getElementById('tGo'), next:document.getElementById('tNext'),
+    reset:document.getElementById('tReset'), list:document.getElementById('tList'),
+    elapsed:document.getElementById('tElapsed'), left:document.getElementById('tLeft'),
+    snd:document.getElementById('tSound'), min:document.getElementById('tMin')
+  };
+
+  function mmss(s){
+    var neg = s<0; s = Math.abs(s);
+    var m = Math.floor(s/60), r = s%60;
+    return (neg?'+':'') + m + ':' + (r<10?'0':'') + r;
+  }
+
+  function beep(times){
+    if(!sound) return;
+    try{
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if(!Ctx) return;
+      var ac = new Ctx();
+      for(var i=0;i<times;i++){
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.connect(g); g.connect(ac.destination);
+        o.frequency.value = 784;
+        var t0 = ac.currentTime + i*0.28;
+        g.gain.setValueAtTime(0.0001,t0);
+        g.gain.exponentialRampToValueAtTime(0.25,t0+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,t0+0.22);
+        o.start(t0); o.stop(t0+0.24);
+      }
+      setTimeout(function(){ try{ac.close();}catch(e){} }, times*300+500);
+    }catch(e){}
+  }
+
+  function buildList(){
+    el.list.innerHTML='';
+    PHASES.forEach(function(p,i){
+      var row=document.createElement('div');
+      row.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+      row.innerHTML='<span>'+p.name+'</span><span class="d">'+p.mins+'m</span>';
+      row.addEventListener('click',function(){ goTo(i); });
+      el.list.appendChild(row);
+    });
+  }
+
+  function render(){
+    var p = PHASES[idx];
+    el.phase.textContent = p.name;
+    el.sub.textContent = 'Phase '+(idx+1)+' of '+PHASES.length+' · '+p.mins+' min';
+    el.clock.textContent = mmss(left);
+    var pct = Math.max(0, Math.min(100, ((p.mins*60-left)/(p.mins*60))*100));
+    el.bar.style.width = pct+'%';
+    el.box.classList.toggle('over', left<0);
+    el.box.classList.toggle('warn', left>=0 && left<=120);
+    el.box.classList.toggle('rotating', !!p.rotations);
+    if(p.rotations){
+      el.rot.textContent = (rotIdx===0?'Your three jars':'The whole class')+' · part '+Math.min(rotIdx+1,p.rotations)+' of '+p.rotations+' · '+mmss(rotLeft);
+    }
+    el.elapsed.textContent = 'Elapsed '+mmss(elapsed);
+    var dl = document.getElementById('tDeadline');
+    if(dl){
+      var toCp = 75*60 - elapsed;
+      if(idx >= 4){ dl.textContent = 'CP2 running'; dl.style.color = '#7fd6a0'; }
+      else if(toCp > 0){ dl.textContent = 'CP2 starts in ' + mmss(toCp); dl.style.color = toCp < 300 ? '#ffc978' : '#9fb0cd'; }
+      else { dl.textContent = 'CP2 ' + mmss(toCp) + ' late'; dl.style.color = '#ff9a9a'; }
+    }
+    var rem = TOTAL*60 - elapsed;
+    el.left.textContent = rem>=0 ? mmss(rem)+' of lesson left' : mmss(rem)+' over';
+    el.go.textContent = running ? 'Pause' : (elapsed===0 && left===PHASES[0].mins*60 ? 'Start' : 'Resume');
+    Array.prototype.forEach.call(el.list.children,function(r,i){
+      r.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+    });
+  }
+
+  function setPhase(i){
+    idx = Math.max(0, Math.min(PHASES.length-1, i));
+    var p = PHASES[idx];
+    left = p.mins*60;
+    if(p.rotations){ rotLen = Math.floor(p.mins*60/p.rotations); rotIdx=0; rotLeft=rotLen; }
+    if(p.tab) show(p.tab);
+    render();
+  }
+
+  function goTo(i){ setPhase(i); }
+
+  function step(){
+    left--; elapsed++;
+    var p = PHASES[idx];
+    if(p.rotations){
+      rotLeft--;
+      if(rotLeft<=0 && rotIdx < p.rotations-1){ rotIdx++; rotLeft=rotLen; beep(1); }
+    }
+    if(left===0){ beep(2); }
+    render();
+  }
+
+  function toggle(){
+    running = !running;
+    if(running){ tick = setInterval(step,1000); } else { clearInterval(tick); }
+    render();
+  }
+
+  el.go.addEventListener('click', toggle);
+  el.next.addEventListener('click', function(){ setPhase(idx+1); });
+  el.reset.addEventListener('click', function(){
+    running=false; clearInterval(tick); elapsed=0; setPhase(0);
+  });
+  el.snd.addEventListener('click', function(){
+    sound=!sound;
+    el.snd.classList.toggle('on',sound);
+    el.snd.setAttribute('aria-pressed', sound?'true':'false');
+    if(sound) beep(1);
+  });
+  el.min.addEventListener('click', function(){
+    var m = el.box.classList.toggle('min');
+    el.min.textContent = m ? '+' : '–';
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(!document.body.classList.contains('teacher')) return;
+    if(/^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if(e.code==='Space'){ e.preventDefault(); toggle(); }
+    if(e.code==='ArrowRight'){ setPhase(idx+1); }
+    if(e.code==='ArrowLeft'){ setPhase(idx-1); }
+  });
+
+  el.box.querySelector('#tClose').addEventListener('click', function(){
+    setTimerVisible(false);
+  });
+
+  /* ---------- drag ---------- */
+  (function(){
+    var hd = el.box.querySelector('.t-hd');
+    var dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+
+    function place(x, y){
+      var r = el.box.getBoundingClientRect();
+      var maxX = window.innerWidth  - r.width  - 6;
+      var maxY = window.innerHeight - r.height - 6;
+      x = Math.max(6, Math.min(x, Math.max(6, maxX)));
+      y = Math.max(6, Math.min(y, Math.max(6, maxY)));
+      el.box.style.left = x + 'px';
+      el.box.style.top  = y + 'px';
+      el.box.style.right = 'auto';
+      el.box.style.bottom = 'auto';
+    }
+
+    function reset(){
+      el.box.style.left = ''; el.box.style.top = '';
+      el.box.style.right = ''; el.box.style.bottom = '';
+    }
+
+    hd.addEventListener('pointerdown', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      var r = el.box.getBoundingClientRect();
+      dragging = true;
+      sx = e.clientX; sy = e.clientY; ox = r.left; oy = r.top;
+      place(r.left, r.top);
+      el.box.classList.add('dragging');
+      hd.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+
+    hd.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      place(ox + (e.clientX - sx), oy + (e.clientY - sy));
+    });
+
+    function stop(e){
+      if(!dragging) return;
+      dragging = false;
+      el.box.classList.remove('dragging');
+      try{ hd.releasePointerCapture(e.pointerId); }catch(err){}
+    }
+    hd.addEventListener('pointerup', stop);
+    hd.addEventListener('pointercancel', stop);
+    hd.addEventListener('dblclick', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      reset();
+    });
+
+    window.addEventListener('resize', function(){
+      if(el.box.style.left){
+        var r = el.box.getBoundingClientRect();
+        place(r.left, r.top);
+      }
+    });
+  })();
+
+  buildList(); render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4 · The point of no return — Year 6 Chemical Sciences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1b2a4a; --navy-soft:#2c3f66; --amber:#e8930c; --amber-deep:#9a5f00;
+  --teal:#0e7c7b; --teal-soft:#e2f0ef; --paper:#fbf9f4; --line:#dcd9d0;
+  --ink:#23272e; --muted:#5a6478; --white:#fff;
+  --rust:#8a4a22; --rust-soft:#f6e9e0;
+  --ok:#2e6b3f; --warn:#b4560a; --stop:#a32020;
+  --radius:10px;
+  --sans:"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:var(--sans); color:var(--ink); background:var(--paper);
+  font-size:17px; line-height:1.62; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+
+/* ---------- header ---------- */
+header.top{background:var(--navy);color:#fff;padding:22px 0 0}
+.crumb{font-size:14px;color:#a9b6cf;text-decoration:none;display:inline-block;margin-bottom:14px}
+.crumb:hover{color:#fff}
+.meta{font-size:13.5px;color:#9fb0cd;letter-spacing:.02em;margin-bottom:6px}
+h1{font-size:2.05rem;line-height:1.18;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.subtitle{color:#c3d0e6;font-size:1.02rem;margin:0 0 16px}
+.badges{display:flex;flex-wrap:wrap;gap:7px;padding-bottom:18px}
+.badge{font-size:12.5px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#e7edf7;border:1px solid rgba(255,255,255,.18)}
+.badge.code{background:var(--amber);color:#33240a;border-color:transparent;font-weight:600}
+
+/* teacher toggle */
+.tmrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:0 0 18px}
+.tmbtn{
+  display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.26);color:#fff;padding:8px 14px;border-radius:999px;
+  font-size:14px;cursor:pointer;font-family:inherit
+}
+.tmbtn:hover{background:rgba(255,255,255,.18)}
+.tmbtn .dot{width:9px;height:9px;border-radius:50%;background:#7c8aa5}
+body.teacher #tmToggle .dot{background:#5fd08a}
+body.teacher #tmToggle{background:var(--amber);color:#2e2105;border-color:transparent;font-weight:600}
+.tmbtn.lit .dot{background:#5fd08a}
+.tmbtn.lit{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4)}
+.tmhint{font-size:13px;color:#9fb0cd}
+
+/* ---------- tabs ---------- */
+nav.tabs{position:sticky;top:0;z-index:40;background:var(--navy-soft);border-bottom:2px solid var(--amber)}
+.tabscroll{max-width:880px;margin:0 auto;display:flex;overflow-x:auto;padding:0 12px;scrollbar-width:thin}
+.tab{
+  flex:0 0 auto;background:none;border:none;font-family:inherit;font-size:14px;color:#c6d2e6;
+  padding:12px 13px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap
+}
+.tab:hover{color:#fff}
+.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--amber);font-weight:600}
+.tab.tonly{display:none}
+body.teacher .tab.tonly{display:block}
+
+/* ---------- panels ---------- */
+main{padding:26px 0 170px}
+.panel{display:none}
+.panel.active{display:block}
+h2{font-size:1.45rem;color:var(--navy);margin:0 0 4px;letter-spacing:-.01em}
+h3{font-size:1.12rem;color:var(--teal);margin:26px 0 6px}
+h4{font-size:1rem;margin:20px 0 4px;color:var(--navy)}
+p{margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:5px 0}
+.lede{font-size:1.06rem;color:var(--muted);margin-bottom:20px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:16px 0}
+.card h4:first-child,.card h3:first-child{margin-top:0}
+
+.note{border-left:4px solid var(--amber);background:#fdf6e8;padding:13px 16px;margin:15px 0;border-radius:0 8px 8px 0}
+.note .lab{font-weight:700;color:var(--amber-deep);display:block;margin-bottom:3px;font-size:14.5px}
+.note.teal{border-left-color:var(--teal);background:var(--teal-soft)}
+.note.teal .lab{color:var(--teal)}
+.note.stop{border-left-color:var(--stop);background:#fbeaea}
+.note.stop .lab{color:var(--stop)}
+.tnote{display:none}
+body.teacher .tnote{display:block}
+.snote{display:block}
+body.teacher .snote{display:block}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15.5px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff;font-weight:600;font-size:14.5px}
+tbody tr:nth-child(even){background:#faf8f3}
+
+.timechip{display:inline-block;background:var(--teal);color:#fff;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:middle}
+
+details{border:1px solid var(--line);border-radius:8px;background:#fff;padding:0;margin:13px 0}
+summary{cursor:pointer;padding:11px 15px;font-weight:600;color:var(--navy);font-size:15.5px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"▸ ";color:var(--amber);font-weight:700}
+details[open] summary:before{content:"▾ "}
+details .body{padding:0 15px 14px;border-top:1px solid var(--line)}
+
+.paths{display:grid;gap:13px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin:16px 0}
+.path{border:1px solid var(--line);border-top:4px solid var(--teal);border-radius:8px;background:#fff;padding:14px 15px}
+.path.core{border-top-color:var(--navy)}
+.path.push{border-top-color:var(--amber)}
+.path .pt{font-weight:700;margin-bottom:5px;color:var(--navy);font-size:15.5px}
+.path ul{padding-left:19px;margin-bottom:0;font-size:15px}
+
+.stations{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.st{border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}
+.st .hd{background:var(--navy);color:#fff;padding:9px 13px;font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.st .hd .n{background:var(--amber);color:#33240a;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;font-size:13px;flex:0 0 auto}
+.st .bd{padding:12px 14px;font-size:15px}
+.st .bd p{margin-bottom:8px}
+.st .kit{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.st.teacherrun .hd{background:var(--stop)}
+
+.kitgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(245px,1fr))}
+.kit-col{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.kit-col h4{margin-top:0}
+.kit-col ul{font-size:15px;padding-left:19px;margin-bottom:0}
+.check{list-style:none;padding-left:0}
+.check li{position:relative;padding-left:26px}
+.check li:before{content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border:2px solid var(--teal);border-radius:3px}
+
+.vocab{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.vocab span{background:#fff;border:1px solid var(--line);border-radius:6px;padding:5px 11px;font-size:15px}
+.vocab b{color:var(--navy)}
+
+/* ---------- downloads ---------- */
+.dl{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));margin:16px 0}
+.dlitem{
+  display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:9px;padding:13px 14px;text-decoration:none;color:inherit;border-left:4px solid var(--teal)
+}
+.dlitem:hover{border-color:var(--amber);border-left-color:var(--amber);background:#fffdf7}
+.dlitem .ic{
+  flex:0 0 auto;width:38px;height:38px;border-radius:7px;background:var(--teal-soft);color:var(--teal);
+  display:grid;place-items:center;font-size:11px;font-weight:700;letter-spacing:.02em
+}
+.dlitem.doc .ic{background:#e8eefb;color:#2b4a8a}
+.dlitem.doc{border-left-color:#2b4a8a}
+.dlitem.all .ic{background:#fdf0dc;color:var(--amber-deep)}
+.dlitem.all{border-left-color:var(--amber)}
+.dlitem .tt{font-weight:700;font-size:15.5px;color:var(--navy);display:block;margin-bottom:2px;line-height:1.3}
+.dlitem .ds{font-size:13.5px;color:var(--muted);display:block;line-height:1.45}
+.dlitem .sz{font-size:12px;color:#8c95a8;display:block;margin-top:3px}
+.tree{
+  background:var(--navy);color:#dfe6f2;border-radius:9px;padding:15px 17px;margin:14px 0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.75;
+  overflow-x:auto;white-space:pre
+}
+.tree b{color:#ffc978;font-weight:600}
+
+/* ---------- TIMER ---------- */
+#timer{display:none}
+body.timer-on #timer{display:flex;flex-direction:column}
+#timer{
+  position:fixed;right:18px;bottom:18px;z-index:70;width:310px;
+  touch-action:none;
+  background:var(--navy);color:#fff;border-radius:14px;
+  box-shadow:0 10px 34px rgba(16,24,40,.34);overflow:hidden;
+  border:1px solid rgba(255,255,255,.14)
+}
+#timer.min{width:206px}
+.t-hd{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(0,0,0,.2);gap:8px;cursor:grab;user-select:none;-webkit-user-select:none}
+.t-hd:active{cursor:grabbing}
+#timer.dragging{transition:none;box-shadow:0 18px 46px rgba(16,24,40,.5)}
+#timer.dragging .bar i{transition:none}
+.t-hd .grip{display:inline-block;width:13px;height:13px;opacity:.5;flex:0 0 auto;
+  background-image:radial-gradient(currentColor 1px, transparent 1px);
+  background-size:4px 4px;background-position:0 1px}
+.t-hd .ttl{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.t-hd .ttl{font-size:13px;color:#b9c6dd;font-weight:600}
+.t-hd .ctl{display:flex;gap:4px}
+.iconbtn{background:rgba(255,255,255,.12);border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:13px;line-height:1;display:grid;place-items:center;font-family:inherit}
+.iconbtn:hover{background:rgba(255,255,255,.26)}
+.iconbtn.on{background:var(--amber);color:#2e2105}
+.t-body{padding:13px 14px 14px}
+.t-phase{font-size:14.5px;font-weight:600;margin-bottom:2px;line-height:1.3}
+.t-sub{font-size:12px;color:#9fb0cd;margin-bottom:9px}
+.t-clock{font-size:2.9rem;font-weight:700;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-bottom:3px}
+#timer.over .t-clock{color:#ff9a9a}
+#timer.warn .t-clock{color:#ffc978}
+.t-rot{font-size:13px;color:#ffd79a;margin-bottom:9px;display:none}
+#timer.rotating .t-rot{display:block}
+.bar{height:6px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;margin-bottom:11px}
+.bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .4s linear}
+#timer.over .bar i{background:#e06060}
+.t-btns{display:flex;gap:7px;margin-bottom:11px}
+.btn{flex:1;background:rgba(255,255,255,.14);border:none;color:#fff;padding:9px 6px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn:hover{background:rgba(255,255,255,.26)}
+.btn.go{background:var(--amber);color:#2e2105}
+.btn.go:hover{background:#f7a626}
+.t-list{max-height:184px;overflow-y:auto;border-top:1px solid rgba(255,255,255,.14);padding-top:9px}
+.t-row{display:flex;justify-content:space-between;gap:8px;padding:5px 7px;border-radius:6px;font-size:13px;color:#c2cfe4;cursor:pointer;align-items:baseline}
+.t-row:hover{background:rgba(255,255,255,.1)}
+.t-row.cur{background:rgba(232,147,12,.24);color:#fff;font-weight:600}
+.t-row.done{color:#7e8da8}
+.t-row .d{color:#9fb0cd;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.t-row.cur .d{color:#ffd79a}
+.t-foot{font-size:12px;color:#9fb0cd;border-top:1px solid rgba(255,255,255,.14);margin-top:9px;padding-top:8px;display:flex;justify-content:space-between}
+#timer.min .t-body>*:not(.t-clock):not(.t-phase):not(.t-btns){display:none}
+#timer.min .t-clock{font-size:2.1rem}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:1.6rem}
+  #timer{right:10px;bottom:10px;width:calc(100% - 20px);max-width:320px}
+  #timer.min{width:210px}
+  .t-list{max-height:120px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+@media print{
+  header.top,nav.tabs,#timer,.tmrow{display:none}
+  .panel{display:block!important;page-break-before:always}
+  body{background:#fff;font-size:12pt}
+  .card,.note,.st{break-inside:avoid}
+}
+
+/* ---- house style typography ---- */
+:root{
+  --sans:"Atkinson Hyperlegible","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --display:"Space Grotesk","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter-spacing:-.01em}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="crumb" href="../../index.html">← All lessons</a>
+    <div class="meta">Year 6 Science · Can we get it back? · Lesson 4 of 7</div>
+    <h1>The point of no return</h1>
+    <p class="subtitle">How much heat turns a change of state into something new</p>
+    <div class="badges">
+      <span class="badge code">AC9S6U04</span>
+      <span class="badge">AC9S6I03</span>
+      <span class="badge">AC9S6I04</span>
+      <span class="badge">90 minutes</span>
+      <span class="badge">Term 4 · Week 4</span>
+      <span class="badge">★ Assessment CP1</span>
+    </div>
+    <div class="tmrow">
+      <button class="tmbtn" id="tmToggle" aria-pressed="false"><span class="dot"></span> Teacher mode</button>
+      <button class="tmbtn" id="timerToggle" aria-pressed="true"><span class="dot"></span> Lesson timer</button>
+      <span class="tmhint">Drag the timer by its title bar to move it. Double-click the bar to send it back.</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabscroll" role="tablist">
+    <button class="tab tonly" role="tab" data-p="notes" aria-selected="false">Teaching notes</button>
+    <button class="tab" role="tab" data-p="overview" aria-selected="true">Overview</button>
+    <button class="tab" role="tab" data-p="intentions" aria-selected="false">Intentions</button>
+    <button class="tab" role="tab" data-p="rust" aria-selected="false">Rust check</button>
+    <button class="tab" role="tab" data-p="sugar" aria-selected="false">Sugar</button>
+    <button class="tab" role="tab" data-p="thresholds" aria-selected="false">Thresholds</button>
+    <button class="tab" role="tab" data-p="consolidate" aria-selected="false">Consolidate</button>
+    <button class="tab" role="tab" data-p="cp1" aria-selected="false">★ CP1</button>
+    <button class="tab" role="tab" data-p="resources" aria-selected="false">Resources</button>
+  </div>
+</nav>
+
+<main><div class="wrap">
+
+<!-- ============ TEACHING NOTES ============ -->
+<section class="panel" id="p-notes">
+  <h2>Teaching notes</h2>
+  <p class="lede">Read before the lesson. Hidden from students when teacher mode is off.</p>
+
+  <div class="note stop"><span class="lab">Teacher mode is not security</span>
+    This page is public once it is on the web, and teacher mode only hides content with a style rule — anyone can read the source. That is why <strong>CP1's questions and marking guide are not on this page or in the resources folder</strong>. They live in the Assessment Pack on your own machine. Keep it that way.</div>
+
+  <div class="note teal"><span class="lab">Where this sits</span>
+    Two jobs today, and they are different jobs. The sugar demonstration does the curriculum elaboration directly — same substance, more heat, different outcome. The chocolate and egg white pairing kills the belief that <em>hotter</em> is what makes a change irreversible. Then CP1 banks the entire Science Understanding judgement, three weeks before the term gets busy.</div>
+
+  <h3>The misconception this lesson exists to break</h3>
+  <p>Students believe irreversible change requires extreme heat. Four weeks of burning, rusting and fizzing has quietly reinforced it. Two numbers undo it:</p>
+  <table>
+    <thead><tr><th style="width:36%">Change</th><th style="width:18%">Temperature</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>Chocolate melts</td><td>34–38 °C</td><td><strong>Reversible.</strong> Body temperature is 37 °C — it melts in your mouth by design.</td></tr>
+      <tr><td>Egg white sets</td><td>about 63 °C</td><td><strong>Irreversible.</strong> Well below boiling.</td></tr>
+      <tr><td>Water boils</td><td>100 °C</td><td><strong>Reversible.</strong> Hotter than both, and reverses completely.</td></tr>
+    </tbody>
+  </table>
+  <p>An egg white cannot be un-cooked at a temperature where water is still comfortably liquid. Temperature is not the thing. <strong>What the substance is</strong> is the thing — and how much energy goes in decides which of its thresholds you cross.</p>
+
+  <div class="note"><span class="lab">Worth saying out loud about the chocolate</span>
+    Cocoa butter is one of very few fats that melts in the narrow band just below mouth temperature, and confectioners choose it for exactly that. Chocolate melting in your hand is not an accident or a flaw — it is the property the whole product is built around. A material selected for how it behaves when heated, which is the same idea as the resin adhesive in Lesson 3.</div>
+
+  <h3>The two moments that matter</h3>
+  <div class="card">
+    <h4>1 · When the sugar goes brown</h4>
+    <p>There is a specific moment when it stops being sugar. Students mark it on their sheet as it happens, in real time, and commit to evidence. The ones to look for are those citing more than one thing — it went brown <em>and</em> it smells different <em>and</em> it will not go back when it cools. A student citing colour alone has a rule, not an understanding.</p>
+  </div>
+  <div class="card">
+    <h4>2 · When the egg white number goes on the board</h4>
+    <p>Sixty-three degrees. Below boiling. Ask whether anyone can un-cook it. Then ask how a change that needs so little heat can be more permanent than boiling water. Sit in the discomfort — that is the concept arriving.</p>
+  </div>
+
+  <h3>Running the sugar</h3>
+  <ul>
+    <li><strong>Two tablespoons, spread thin.</strong> More than that and the middle burns before the edges melt. Small quantity also limits the smoke.</li>
+    <li><strong>Medium-high.</strong> A frypan tops out around 200–230 °C, which reaches caramelisation at about 170 °C but does not race past it. If you use a hotplate instead, run it lower than you think — 300 °C-plus overshoots to black very quickly.</li>
+    <li><strong>Do not stir at first.</strong> Let it go clear from the edges. Stirring early makes it seize into lumps.</li>
+    <li><strong>Never put a thermometer probe into molten sugar.</strong> It is over 180 °C, it sticks, and it will drag hot sugar with it when removed. Read the pan setting and observe the sugar by eye. The probe is for the chocolate and the egg white, where it is safe and the numbers actually matter.</li>
+    <li><strong>Stop at the first serious smoke.</strong> You have the result you need once it is dark brown. Black and smoking adds nothing except a smoke alarm.</li>
+  </ul>
+
+  <div class="note"><span class="lab">The honest nuance on "melting" sugar</span>
+    Sugar does not cleanly melt the way ice does — decomposition begins around the same temperature as the apparent melting. For Year 6 the observable is what matters and it is sound: <em>goes clear and runny, then sets hard again when it cools — still sugar</em>, versus <em>goes brown and smells different — not sugar any more</em>. If a sharp student asks whether the clear stage is really reversible, that is an excellent question and the honest answer is "mostly, and it is more complicated than it looks." Do not pretend it is simple.</div>
+
+  <div class="note stop"><span class="lab">Safety — the highest-risk demonstration in the unit</span>
+    Molten sugar is above 180 °C and sticks to skin, which makes its burns far worse than boiling water. Strictly teacher-operated. One-metre exclusion line, students seated behind it for the whole demonstration. Safety glasses and heat-resistant gloves for you. Long hair tied back. Windows and door open before heating starts, and check where the smoke detector is — notify the office if it is nearby. Cold running water immediately available. Pan stays where it is to cool; do not carry hot residue across the room.</div>
+
+  <div class="note stop"><span class="lab">Allergens</span>
+    Egg today, and chocolate contains milk. Check both classes' allergy registers before you buy anything, and again on the morning. If anyone in either class is at risk, the sugar sequence carries the whole lesson on its own — the chocolate and egg pairing can be replaced with butter and a description of the egg result without losing the concept.</div>
+
+  <h3>Running CP1</h3>
+  <ul>
+    <li><strong>Thirty minutes, individual, silent, books closed.</strong> The word bank goes to everyone, not just the support tier.</li>
+    <li>Read aloud on request. Scribe where writing is not the criterion.</li>
+    <li>Part B asks students to compare two changes <em>they investigated themselves</em>. Have the criteria chart, the Week 2 mass results and the Week 3 yield numbers visible. This is not a memory test.</li>
+    <li>Collect and bank it. This is the entire Science Understanding judgement and it is done.</li>
+  </ul>
+
+  <div class="note tnote"><span class="lab">The discriminator in Part B</span>
+    A B-grade response describes change one, then change two. An A-grade response picks a criterion — can you get it back, did the mass alter, was a new substance made — and runs both changes through it. That structural difference is the clearest signal of purposeful comparison at this year level, and it is what separates <em>thorough</em> from <em>informed</em> in the elaborations.</div>
+
+  <h3>Misconceptions to expect</h3>
+  <table>
+    <thead><tr><th style="width:27%">Misconception</th><th style="width:33%">How it shows today</th><th>Response</th></tr></thead>
+    <tbody>
+      <tr><td>Hotter means more irreversible</td><td>Predicting the egg needs more heat than the chocolate to be permanent</td><td>Sixty-three degrees against a hundred for boiling. The egg wins on permanence and loses on temperature.</td></tr>
+      <tr><td>Melting is always reversible</td><td>Applied as a rule, including to the sugar</td><td>Mostly true — but watch what happens to sugar shortly after it goes runny. The melt is not the end of the story.</td></tr>
+      <tr><td>Colour change decides it</td><td>Marking the transition purely on browning</td><td>Food colouring in water changes colour and evaporates back. Colour is a clue, not a verdict.</td></tr>
+      <tr><td>Burnt sugar is still sugar, just dirty</td><td>"You could clean it off"</td><td>It smells different and tastes different because it <em>is</em> different. New substances were made, and no amount of cooling brings sugar back.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>What comes next</h3>
+  <p>Lesson 5 is the biggest of the unit: the rust jars come apart, the nails are weighed on the 0.01 g scales and come out <em>heavier</em>, both classes swap datasets, and CP2 is written. Make sure the scales have arrived and the drying trays are ready.</p>
+</section>
+
+<!-- ============ OVERVIEW ============ -->
+<section class="panel active" id="p-overview">
+  <h2>Overview</h2>
+  <p class="lede">Heat something gently and it comes back. Heat it further and it does not. Today you find the moment in between.</p>
+
+  <h3>Shape of the lesson</h3>
+  <table>
+    <thead><tr><th style="width:32%">Phase</th><th style="width:14%">Time</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rust check</strong></td><td>5 min</td><td>Week 3 reading. Photograph, rate, record.</td></tr>
+      <tr><td><strong>The sugar escalation</strong></td><td>30 min</td><td>One substance, more and more heat. Students mark the moment it stops being sugar.</td></tr>
+      <tr><td><strong>Two thresholds</strong></td><td>15 min</td><td>Chocolate melts at body temperature. Egg white sets at 63 °C. One comes back, one does not.</td></tr>
+      <tr><td><strong>Consolidate</strong></td><td>10 min</td><td>Amend the criteria chart for the last time before the assessment.</td></tr>
+      <tr><td><strong>★ CP1</strong></td><td>30 min</td><td>Classify and Compare. Individual, silent. Science Understanding banked.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note stop tnote"><span class="lab">Do not let CP1 slide</span>
+    If the demonstrations run long, cut the consolidate phase to five minutes and start CP1 on time. The entire Science Understanding judgement is in this thirty minutes, and it is being collected now precisely so that a chaotic Week 7 cannot cost you a whole strand.</div>
+
+  <h3>Everything you need</h3>
+
+  <div class="kitgrid">
+    <div class="kit-col">
+      <h4>Prepare before the lesson</h4>
+      <ul class="check">
+        <li><strong>Check both classes' allergy registers</strong> — egg and milk are used today</li>
+        <li>Measure 2 tablespoons of white sugar into a small dish</li>
+        <li>Break chocolate into small even pieces</li>
+        <li>Separate one egg white into a cup</li>
+        <li>Mark the one-metre exclusion line on the floor</li>
+        <li>Open windows, check where the smoke detector is, notify the office if it is close</li>
+        <li>Print the escalation sheets and the CP1 papers</li>
+        <li>Have the criteria chart, Week 2 mass results and Week 3 yields on display</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Teacher bench</h4>
+      <ul class="check">
+        <li>Electric frypan — <strong>you operate it, nobody else</strong></li>
+        <li>Two digital instant-read thermometers</li>
+        <li>Heat-resistant gloves and tongs</li>
+        <li>Heat-resistant mat</li>
+        <li>Small metal dish or ramekin for the chocolate</li>
+        <li>Metal spoon for the egg white</li>
+        <li>Fire blanket and cold running water within reach</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Consumables</h4>
+      <ul class="check">
+        <li>White sugar — 2 tablespoons</li>
+        <li>Chocolate — a small handful</li>
+        <li>One egg</li>
+        <li>Paper towel</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Per student</h4>
+      <ul class="check">
+        <li>Heat escalation recording sheet</li>
+        <li>Supported version where needed</li>
+        <li>CP1 paper — <strong>from your Assessment Pack, not from this site</strong></li>
+        <li>Word bank for CP1 — everyone gets one</li>
+        <li>Safety glasses are not required today: students observe, they do not handle</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>On display</h4>
+      <ul class="check">
+        <li>Criteria chart from Lesson 1, as amended in Lesson 2</li>
+        <li>Week 2 mass results</li>
+        <li>Week 3 recovery yields, both methods</li>
+        <li>Rust jars and the coverage scale</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Not needed today</h4>
+      <ul>
+        <li>Funnels, filter papers, evaporating basins — finished with</li>
+        <li>The 0.01 g scales — next week</li>
+        <li>Group equipment of any kind: this is a demonstration lesson</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTENTIONS ============ -->
+<section class="panel" id="p-intentions">
+  <h2>What we are learning</h2>
+
+  <div class="card">
+    <h4>Learning intention</h4>
+    <p style="font-size:1.1rem;margin-bottom:0">We are learning to compare a reversible and an irreversible change caused by adding heat.</p>
+  </div>
+
+  <h3>I will be successful when I can…</h3>
+  <ul>
+    <li>describe what happens to a substance as more and more heat is added</li>
+    <li>identify the point at which a new substance has been made</li>
+    <li>classify a change and justify it with evidence, not with a rule</li>
+    <li>compare a reversible and an irreversible change</li>
+  </ul>
+
+  <h3>Stretch</h3>
+  <ul>
+    <li>I can explain why temperature on its own does not tell you whether a change is reversible.</li>
+    <li>I can organise a comparison around a criterion instead of describing each change in turn.</li>
+  </ul>
+
+  <div class="note teal"><span class="lab">Curriculum</span>
+    <strong>AC9S6U04</strong> — compare reversible changes, including dissolving and changes of state, and irreversible changes, including cooking and rusting that produce new substances. <em>Elaboration: comparing how the amount of heat energy added affects whether a change in state or an irreversible change occurs.</em><br>
+    <strong>AC9S6I03</strong> — use equipment to observe, measure and record data with reasonable precision.</div>
+
+  <div class="note"><span class="lab">Assessment today</span>
+    The last thirty minutes is <strong>Classify and Compare</strong>. It covers everything from Week 1 to now. You will have the class charts and your own results from Weeks 2 and 3 in front of you — it is not a memory test, it is a reasoning test.</div>
+
+  <div class="card">
+    <h4>Your goal for today</h4>
+    <textarea style="width:100%;min-height:74px;border:1px solid var(--line);border-radius:8px;padding:10px;font-family:inherit;font-size:16px" placeholder="Today I want to…"></textarea>
+  </div>
+</section>
+
+<!-- ============ RUST CHECK ============ -->
+<section class="panel" id="p-rust">
+  <h2>Rust check <span class="timechip">5 min</span></h2>
+  <p class="lede">Week 3 reading. Second to last one.</p>
+
+  <div class="card">
+    <p style="margin-bottom:0">Photograph, rate all three jars separately, record. Next week the jars come apart and the nails go on the scales.</p>
+  </div>
+
+  <div class="note tnote"><span class="lab">Flag next week now</span>
+    Tell them the jars come apart next lesson and the nails get weighed. A week of quietly wondering what the nails will weigh is free thinking time, and it makes the mass gain land harder when it arrives.</div>
+
+  <div class="note tnote"><span class="lab">Check the 0.01 g scales have arrived</span>
+    They were due 23 October. If they have not turned up, chase MTA today — next week's weigh-in is the payoff of the entire investigation and 1 g resolution will not resolve the mass gain on three nails.</div>
+</section>
+
+<!-- ============ SUGAR ============ -->
+<section class="panel" id="p-sugar">
+  <h2>The sugar escalation <span class="timechip">30 min</span></h2>
+  <p class="lede">One substance. More and more heat. Watch for the moment it stops being sugar.</p>
+
+  <div class="note stop"><span class="lab">Watch only</span>
+    Everybody stays behind the line, seated, for the whole demonstration. Melted sugar is hotter than boiling water and it sticks to skin. Nobody comes forward for any reason.</div>
+
+  <h3>Your job</h3>
+  <div class="card">
+    <p>Record what you see, hear and smell at each stage.</p>
+    <p style="margin-bottom:0"><strong>Then mark the exact stage where you believe sugar stopped existing</strong> — and write the evidence that convinced you.</p>
+  </div>
+
+  <h3>The stages</h3>
+  <table>
+    <thead><tr><th style="width:9%">Stage</th><th style="width:30%">What is happening</th><th>What to look for</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Cold sugar</td><td>White, grainy, separate crystals. Smells of almost nothing.</td></tr>
+      <tr><td><strong>2</strong></td><td>Edges go clear</td><td>The outside turns glassy and starts to run. Still colourless.</td></tr>
+      <tr><td><strong>3</strong></td><td>All liquid</td><td>Clear, runny, like syrup. Bubbles at the edges.</td></tr>
+      <tr><td><strong>4</strong></td><td>First colour</td><td>A straw tint creeping in. The smell begins to change.</td></tr>
+      <tr><td><strong>5</strong></td><td>Amber</td><td>Definite brown. Strong caramel smell across the room.</td></tr>
+      <tr><td><strong>6</strong></td><td>Dark</td><td>Deep brown going black. Sharp, bitter smell. First wisps of smoke.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The test</h3>
+  <p>A spoonful is taken out at <strong>stage 3</strong> and left to cool. Another is taken out at <strong>stage 5</strong>.</p>
+  <div class="card">
+    <p style="margin-bottom:0"><strong>Once they are cool: which one is still sugar?</strong></p>
+  </div>
+
+  <ol>
+    <li>What did the stage 3 sample look like once it cooled?</li>
+    <li>What did the stage 5 sample look like?</li>
+    <li>Which stage did you mark as the point of no return, and why?</li>
+    <li>The sugar got liquid at stage 3 and it got liquid at stage 5. Why is only one of those reversible?</li>
+    <li>If you kept heating past stage 6, would you ever get sugar back?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> Hard, clear or slightly cloudy, glassy. It looks different from the grainy powder it started as, but it is still sugar — it tastes of sugar and nothing new has been made.</p>
+      <p><strong>2.</strong> Hard, brown, and it smells of caramel rather than of nothing. It is not sugar any more.</p>
+      <p><strong>3.</strong> Somewhere between stage 4 and stage 5. The evidence to look for is more than one thing at once: the colour changed <em>and</em> the smell changed <em>and</em> it does not go back.</p>
+      <p><strong>4.</strong> At stage 3 the sugar changed state — same substance, different form, and cooling reverses it. By stage 5 the heat has broken the sugar apart and built new substances, which is why it smells different. A change of state can be undone. A new substance cannot be un-made.</p>
+      <p style="margin-bottom:0"><strong>5.</strong> No. It keeps decomposing until what is left is mostly carbon — the black stuff. Every step takes it further away.</p>
+    </div>
+  </details>
+
+  <div class="note teal tnote"><span class="lab">This is the elaboration, exactly</span>
+    "Comparing how the amount of heat energy added affects whether a change in state or an irreversible change occurs." One substance, one heat source, two completely different outcomes decided purely by how much energy went in. There is no cleaner demonstration of it available in a primary classroom.</div>
+
+  <div class="note tnote"><span class="lab">If a student asks whether stage 3 is really reversible</span>
+    Excellent question, and the honest answer is "mostly, and it is more complicated than it looks." Sugar does not cleanly melt the way ice does — some decomposition starts around the same temperature. Do not pretend it is simple. Saying "you have found the edge of what this model handles" respects the question and is true.</div>
+
+  <div class="paths">
+    <div class="path"><div class="pt">Need a hand</div><ul><li>Use the sheet with the stages already listed.</li><li>Tick what you notice, then mark one transition point.</li></ul></div>
+    <div class="path core"><div class="pt">Keep going</div><ul><li>Record at every stage.</li><li>Mark the transition and write your evidence.</li></ul></div>
+    <div class="path push"><div class="pt">Push me</div><ul><li>Argue that the transition happened one stage earlier or later than the class agreed, and defend it.</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ THRESHOLDS ============ -->
+<section class="panel" id="p-thresholds">
+  <h2>Two thresholds <span class="timechip">15 min</span></h2>
+  <p class="lede">Now two different substances — and this time we measure the temperature.</p>
+
+  <div class="stations">
+    <div class="st"><div class="hd"><span>Chocolate</span><span class="n">1</span></div><div class="bd">
+      <p>Heated gently in a metal dish with the thermometer in it. Call out when it starts to go.</p>
+      <p><strong>Then it comes off the heat and cools.</strong></p>
+      <p style="margin-bottom:0">At what temperature did it melt?</p>
+      <div class="kit">Chocolate, metal dish, thermometer. Teacher operates.</div></div></div>
+
+    <div class="st"><div class="hd"><span>Egg white</span><span class="n">2</span></div><div class="bd">
+      <p>Heated gently with the thermometer in it. Call out the moment it turns white.</p>
+      <p><strong>Then it comes off the heat and cools.</strong></p>
+      <p style="margin-bottom:0">At what temperature did it set?</p>
+      <div class="kit">One egg white, metal spoon or dish, thermometer. Teacher operates.</div></div></div>
+  </div>
+
+  <h3>Put the numbers up</h3>
+  <table>
+    <thead><tr><th style="width:38%">Change</th><th style="width:22%">Temperature</th><th>Did it come back?</th></tr></thead>
+    <tbody>
+      <tr><td>Chocolate melted</td><td></td><td></td></tr>
+      <tr><td>Egg white set</td><td></td><td></td></tr>
+      <tr><td>Water boils</td><td>100 °C</td><td>Yes — steam condenses back to water</td></tr>
+    </tbody>
+  </table>
+
+  <ol>
+    <li>Which of these needed the <em>least</em> heat?</li>
+    <li>Which one is permanent?</li>
+    <li>The egg set at a lower temperature than boiling water. So why can you un-boil water but not un-cook an egg?</li>
+    <li>Does knowing the temperature tell you whether a change is reversible?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> The chocolate, somewhere around 34–38 °C. Body temperature is 37 °C, so it melts at roughly the temperature of your own mouth — which is exactly why it melts in your hand and on your tongue.</p>
+      <p><strong>2.</strong> The egg white, at around 63 °C. Still well below boiling.</p>
+      <p><strong>3.</strong> Because boiling only changes water's <em>state</em> — it is still water, whether liquid or steam, and cooling brings it straight back. Cooking the egg builds something new out of what was there. Cooling cannot un-build it.</p>
+      <p style="margin-bottom:0"><strong>4.</strong> No. Not on its own. Temperature tells you how much energy went in. What happens depends on the substance and on which of its thresholds that energy crosses.</p>
+    </div>
+  </details>
+
+  <div class="card">
+    <p style="font-size:1.12rem;margin-bottom:0"><strong>An egg cannot be un-cooked at a temperature where water is still perfectly happy being liquid.</strong></p>
+  </div>
+
+  <div class="note"><span class="lab">Why chocolate melts in your hand</span>
+    Your body sits at about 37 °C, and chocolate melts somewhere around 34 to 38 °C. That is not a coincidence. The fat in chocolate — cocoa butter — is one of the very few that melts in that narrow band, and chocolate makers use it for precisely that reason. Melting in your mouth is the whole point of the product.</div>
+
+  <div class="note teal tnote"><span class="lab">This is the whole point of the phase</span>
+    Four weeks of burning, rusting and fizzing has quietly taught the class that irreversible means extreme. Sixty-three degrees against a hundred breaks it in one line. Write both numbers on the board and leave them there through CP1.</div>
+
+  <div class="note stop tnote"><span class="lab">Thermometer use</span>
+    The probe goes into the chocolate and the egg white, where it is safe and the readings matter. It <strong>never</strong> goes into molten sugar — that is over 180 °C, it sticks, and it drags hot sugar out with it.</div>
+</section>
+
+<!-- ============ CONSOLIDATE ============ -->
+<section class="panel" id="p-consolidate">
+  <h2>Consolidate <span class="timechip">10 min</span></h2>
+
+  <h3>Amend the chart</h3>
+  <p>Four weeks ago you listed the evidence that something new has been made. In Week 2 you added <em>the mass changed</em>. Today it changes again.</p>
+
+  <ol>
+    <li>Should <em>it got hot</em> stay on the list as evidence of a new substance?</li>
+    <li>What would you replace it with?</li>
+  </ol>
+
+  <details>
+    <summary>Where this is going</summary>
+    <div class="body">
+      <p>Heat on its own is not evidence — ice melts when it is heated and nothing new is made. What today showed is subtler and more useful:</p>
+      <p style="margin-bottom:0"><strong>Adding heat can cause either kind of change. What decides it is the substance, and how much energy goes in.</strong></p>
+    </div>
+  </details>
+
+  <div class="note tnote"><span class="lab">Physically edit the chart in front of them</span>
+    Cross the old line out, write the new one. Students need to see a list being changed by evidence they generated — that is what makes it a working tool rather than wallpaper. It is also the last edit before the assessment, so leave it visible.</div>
+
+  <h3>Where we have got to</h3>
+  <ol>
+    <li>To tell whether something new was made, you need more than one piece of evidence.</li>
+    <li>Mass is the strongest evidence, because it is a number rather than an opinion.</li>
+    <li>The clearest question is still: <strong>can we get it back?</strong></li>
+    <li>Heat can cause either kind of change. How much you add decides which.</li>
+  </ol>
+
+  <h3>Words we have used</h3>
+  <div class="vocab">
+    <span><b>reversible</b></span><span><b>irreversible</b></span><span><b>change of state</b></span>
+    <span><b>melt</b></span><span><b>dissolve</b></span><span><b>caramelise</b></span>
+    <span><b>new substance</b></span><span><b>evidence</b></span><span><b>permanent</b></span>
+  </div>
+</section>
+
+<!-- ============ CP1 ============ -->
+<section class="panel" id="p-cp1">
+  <h2>★ Classify and Compare <span class="timechip">30 min</span></h2>
+  <p class="lede">Assessment. Individual, silent, books closed.</p>
+
+  <div class="card">
+    <p>This covers everything from Week 1 until now.</p>
+    <p style="margin-bottom:0"><strong>You are not being tested on remembering.</strong> The class charts and your own results from Weeks 2 and 3 stay on display. You are being assessed on whether you can classify a change and say what evidence decided it — and whether you can compare two changes properly.</p>
+  </div>
+
+  <h3>What is on the paper</h3>
+  <ul>
+    <li><strong>Part A</strong> — eight changes to classify, each with the one piece of evidence that decided it. A tick with no evidence does not count.</li>
+    <li><strong>Part B</strong> — compare one reversible and one irreversible change that <em>you investigated yourself</em> in this unit.</li>
+    <li><strong>Part C</strong> — the cross at our entrance.</li>
+  </ul>
+
+  <div class="note"><span class="lab">How to do well in Part B</span>
+    A weak comparison describes the first change, then describes the second. A strong one picks something to compare them <em>on</em> — can you get it back, did the mass change, was a new substance made — and runs both changes through it. Use your own numbers from Weeks 2 and 3.</div>
+
+  <div class="note"><span class="lab">Adjustments</span>
+    The word bank goes to everyone. Ask if you want the paper read aloud. If writing is the thing slowing you down rather than the thinking, say so — it can be scribed.</div>
+
+  <div class="note stop tnote"><span class="lab">The task itself is not on this site</span>
+    CP1's questions and marking guide are in the Assessment Pack on your own machine, deliberately. This page is public and teacher mode only hides things with a style rule — it does not protect them. Print from the pack.</div>
+
+  <div class="note tnote"><span class="lab">Administration</span>
+    Thirty minutes, individual, silent. Books closed but the wall charts and Week 2 and 3 results stay up — this assesses reasoning, not recall. Read aloud on request; scribe where writing is not the criterion being judged. Collect and bank it: this is the whole Science Understanding judgement, done, three weeks before the term gets difficult.</div>
+
+  <h3>Next week</h3>
+  <p>The biggest lesson of the unit. The jars come apart, the nails go on the good scales, and something happens to the numbers that nobody is expecting. Then you get the other class's data and have to find what is wrong with it.</p>
+</section>
+
+<!-- ============ RESOURCES ============ -->
+<section class="panel" id="p-resources">
+  <h2>Resources</h2>
+  <p class="lede">Print before the lesson.</p>
+
+  <a class="dlitem all" href="resources/l4-00-all-student-sheets.pdf" download style="margin-bottom:6px">
+    <span class="ic">PDF</span>
+    <span><span class="tt">All student sheets</span>
+    <span class="ds">Both versions of the escalation sheet in one file.</span></span>
+  </a>
+
+  <h3>Individual sheets</h3>
+  <div class="dl">
+    <a class="dlitem" href="resources/l4-01-heat-escalation-sheet.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Heat escalation record</span>
+      <span class="ds">Core version. Six sugar stages, the transition point, and the two threshold temperatures.</span></span>
+    </a>
+    <a class="dlitem" href="resources/l4-02-heat-escalation-support.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Escalation record — supported</span>
+      <span class="ds">Stages pre-listed as tick-boxes. One transition point, one reason, sentence starters.</span></span>
+    </a>
+    <a class="dlitem doc" href="resources/l4-student-sheets-EDITABLE.docx" download>
+      <span class="ic">DOCX</span>
+      <span><span class="tt">Editable master</span>
+      <span class="ds">Both sheets in one Word file.</span></span>
+    </a>
+  </div>
+
+  <div class="note stop"><span class="lab">CP1 is not published here</span>
+    The assessment task and its marking guide are deliberately absent from this site. Print them from the Assessment Pack on your own machine.</div>
+
+  <div class="tree tnote">lessons/
+└── 04-point-of-no-return/
+    ├── lesson-04-point-of-no-return.html   <b>this page</b>
+    └── resources/
+        ├── l4-00-all-student-sheets.pdf
+        ├── l4-01-heat-escalation-sheet.pdf
+        ├── l4-02-heat-escalation-support.pdf
+        └── l4-student-sheets-EDITABLE.docx</div>
+</section>
+
+</div></main>
+
+<!-- ============ TIMER ============ -->
+<div id="timer" role="region" aria-label="Lesson timer">
+  <div class="t-hd">
+    <span class="grip" aria-hidden="true"></span><span class="ttl">Lesson timer</span>
+    <span class="ctl">
+      <button class="iconbtn on" id="tSound" title="Sound on or off" aria-pressed="true">♪</button>
+      <button class="iconbtn" id="tMin" title="Shrink or expand">–</button>
+      <button class="iconbtn" id="tClose" title="Hide the timer">×</button>
+    </span>
+  </div>
+  <div class="t-body">
+    <div class="t-phase" id="tPhase">Rust check</div>
+    <div class="t-sub" id="tSub">Phase 1 of 5</div>
+    <div class="t-clock" id="tClock">5:00</div>
+    <div class="t-rot" id="tRot"></div>
+    <div class="bar"><i id="tBar"></i></div>
+    <div class="t-btns">
+      <button class="btn go" id="tGo">Start</button>
+      <button class="btn" id="tNext">Next</button>
+      <button class="btn" id="tReset">Reset</button>
+    </div>
+    <div class="t-list" id="tList"></div>
+    <div class="t-foot"><span id="tElapsed">Elapsed 0:00</span><span id="tLeft">90 min total</span></div>
+    <div class="t-foot" style="border-top:none;margin-top:2px;padding-top:0;justify-content:center"><span id="tDeadline">CP1 starts in 60:00</span></div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- teacher mode ---------- */
+  var tm = document.getElementById('tmToggle');
+  tm.addEventListener('click', function(){
+    var on = document.body.classList.toggle('teacher');
+    tm.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if(!on){
+      var cur = document.querySelector('.tab[aria-selected="true"]');
+      if(cur && cur.classList.contains('tonly')) show('overview');
+    }
+  });
+
+  /* ---------- timer visibility (independent of teacher mode) ---------- */
+  document.body.classList.add('timer-on');
+  var tv = document.getElementById('timerToggle');
+  function setTimerVisible(on){
+    document.body.classList.toggle('timer-on', on);
+    tv.setAttribute('aria-pressed', on ? 'true' : 'false');
+    tv.classList.toggle('lit', on);
+  }
+  tv.classList.add('lit');
+  tv.addEventListener('click', function(){
+    setTimerVisible(!document.body.classList.contains('timer-on'));
+  });
+
+  /* ---------- tabs ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function show(id){
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.p===id ? 'true':'false'); });
+    document.querySelectorAll('.panel').forEach(function(p){
+      p.classList.toggle('active', p.id==='p-'+id);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.p); }); });
+
+  /* ---------- timer ---------- */
+  var PHASES = [
+    {name:'Rust check — week 3 reading', mins:5,  tab:'rust'},
+    {name:'The sugar escalation',        mins:30, tab:'sugar', rotations:6},
+    {name:'Two thresholds',              mins:15, tab:'thresholds', rotations:2},
+    {name:'Consolidate',                 mins:10, tab:'consolidate'},
+    {name:'★ CP1 Classify and Compare',  mins:30, tab:'cp1'}
+  ];
+  var TOTAL = PHASES.reduce(function(a,p){ return a+p.mins; },0);
+
+  var idx=0, left=PHASES[0].mins*60, running=false, elapsed=0, sound=true, tick=null;
+  var rotLeft=0, rotIdx=0, rotLen=0;
+
+  var el = {
+    box:document.getElementById('timer'), phase:document.getElementById('tPhase'),
+    sub:document.getElementById('tSub'), clock:document.getElementById('tClock'),
+    rot:document.getElementById('tRot'), bar:document.getElementById('tBar'),
+    go:document.getElementById('tGo'), next:document.getElementById('tNext'),
+    reset:document.getElementById('tReset'), list:document.getElementById('tList'),
+    elapsed:document.getElementById('tElapsed'), left:document.getElementById('tLeft'),
+    snd:document.getElementById('tSound'), min:document.getElementById('tMin')
+  };
+
+  function mmss(s){
+    var neg = s<0; s = Math.abs(s);
+    var m = Math.floor(s/60), r = s%60;
+    return (neg?'+':'') + m + ':' + (r<10?'0':'') + r;
+  }
+
+  function beep(times){
+    if(!sound) return;
+    try{
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if(!Ctx) return;
+      var ac = new Ctx();
+      for(var i=0;i<times;i++){
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.connect(g); g.connect(ac.destination);
+        o.frequency.value = 784;
+        var t0 = ac.currentTime + i*0.28;
+        g.gain.setValueAtTime(0.0001,t0);
+        g.gain.exponentialRampToValueAtTime(0.25,t0+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,t0+0.22);
+        o.start(t0); o.stop(t0+0.24);
+      }
+      setTimeout(function(){ try{ac.close();}catch(e){} }, times*300+500);
+    }catch(e){}
+  }
+
+  function buildList(){
+    el.list.innerHTML='';
+    PHASES.forEach(function(p,i){
+      var row=document.createElement('div');
+      row.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+      row.innerHTML='<span>'+p.name+'</span><span class="d">'+p.mins+'m</span>';
+      row.addEventListener('click',function(){ goTo(i); });
+      el.list.appendChild(row);
+    });
+  }
+
+  function render(){
+    var p = PHASES[idx];
+    el.phase.textContent = p.name;
+    el.sub.textContent = 'Phase '+(idx+1)+' of '+PHASES.length+' · '+p.mins+' min';
+    el.clock.textContent = mmss(left);
+    var pct = Math.max(0, Math.min(100, ((p.mins*60-left)/(p.mins*60))*100));
+    el.bar.style.width = pct+'%';
+    el.box.classList.toggle('over', left<0);
+    el.box.classList.toggle('warn', left>=0 && left<=120);
+    el.box.classList.toggle('rotating', !!p.rotations);
+    if(p.rotations){
+      el.rot.textContent = (PHASES[idx].tab==='sugar'?'Stage ':'Substance ')+Math.min(rotIdx+1,p.rotations)+' of '+p.rotations+' · '+mmss(rotLeft);
+    }
+    el.elapsed.textContent = 'Elapsed '+mmss(elapsed);
+    var dl = document.getElementById('tDeadline');
+    if(dl){
+      var toCp = 60*60 - elapsed;
+      if(idx >= 4){ dl.textContent = 'CP1 running'; dl.style.color = '#7fd6a0'; }
+      else if(toCp > 0){ dl.textContent = 'CP1 starts in ' + mmss(toCp); dl.style.color = toCp < 300 ? '#ffc978' : '#9fb0cd'; }
+      else { dl.textContent = 'CP1 ' + mmss(toCp) + ' late'; dl.style.color = '#ff9a9a'; }
+    }
+    var rem = TOTAL*60 - elapsed;
+    el.left.textContent = rem>=0 ? mmss(rem)+' of lesson left' : mmss(rem)+' over';
+    el.go.textContent = running ? 'Pause' : (elapsed===0 && left===PHASES[0].mins*60 ? 'Start' : 'Resume');
+    Array.prototype.forEach.call(el.list.children,function(r,i){
+      r.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+    });
+  }
+
+  function setPhase(i){
+    idx = Math.max(0, Math.min(PHASES.length-1, i));
+    var p = PHASES[idx];
+    left = p.mins*60;
+    if(p.rotations){ rotLen = Math.floor(p.mins*60/p.rotations); rotIdx=0; rotLeft=rotLen; }
+    if(p.tab) show(p.tab);
+    render();
+  }
+
+  function goTo(i){ setPhase(i); }
+
+  function step(){
+    left--; elapsed++;
+    var p = PHASES[idx];
+    if(p.rotations){
+      rotLeft--;
+      if(rotLeft<=0 && rotIdx < p.rotations-1){ rotIdx++; rotLeft=rotLen; beep(1); }
+    }
+    if(left===0){ beep(2); }
+    render();
+  }
+
+  function toggle(){
+    running = !running;
+    if(running){ tick = setInterval(step,1000); } else { clearInterval(tick); }
+    render();
+  }
+
+  el.go.addEventListener('click', toggle);
+  el.next.addEventListener('click', function(){ setPhase(idx+1); });
+  el.reset.addEventListener('click', function(){
+    running=false; clearInterval(tick); elapsed=0; setPhase(0);
+  });
+  el.snd.addEventListener('click', function(){
+    sound=!sound;
+    el.snd.classList.toggle('on',sound);
+    el.snd.setAttribute('aria-pressed', sound?'true':'false');
+    if(sound) beep(1);
+  });
+  el.min.addEventListener('click', function(){
+    var m = el.box.classList.toggle('min');
+    el.min.textContent = m ? '+' : '–';
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(!document.body.classList.contains('teacher')) return;
+    if(/^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if(e.code==='Space'){ e.preventDefault(); toggle(); }
+    if(e.code==='ArrowRight'){ setPhase(idx+1); }
+    if(e.code==='ArrowLeft'){ setPhase(idx-1); }
+  });
+
+  el.box.querySelector('#tClose').addEventListener('click', function(){
+    setTimerVisible(false);
+  });
+
+  /* ---------- drag ---------- */
+  (function(){
+    var hd = el.box.querySelector('.t-hd');
+    var dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+
+    function place(x, y){
+      var r = el.box.getBoundingClientRect();
+      var maxX = window.innerWidth  - r.width  - 6;
+      var maxY = window.innerHeight - r.height - 6;
+      x = Math.max(6, Math.min(x, Math.max(6, maxX)));
+      y = Math.max(6, Math.min(y, Math.max(6, maxY)));
+      el.box.style.left = x + 'px';
+      el.box.style.top  = y + 'px';
+      el.box.style.right = 'auto';
+      el.box.style.bottom = 'auto';
+    }
+
+    function reset(){
+      el.box.style.left = ''; el.box.style.top = '';
+      el.box.style.right = ''; el.box.style.bottom = '';
+    }
+
+    hd.addEventListener('pointerdown', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      var r = el.box.getBoundingClientRect();
+      dragging = true;
+      sx = e.clientX; sy = e.clientY; ox = r.left; oy = r.top;
+      place(r.left, r.top);
+      el.box.classList.add('dragging');
+      hd.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+
+    hd.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      place(ox + (e.clientX - sx), oy + (e.clientY - sy));
+    });
+
+    function stop(e){
+      if(!dragging) return;
+      dragging = false;
+      el.box.classList.remove('dragging');
+      try{ hd.releasePointerCapture(e.pointerId); }catch(err){}
+    }
+    hd.addEventListener('pointerup', stop);
+    hd.addEventListener('pointercancel', stop);
+    hd.addEventListener('dblclick', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      reset();
+    });
+
+    window.addEventListener('resize', function(){
+      if(el.box.style.left){
+        var r = el.box.getBoundingClientRect();
+        place(r.left, r.top);
+      }
+    });
+  })();
+
+  buildList(); render();
+})();
+</script>
+</body>
+</html>

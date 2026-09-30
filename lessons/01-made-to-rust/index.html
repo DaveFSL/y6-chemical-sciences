@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1 · Made to rust — Year 6 Chemical Sciences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1b2a4a; --navy-soft:#2c3f66; --amber:#e8930c; --amber-deep:#9a5f00;
+  --teal:#0e7c7b; --teal-soft:#e2f0ef; --paper:#fbf9f4; --line:#dcd9d0;
+  --ink:#23272e; --muted:#5a6478; --white:#fff;
+  --rust:#8a4a22; --rust-soft:#f6e9e0;
+  --ok:#2e6b3f; --warn:#b4560a; --stop:#a32020;
+  --radius:10px;
+  --sans:"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:var(--sans); color:var(--ink); background:var(--paper);
+  font-size:17px; line-height:1.62; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+
+/* ---------- header ---------- */
+header.top{background:var(--navy);color:#fff;padding:22px 0 0}
+.crumb{font-size:14px;color:#a9b6cf;text-decoration:none;display:inline-block;margin-bottom:14px}
+.crumb:hover{color:#fff}
+.meta{font-size:13.5px;color:#9fb0cd;letter-spacing:.02em;margin-bottom:6px}
+h1{font-size:2.05rem;line-height:1.18;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.subtitle{color:#c3d0e6;font-size:1.02rem;margin:0 0 16px}
+.badges{display:flex;flex-wrap:wrap;gap:7px;padding-bottom:18px}
+.badge{font-size:12.5px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#e7edf7;border:1px solid rgba(255,255,255,.18)}
+.badge.code{background:var(--amber);color:#33240a;border-color:transparent;font-weight:600}
+
+/* teacher toggle */
+.tmrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:0 0 18px}
+.tmbtn{
+  display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.26);color:#fff;padding:8px 14px;border-radius:999px;
+  font-size:14px;cursor:pointer;font-family:inherit
+}
+.tmbtn:hover{background:rgba(255,255,255,.18)}
+.tmbtn .dot{width:9px;height:9px;border-radius:50%;background:#7c8aa5}
+body.teacher #tmToggle .dot{background:#5fd08a}
+body.teacher #tmToggle{background:var(--amber);color:#2e2105;border-color:transparent;font-weight:600}
+.tmbtn.lit .dot{background:#5fd08a}
+.tmbtn.lit{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4)}
+.tmhint{font-size:13px;color:#9fb0cd}
+
+/* ---------- tabs ---------- */
+nav.tabs{position:sticky;top:0;z-index:40;background:var(--navy-soft);border-bottom:2px solid var(--amber)}
+.tabscroll{max-width:880px;margin:0 auto;display:flex;overflow-x:auto;padding:0 12px;scrollbar-width:thin}
+.tab{
+  flex:0 0 auto;background:none;border:none;font-family:inherit;font-size:14px;color:#c6d2e6;
+  padding:12px 13px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap
+}
+.tab:hover{color:#fff}
+.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--amber);font-weight:600}
+.tab.tonly{display:none}
+body.teacher .tab.tonly{display:block}
+
+/* ---------- panels ---------- */
+main{padding:26px 0 170px}
+.panel{display:none}
+.panel.active{display:block}
+h2{font-size:1.45rem;color:var(--navy);margin:0 0 4px;letter-spacing:-.01em}
+h3{font-size:1.12rem;color:var(--teal);margin:26px 0 6px}
+h4{font-size:1rem;margin:20px 0 4px;color:var(--navy)}
+p{margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:5px 0}
+.lede{font-size:1.06rem;color:var(--muted);margin-bottom:20px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:16px 0}
+.card h4:first-child,.card h3:first-child{margin-top:0}
+
+.note{border-left:4px solid var(--amber);background:#fdf6e8;padding:13px 16px;margin:15px 0;border-radius:0 8px 8px 0}
+.note .lab{font-weight:700;color:var(--amber-deep);display:block;margin-bottom:3px;font-size:14.5px}
+.note.teal{border-left-color:var(--teal);background:var(--teal-soft)}
+.note.teal .lab{color:var(--teal)}
+.note.stop{border-left-color:var(--stop);background:#fbeaea}
+.note.stop .lab{color:var(--stop)}
+.tnote{display:none}
+body.teacher .tnote{display:block}
+.snote{display:block}
+body.teacher .snote{display:block}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15.5px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff;font-weight:600;font-size:14.5px}
+tbody tr:nth-child(even){background:#faf8f3}
+
+.timechip{display:inline-block;background:var(--teal);color:#fff;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:middle}
+
+details{border:1px solid var(--line);border-radius:8px;background:#fff;padding:0;margin:13px 0}
+summary{cursor:pointer;padding:11px 15px;font-weight:600;color:var(--navy);font-size:15.5px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"▸ ";color:var(--amber);font-weight:700}
+details[open] summary:before{content:"▾ "}
+details .body{padding:0 15px 14px;border-top:1px solid var(--line)}
+
+.paths{display:grid;gap:13px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin:16px 0}
+.path{border:1px solid var(--line);border-top:4px solid var(--teal);border-radius:8px;background:#fff;padding:14px 15px}
+.path.core{border-top-color:var(--navy)}
+.path.push{border-top-color:var(--amber)}
+.path .pt{font-weight:700;margin-bottom:5px;color:var(--navy);font-size:15.5px}
+.path ul{padding-left:19px;margin-bottom:0;font-size:15px}
+
+.stations{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.st{border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}
+.st .hd{background:var(--navy);color:#fff;padding:9px 13px;font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.st .hd .n{background:var(--amber);color:#33240a;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;font-size:13px;flex:0 0 auto}
+.st .bd{padding:12px 14px;font-size:15px}
+.st .bd p{margin-bottom:8px}
+.st .kit{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.st.teacherrun .hd{background:var(--stop)}
+
+.kitgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(245px,1fr))}
+.kit-col{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.kit-col h4{margin-top:0}
+.kit-col ul{font-size:15px;padding-left:19px;margin-bottom:0}
+.check{list-style:none;padding-left:0}
+.check li{position:relative;padding-left:26px}
+.check li:before{content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border:2px solid var(--teal);border-radius:3px}
+
+.vocab{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.vocab span{background:#fff;border:1px solid var(--line);border-radius:6px;padding:5px 11px;font-size:15px}
+.vocab b{color:var(--navy)}
+
+/* ---------- downloads ---------- */
+.dl{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));margin:16px 0}
+.dlitem{
+  display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:9px;padding:13px 14px;text-decoration:none;color:inherit;border-left:4px solid var(--teal)
+}
+.dlitem:hover{border-color:var(--amber);border-left-color:var(--amber);background:#fffdf7}
+.dlitem .ic{
+  flex:0 0 auto;width:38px;height:38px;border-radius:7px;background:var(--teal-soft);color:var(--teal);
+  display:grid;place-items:center;font-size:11px;font-weight:700;letter-spacing:.02em
+}
+.dlitem.doc .ic{background:#e8eefb;color:#2b4a8a}
+.dlitem.doc{border-left-color:#2b4a8a}
+.dlitem.all .ic{background:#fdf0dc;color:var(--amber-deep)}
+.dlitem.all{border-left-color:var(--amber)}
+.dlitem .tt{font-weight:700;font-size:15.5px;color:var(--navy);display:block;margin-bottom:2px;line-height:1.3}
+.dlitem .ds{font-size:13.5px;color:var(--muted);display:block;line-height:1.45}
+.dlitem .sz{font-size:12px;color:#8c95a8;display:block;margin-top:3px}
+.tree{
+  background:var(--navy);color:#dfe6f2;border-radius:9px;padding:15px 17px;margin:14px 0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.75;
+  overflow-x:auto;white-space:pre
+}
+.tree b{color:#ffc978;font-weight:600}
+
+/* ---------- TIMER ---------- */
+#timer{display:none}
+body.timer-on #timer{display:flex;flex-direction:column}
+#timer{
+  position:fixed;right:18px;bottom:18px;z-index:70;width:310px;
+  touch-action:none;
+  background:var(--navy);color:#fff;border-radius:14px;
+  box-shadow:0 10px 34px rgba(16,24,40,.34);overflow:hidden;
+  border:1px solid rgba(255,255,255,.14)
+}
+#timer.min{width:206px}
+.t-hd{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(0,0,0,.2);gap:8px;cursor:grab;user-select:none;-webkit-user-select:none}
+.t-hd:active{cursor:grabbing}
+#timer.dragging{transition:none;box-shadow:0 18px 46px rgba(16,24,40,.5)}
+#timer.dragging .bar i{transition:none}
+.t-hd .grip{display:inline-block;width:13px;height:13px;opacity:.5;flex:0 0 auto;
+  background-image:radial-gradient(currentColor 1px, transparent 1px);
+  background-size:4px 4px;background-position:0 1px}
+.t-hd .ttl{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.t-hd .ttl{font-size:13px;color:#b9c6dd;font-weight:600}
+.t-hd .ctl{display:flex;gap:4px}
+.iconbtn{background:rgba(255,255,255,.12);border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:13px;line-height:1;display:grid;place-items:center;font-family:inherit}
+.iconbtn:hover{background:rgba(255,255,255,.26)}
+.iconbtn.on{background:var(--amber);color:#2e2105}
+.t-body{padding:13px 14px 14px}
+.t-phase{font-size:14.5px;font-weight:600;margin-bottom:2px;line-height:1.3}
+.t-sub{font-size:12px;color:#9fb0cd;margin-bottom:9px}
+.t-clock{font-size:2.9rem;font-weight:700;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-bottom:3px}
+#timer.over .t-clock{color:#ff9a9a}
+#timer.warn .t-clock{color:#ffc978}
+.t-rot{font-size:13px;color:#ffd79a;margin-bottom:9px;display:none}
+#timer.rotating .t-rot{display:block}
+.bar{height:6px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;margin-bottom:11px}
+.bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .4s linear}
+#timer.over .bar i{background:#e06060}
+.t-btns{display:flex;gap:7px;margin-bottom:11px}
+.btn{flex:1;background:rgba(255,255,255,.14);border:none;color:#fff;padding:9px 6px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn:hover{background:rgba(255,255,255,.26)}
+.btn.go{background:var(--amber);color:#2e2105}
+.btn.go:hover{background:#f7a626}
+.t-list{max-height:184px;overflow-y:auto;border-top:1px solid rgba(255,255,255,.14);padding-top:9px}
+.t-row{display:flex;justify-content:space-between;gap:8px;padding:5px 7px;border-radius:6px;font-size:13px;color:#c2cfe4;cursor:pointer;align-items:baseline}
+.t-row:hover{background:rgba(255,255,255,.1)}
+.t-row.cur{background:rgba(232,147,12,.24);color:#fff;font-weight:600}
+.t-row.done{color:#7e8da8}
+.t-row .d{color:#9fb0cd;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.t-row.cur .d{color:#ffd79a}
+.t-foot{font-size:12px;color:#9fb0cd;border-top:1px solid rgba(255,255,255,.14);margin-top:9px;padding-top:8px;display:flex;justify-content:space-between}
+#timer.min .t-body>*:not(.t-clock):not(.t-phase):not(.t-btns){display:none}
+#timer.min .t-clock{font-size:2.1rem}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:1.6rem}
+  #timer{right:10px;bottom:10px;width:calc(100% - 20px);max-width:320px}
+  #timer.min{width:210px}
+  .t-list{max-height:120px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+@media print{
+  header.top,nav.tabs,#timer,.tmrow{display:none}
+  .panel{display:block!important;page-break-before:always}
+  body{background:#fff;font-size:12pt}
+  .card,.note,.st{break-inside:avoid}
+}
+
+/* ---- house style typography ---- */
+:root{
+  --sans:"Atkinson Hyperlegible","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --display:"Space Grotesk","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter-spacing:-.01em}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="crumb" href="../../index.html">← All lessons</a>
+    <div class="meta">Year 6 Science · Can we get it back? · Lesson 1 of 7</div>
+    <h1>Made to rust</h1>
+    <p class="subtitle">What evidence tells us a new substance has been made</p>
+    <div class="badges">
+      <span class="badge code">AC9S6U04</span>
+      <span class="badge">AC9S6I02</span>
+      <span class="badge">90 minutes</span>
+      <span class="badge">Term 4 · Week 1</span>
+      <span class="badge">Investigation launch</span>
+    </div>
+    <div class="tmrow">
+      <button class="tmbtn" id="tmToggle" aria-pressed="false"><span class="dot"></span> Teacher mode</button>
+      <button class="tmbtn" id="timerToggle" aria-pressed="true"><span class="dot"></span> Lesson timer</button>
+      <span class="tmhint">Drag the timer by its title bar to move it. Double-click the bar to send it back.</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabscroll" role="tablist">
+    <button class="tab tonly" role="tab" data-p="notes" aria-selected="false">Teaching notes</button>
+    <button class="tab" role="tab" data-p="overview" aria-selected="true">Overview</button>
+    <button class="tab" role="tab" data-p="intentions" aria-selected="false">Intentions</button>
+    <button class="tab" role="tab" data-p="hook" aria-selected="false">Hook</button>
+    <button class="tab" role="tab" data-p="elicit" aria-selected="false">Card sort</button>
+    <button class="tab" role="tab" data-p="criteria" aria-selected="false">Criteria</button>
+    <button class="tab" role="tab" data-p="stations" aria-selected="false">Stations</button>
+    <button class="tab" role="tab" data-p="setup" aria-selected="false">Set up</button>
+    <button class="tab" role="tab" data-p="review" aria-selected="false">Review</button>
+    <button class="tab" role="tab" data-p="resources" aria-selected="false">Resources</button>
+  </div>
+</nav>
+
+<main><div class="wrap">
+
+<!-- ============ TEACHING NOTES ============ -->
+<section class="panel" id="p-notes">
+  <h2>Teaching notes</h2>
+  <p class="lede">Read before the lesson. Everything here is hidden from students when teacher mode is off.</p>
+
+  <div class="note teal"><span class="lab">Where this sits</span>
+    This is the launch of a seven-week unit. Two jobs: get students building the evidence criteria themselves rather than receiving them, and get the rust jars sealed before they leave the room. The rust investigation needs four full weeks to Week 5, so the setup cannot slide.</div>
+
+  <h3>The one thing to protect</h3>
+  <p>Do not pre-teach <em>reversible</em> and <em>irreversible</em>. They are introduced at the end of the station circuit, as names for categories the class has already built. Introduce them first and the whole lesson collapses into a labelling exercise where students look for the word rather than the evidence.</p>
+
+  <h3>The two moments that matter</h3>
+  <div class="card">
+    <h4>1 · When students name what they looked at</h4>
+    <p>In the Criteria phase, the shift you want is from <em>what happened</em> to <em>how I could tell</em>. A student saying "it went brown" is describing. A student saying "it went brown and it won't go back, so something new is there" is reasoning. Write the class list in their words, not yours — it becomes the reference point for the whole unit and they need to own it.</p>
+  </div>
+  <div class="card">
+    <h4>2 · When someone argues with a classification</h4>
+    <p>The candle station is deliberately ambiguous — the wax melts reversibly while the wick burns irreversibly. If nobody spots it, point at it. A genuine disagreement about a station is worth more than six correct sorts, because it forces the class to ask what evidence would settle it. That question is the whole unit in miniature.</p>
+  </div>
+
+  <h3>Reading the diagnostic</h3>
+  <p>The card sort is not marked. Photograph each pair's sort and look for three things:</p>
+  <ul>
+    <li><strong>Dissolving in the "gone for good" pile.</strong> Expect this from most of the class. It is corrected by measurement in Lesson 2, not by being told.</li>
+    <li><strong>Sorting by appearance.</strong> Students who put "banana going brown" and "ice melting" in the same pile because both are visible changes are not yet reasoning from recoverability. Target these students in Lesson 2.</li>
+    <li><strong>Melting and dissolving used interchangeably.</strong> Very common. Chart the difference explicitly in the Criteria phase if it appears.</li>
+  </ul>
+
+  <h3>Before the bell</h3>
+  <ul>
+    <li>Safety glasses on every student for the station circuit and the setup — no exceptions.</li>
+    <li>Set the steel wool in vinegar going <em>first</em>, before the hook, so it has rusted visibly by the time the last group reaches it.</li>
+    <li>Bread is entirely pre-prepared — three slices on a plate, untoasted, golden, blackened. No appliance at that station.</li>
+    <li>The candle is the only flame in the room and it is teacher-run. Water and a fire blanket within reach.</li>
+    <li>Photograph of the client's rusting asset loaded and ready.</li>
+  </ul>
+
+  <div class="note stop"><span class="lab">If it rains</span>
+    The outdoor visit becomes a photograph. Take the picture on a dry day beforehand so you are never without it. The chat matters more than standing in front of the thing.</div>
+
+  <h3>Misconceptions to expect</h3>
+  <table>
+    <thead><tr><th style="width:27%">Misconception</th><th style="width:33%">How it shows today</th><th>Response</th></tr></thead>
+    <tbody>
+      <tr><td>Dissolving destroys the substance</td><td>Salt card in the "gone for good" pile; station B recorded as "it disappeared"</td><td>Don't correct it now. Note who. Lesson 2 settles it with scales and Lesson 3 by getting it back.</td></tr>
+      <tr><td>Colour change means irreversible</td><td>A confident single-criterion rule applied to everything</td><td>Ask about food colouring in water. Changes colour, evaporates back. One piece of evidence is never enough.</td></tr>
+      <tr><td>Melting and dissolving are the same</td><td>Used interchangeably in station records</td><td>Chart it: melting needs heat and involves one substance; dissolving needs a second substance and usually no heat.</td></tr>
+      <tr><td>Bubbles always mean a new substance</td><td>Boiling water classified as irreversible</td><td>Boiling makes bubbles of the same stuff. Fizzing makes bubbles of something that was not there before. The test is whether it comes back.</td></tr>
+      <tr><td>Irreversible means bad</td><td>Surfaces during the cross discussion</td><td>Leave it open today. It is the question Week 5 answers.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>What comes next</h3>
+  <p>Lesson 2 is the conceptual pivot — mass conservation with the scales, and the sealed bag. Carry forward the class criteria list (keep it on display all term) and the names of students whose card sort showed the dissolving misconception.</p>
+</section>
+
+<!-- ============ OVERVIEW ============ -->
+<section class="panel active" id="p-overview">
+  <h2>Overview</h2>
+  <p class="lede">Students work out for themselves how to tell whether a change has made something new — then set up the investigation that runs for the next four weeks.</p>
+
+  <h3>Shape of the lesson</h3>
+  <table>
+    <thead><tr><th style="width:30%">Phase</th><th style="width:15%">Time</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Hook</strong></td><td>12 min</td><td>Walk to the cross. It was made to rust. Someone chose that.</td></tr>
+      <tr><td><strong>Card sort</strong></td><td>10 min</td><td>Twelve changes sorted in pairs. No teaching. This is the diagnostic.</td></tr>
+      <tr><td><strong>Build the criteria</strong></td><td>18 min</td><td>Students name what they actually looked at. Class list compiled in their words.</td></tr>
+      <tr><td><strong>Station circuit</strong></td><td>28 min</td><td>Six benches, six changes, roughly four and a half minutes each.</td></tr>
+      <tr><td><strong>Set up the investigation</strong></td><td>17 min</td><td>Rust jars built, nails weighed, labelled, sealed.</td></tr>
+      <tr><td><strong>Review</strong></td><td>5 min</td><td>Exit ticket.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note tnote"><span class="lab">Timing is tight</span>
+    Ninety minutes with an outdoor visit and a practical setup has no slack. If you are running behind at the 60-minute mark, shorten the station circuit to four benches rather than cutting the rust setup. The setup is the only part that cannot be done next week.</div>
+
+  <h3>Everything you need</h3>
+  <p>The full kit for this lesson, so you are not going back to the plan.</p>
+
+  <div class="kitgrid">
+    <div class="kit-col">
+      <h4>Prepare before the lesson</h4>
+      <ul class="check">
+        <li>Toast three slices of bread — untoasted, golden, blackened. Plate them.</li>
+        <li>Photograph the client's rusting asset. Load it.</li>
+        <li>Take a backup photo of the cross in case of rain.</li>
+        <li>Set steel wool in vinegar going before the class arrives.</li>
+        <li>Print the card sort, station sheets and rust labels.</li>
+        <li>Dispense vinegar, salt and bicarbonate into labelled bench containers.</li>
+        <li>Check jars for chips. Set aside any that are cracked.</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Whole class</h4>
+      <ul class="check">
+        <li>Safety glasses — one per student, worn from the station circuit onwards</li>
+        <li>Board or chart paper for the criteria list (stays on display all term)</li>
+        <li>Camera or tablet for photographing card sorts</li>
+        <li>Paper towel and a spill kit at each bench</li>
+        <li>Dustpan, brush and a broken-glass bin</li>
+        <li>Water and a fire blanket near the candle</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Station circuit — six benches</h4>
+      <ul class="check">
+        <li>Ice cubes, clear cups or dishes, small tray</li>
+        <li>Salt, warm water, beaker, stirring rod</li>
+        <li>Steel wool grade 0000, white vinegar, test tube and rack</li>
+        <li>Bicarbonate of soda, white vinegar, beaker, tray</li>
+        <li>Candle, non-combustible holder, heat-resistant mat, matches (teacher only)</li>
+        <li>Three slices of bread — untoasted, toasted, burnt — on a plate</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Rust investigation setup</h4>
+      <ul class="check">
+        <li>18 jars with lids per class (six conditions × three replicates)</li>
+        <li>65 mm bright steel nails — three per jar, 54 per class</li>
+        <li>Galvanised nails — nine, Thursday class only</li>
+        <li>Scales (1 g resolution is fine today)</li>
+        <li>White vinegar, cooking salt, cooking oil, kettle for boiled water</li>
+        <li>Thursday only: paint, petroleum jelly, electrical tape, clear nail polish</li>
+        <li>Labels and permanent markers</li>
+        <li>Shelf space out of walkways for five weeks</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Printed sheets</h4>
+      <ul class="check">
+        <li>Card sort — 12 cards, one set per pair</li>
+        <li>Card sort — 8-card version for the support tier</li>
+        <li>Station observation sheet — one per student</li>
+        <li>Station observation sheet, supported version</li>
+        <li>Rust setup and label sheet — one per group</li>
+        <li>Exit ticket slips</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Not needed today</h4>
+      <ul>
+        <li>The 0.01 g scales — only Week 5 needs that resolution</li>
+        <li>Petri dishes — clear cups do the same job</li>
+        <li>Evaporating basins, funnels — Lesson 3</li>
+        <li>Frypan, thermometers — Lessons 3 and 4</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note stop"><span class="lab">Approval first</span>
+    The unit's HSW Risk Assessment must be signed before any practical work, including today's station circuit.</div>
+</section>
+
+<!-- ============ INTENTIONS ============ -->
+<section class="panel" id="p-intentions">
+  <h2>What we are learning</h2>
+
+  <div class="card">
+    <h4>Learning intention</h4>
+    <p style="font-size:1.1rem;margin-bottom:0">We are learning to work out what evidence tells us that a new substance has been made.</p>
+  </div>
+
+  <h3>I will be successful when I can…</h3>
+  <ul>
+    <li>describe a change using more than one kind of observation</li>
+    <li>sort changes by whether I think the original could be recovered</li>
+    <li>explain which evidence I used to decide, not just what I decided</li>
+    <li>set up an investigation so that someone else could repeat it exactly</li>
+  </ul>
+
+  <h3>Stretch</h3>
+  <ul>
+    <li>I can explain why one piece of evidence is never enough on its own.</li>
+    <li>I can argue that a change belongs in both groups, and justify it.</li>
+  </ul>
+
+  <div class="note teal"><span class="lab">Curriculum</span>
+    <strong>AC9S6U04</strong> — compare reversible changes, including dissolving and changes of state, and irreversible changes, including cooking and rusting that produce new substances.<br>
+    <strong>AC9S6I02</strong> — plan and conduct repeatable investigations, including deciding the variables to be changed, measured and controlled; describing potential risks; planning for the safe use of equipment and materials.</div>
+
+  <div class="card">
+    <h4>Your goal for today</h4>
+    <p>Before we start, write one thing you want to get better at in this lesson. Nothing here is saved or sent anywhere — it is for you.</p>
+    <textarea style="width:100%;min-height:74px;border:1px solid var(--line);border-radius:8px;padding:10px;font-family:inherit;font-size:16px" placeholder="Today I want to…"></textarea>
+  </div>
+
+  <div class="note teal tnote"><span class="lab">How the question sets work</span>
+    Every question set in this unit runs easy to hard, in order. The last one or two in each set supply no method — students decide the approach and justify it. The three-tier paths in each phase do the visible differentiation; the questions themselves escalate quietly.</div>
+</section>
+
+<!-- ============ HOOK ============ -->
+<section class="panel" id="p-hook">
+  <h2>Hook — Made to rust <span class="timechip">12 min</span></h2>
+  <p class="lede">Outside, at the entrance.</p>
+
+  <div class="card">
+    <p style="font-size:1.12rem">This cross has been here for years. It is covered in rust.</p>
+    <p style="font-size:1.12rem;margin-bottom:0"><strong>Nobody has ever tried to stop it. Somebody chose this.</strong></p>
+  </div>
+
+  <h3>Questions, in this order</h3>
+  <ol>
+    <li>What do you notice about the surface?</li>
+    <li>What do you think it looked like on the day it was installed?</li>
+    <li>Could we get it back to that? How would we try?</li>
+    <li>Why would anyone choose to let steel rust on purpose?</li>
+  </ol>
+
+  <div class="note tnote"><span class="lab">Leave question 4 unanswered</span>
+    Take the answer nowhere today. Write the question on the board and leave it there for five weeks. Students will return to it in Lesson 5 with a mass reading in front of them that explains it. Answering it now costs you the best payoff in the unit.</div>
+
+  <h3>Then, inside</h3>
+  <p>Show the photograph of the rusting asset.</p>
+  <div class="card">
+    <p><strong>Same reaction. Completely different problem.</strong></p>
+    <p style="margin-bottom:0">[CLIENT NAME] looks after this and would like it to stop. In seven weeks you are going to write to them and tell them what to do. Today you start finding out.</p>
+  </div>
+
+  <div class="note teal tnote"><span class="lab">Why this framing works</span>
+    Two objects, one reaction, opposite verdicts. It blocks the easy conclusion that irreversible change is damage, and it gives the investigation a reader. Students behave differently when the recommendation goes to a person who could disagree with it.</div>
+
+  <div class="note teal"><span class="lab">A thought worth sitting with</span>
+    A cross made of something that changes permanently, and cannot be returned to what it was. Some things are meant to be changed for good.</div>
+</section>
+
+<!-- ============ CARD SORT ============ -->
+<section class="panel" id="p-elicit">
+  <h2>Card sort <span class="timechip">10 min</span></h2>
+  <p class="lede">In pairs. Two piles. No talking to other pairs.</p>
+
+  <div class="card">
+    <p style="margin-bottom:6px"><strong>Could get it back</strong> — you could return it to what it was.</p>
+    <p style="margin-bottom:0"><strong>Gone for good</strong> — there is no way back.</p>
+  </div>
+
+  <h3>The twelve changes</h3>
+  <table>
+    <tbody>
+      <tr><td>Ice cubes left on the bench</td><td>Salt stirred into warm water</td></tr>
+      <tr><td>A banana skin going brown</td><td>Chocolate melting in your hand</td></tr>
+      <tr><td>A candle burning down</td><td>Wet clothes drying on the line</td></tr>
+      <tr><td>Bread being toasted</td><td>A nail left outside for a year</td></tr>
+      <tr><td>Water boiling in a kettle</td><td>Fireworks going off</td></tr>
+      <tr><td>Butter melting in a pan</td><td>Concrete setting</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note"><span class="lab">If you get stuck</span>
+    Put it in the middle and move on. A pile of "not sure" is a useful answer, not a failure.</div>
+
+  <div class="note tnote"><span class="lab">Do not teach here</span>
+    No hints, no vocabulary, no correcting. Ten minutes of silence from you. The value of this phase is entirely in what students do without help — and you lose the diagnostic the moment you steer it.</div>
+
+  <div class="note tnote"><span class="lab">Photograph every sort before it is cleared</span>
+    This is your evidence and it takes ninety seconds. Walk the room with a tablet. You are looking for where the salt card went, whether appearance is being used instead of recoverability, and which pairs disagreed with each other.</div>
+
+  <div class="paths">
+    <div class="path"><div class="pt">Need a hand</div><ul><li>Use the eight-card set.</li><li>Start with the three you are most sure about.</li></ul></div>
+    <div class="path core"><div class="pt">Keep going</div><ul><li>All twelve cards.</li><li>Be ready to say why for any card you are asked about.</li></ul></div>
+    <div class="path push"><div class="pt">Push me</div><ul><li>Find a card you could argue belongs in both piles.</li><li>Be ready to defend it.</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ CRITERIA ============ -->
+<section class="panel" id="p-criteria">
+  <h2>Build the criteria <span class="timechip">18 min</span></h2>
+  <p class="lede">You have all made decisions. Now we work out how you made them.</p>
+
+  <h3>The question</h3>
+  <div class="card">
+    <p style="font-size:1.1rem;margin-bottom:0">You put those cards in piles. <strong>What were you actually looking at when you decided?</strong></p>
+  </div>
+
+  <p>Take answers. Write them on the board in the words students use. Group them as they repeat.</p>
+
+  <details>
+    <summary>What classes usually come up with</summary>
+    <div class="body">
+      <p>Expect most of these, in roughly this order:</p>
+      <ul>
+        <li><strong>It changed colour</strong></li>
+        <li><strong>It made bubbles or a gas</strong></li>
+        <li><strong>It got hot or cold</strong></li>
+        <li><strong>It smells different now</strong></li>
+        <li><strong>There is something solid there that was not there before</strong></li>
+        <li><strong>You cannot undo it</strong> — this one usually arrives last and is the most important</li>
+      </ul>
+      <p style="margin-bottom:0">If "you cannot undo it" does not come up, ask: what is the difference between the ice and the toast? Somebody will get there.</p>
+    </div>
+  </details>
+
+  <div class="note tnote"><span class="lab">Use their words on the chart, not yours</span>
+    "It smells different" stays as "it smells different". This list goes on the wall for the whole term and gets refined each week. Students defend a list they wrote far more willingly than one they were given.</div>
+
+  <h3>Then press on it</h3>
+  <ol>
+    <li>Which of these would convince you on its own?</li>
+    <li>Food colouring in water changes colour. Is that gone for good?</li>
+    <li>So how many of these do you need before you are sure?</li>
+  </ol>
+
+  <details>
+    <summary>Where this is going</summary>
+    <div class="body">
+      <p>The food colouring example breaks the single-criterion rule, and it needs breaking today. Colour change alone proves nothing — you can evaporate coloured water and get the colour back.</p>
+      <p style="margin-bottom:0">The landing point is not a number. It is: <strong>one observation is a clue, several agreeing is evidence, and "can we get it back" is the one that decides it.</strong></p>
+    </div>
+  </details>
+
+  <div class="note tnote"><span class="lab">If melting and dissolving are being muddled</span>
+    Chart it now, quickly. Melting needs heat and involves one substance changing state. Dissolving needs a second substance and usually no heat at all. It will cause trouble in Lessons 2 and 3 if it goes unaddressed.</div>
+</section>
+
+<!-- ============ STATIONS ============ -->
+<section class="panel" id="p-stations">
+  <h2>Station circuit <span class="timechip">28 min</span></h2>
+  <p class="lede">Six benches. Roughly four and a half minutes each. Safety glasses on from here.</p>
+
+  <div class="note"><span class="lab">At every station</span>
+    Record what you observe against the class criteria. Then commit: could you get it back? And write the one piece of evidence that decided it for you.</div>
+
+  <div class="stations">
+    <div class="st"><div class="hd"><span>Ice melting</span><span class="n">1</span></div><div class="bd">
+      <p>Ice cubes in a clear cup. Watch, then check again when you come past later.</p>
+      <p>Is the water that is left the same stuff as the ice?</p>
+      <div class="kit">Ice, clear cup, tray</div></div></div>
+
+    <div class="st"><div class="hd"><span>Salt dissolving</span><span class="n">2</span></div><div class="bd">
+      <p>Stir a spoon of salt into warm water until you cannot see it.</p>
+      <p>Where has the salt gone? Is it still in there?</p>
+      <div class="kit">Salt, warm water, beaker, stirring rod</div></div></div>
+
+    <div class="st"><div class="hd"><span>Steel wool in vinegar</span><span class="n">3</span></div><div class="bd">
+      <p>This has been sitting since before you arrived. Look closely at the colour and the texture.</p>
+      <p>What has appeared that was not there this morning?</p>
+      <div class="kit">Steel wool 0000, white vinegar, test tube, rack</div></div></div>
+
+    <div class="st"><div class="hd"><span>Bicarbonate and vinegar</span><span class="n">4</span></div><div class="bd">
+      <p>A spoon of bicarbonate into the vinegar. Watch it, and listen to it.</p>
+      <p>The bubbles are made of something. Where did it come from?</p>
+      <div class="kit">Bicarbonate, vinegar, beaker, tray</div></div></div>
+
+    <div class="st teacherrun"><div class="hd"><span>Candle burning — teacher</span><span class="n">5</span></div><div class="bd">
+      <p>Watch from behind the line. Two different things are happening at once here.</p>
+      <p>Is this one change or two?</p>
+      <div class="kit">Candle, holder, heat mat, matches. Teacher operates. Never unattended.</div></div></div>
+
+    <div class="st"><div class="hd"><span>Bread</span><span class="n">6</span></div><div class="bd">
+      <p>Three slices, already prepared: untoasted, golden, blackened. Look and smell, do not taste.</p>
+      <p>At which slice did it stop being bread?</p>
+      <div class="kit">Three prepared slices on a plate. No appliance at this bench.</div></div></div>
+  </div>
+
+  <div class="note teal tnote"><span class="lab">Station 5 is the one to protect</span>
+    The wax melts and resets; the wick burns away and does not come back. Same object, both categories at once. If a group notices unprompted, stop the circuit and let them tell the room. If nobody does, raise it in the summary — it is the strongest thing on the circuit.</div>
+
+  <div class="note stop tnote"><span class="lab">Keep stations 3 and 5 apart</span>
+    Fine steel wool is flammable — grade 0000 catches readily from a flame or spark. Put the steel wool station and the candle station on opposite sides of the room, and keep spare steel wool well away from the candle bench.</div>
+
+  <div class="note tnote"><span class="lab">Station 3 timing</span>
+    Set the steel wool going before the class arrives. Around twenty minutes in vinegar gives obvious orange discolouration. Groups arriving late in the rotation see more, which is fine — ask them to compare with what earlier groups recorded.</div>
+
+  <div class="paths">
+    <div class="path"><div class="pt">Need a hand</div><ul><li>Use the tick-box sheet.</li><li>Tick what you see, then write one reason at each bench.</li></ul></div>
+    <div class="path core"><div class="pt">Keep going</div><ul><li>Full sheet. Write observations against every criterion that applies.</li><li>Commit to a classification each time.</li></ul></div>
+    <div class="path push"><div class="pt">Push me</div><ul><li>Find a station that belongs in both categories and build the argument.</li><li>Rank the six from most to least certain, and say what made the uncertain ones uncertain.</li></ul></div>
+  </div>
+
+  <h3>Naming them</h3>
+  <p>Now, and only now:</p>
+  <div class="card">
+    <p><strong>Reversible</strong> — the change can be undone and you get the original substance back.</p>
+    <p style="margin-bottom:0"><strong>Irreversible</strong> — a new substance has been made, and you cannot get the original back.</p>
+  </div>
+  <p>Which of your two piles is which?</p>
+</section>
+
+<!-- ============ SETUP ============ -->
+<section class="panel" id="p-setup">
+  <h2>Set up the investigation <span class="timechip">17 min</span></h2>
+  <p class="lede">These jars sit on the shelf for the next five weeks. Get them right now — you do not get to start again.</p>
+
+  <div class="card">
+    <p style="margin-bottom:0">[CLIENT NAME] needs to know how to stop the rusting. Between the two Year 6 classes we are going to find out. <strong>Neither class can answer it alone.</strong></p>
+  </div>
+
+  <table>
+    <thead><tr><th style="width:28%">Class</th><th>Question</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Tuesday</strong></td><td>What makes rust happen? Six different conditions.</td></tr>
+      <tr><td><strong>Thursday</strong></td><td>What stops rust happening? Six different coatings, all in the same conditions.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Your group's job</h3>
+  <ol>
+    <li>Collect three jars. Check each one for chips — if it is cracked, swap it.</li>
+    <li>Weigh your three nails together. Write the mass on the label before they go in.</li>
+    <li>Set up your condition in all three jars, exactly the same way each time.</li>
+    <li>Label every jar: group, condition, nail mass, today's date.</li>
+    <li>Write the one sentence that would let another group repeat your setup exactly.</li>
+  </ol>
+
+  <div class="note"><span class="lab">Why three jars and not one</span>
+    If you only had one and something went wrong with it, you would never know. Three lets you spot the odd one out.</div>
+
+  <div class="note tnote"><span class="lab">Conditions, Tuesday</span>
+    A dry sealed · B half-submerged in tap water, open · C fully submerged in tap water, open · D fully submerged in salt water (2 tsp per 250 mL) · E fully submerged in white vinegar · F boiled and cooled water, sealed under 1 cm of cooking oil.<br>
+    The result that teaches: <strong>B rusts fastest, not C.</strong> Rusting needs water and oxygen together and the waterline has both. F barely rusts at all.</div>
+
+  <div class="note tnote"><span class="lab">Conditions, Thursday</span>
+    All half-submerged in tap water, replicating Jar B. A bare nail (control) · B painted · C petroleum jelly · D wrapped in electrical tape · E clear nail polish · F galvanised nail, untreated.</div>
+
+  <div class="note tnote"><span class="lab">The sentence in step 5 is assessable</span>
+    This is your first read on AC9S6I02 — planning a <em>repeatable</em> investigation. A group writing "we put nails in water" has not done it. A group writing "three 65 mm nails, half covered in tap water, lid off, on the shelf by the window" has. Worth two minutes of feedback now, because the same skill is marked in CP2.</div>
+
+  <div class="note stop"><span class="lab">Safety</span>
+    Glasses on. Nails counted out and counted back in. Jars stay on the bench and are carried with two hands, one at a time. Any spill gets reported and cleaned straight away.</div>
+
+  <p>Jars go on the shelf. We look at them every week for the next four weeks — five minutes, no more.</p>
+</section>
+
+<!-- ============ REVIEW ============ -->
+<section class="panel" id="p-review">
+  <h2>Review <span class="timechip">5 min</span></h2>
+
+  <h3>Three things to take away</h3>
+  <ol>
+    <li>To tell whether something new has been made, you need more than one piece of evidence.</li>
+    <li>The strongest question is: <strong>can we get it back?</strong></li>
+    <li>An irreversible change is not automatically a bad thing. Somebody wanted that cross to rust.</li>
+  </ol>
+
+  <h3>Exit ticket</h3>
+  <div class="card">
+    <p><strong>Which station was hardest to classify, and what would settle it?</strong></p>
+    <p style="margin-bottom:0">One sentence each. You are not being asked for the right answer — you are being asked what evidence you would want.</p>
+  </div>
+
+  <details class="tnote">
+    <summary>Sorting the exit tickets into piles</summary>
+    <div class="body">
+      <p><strong>Ready to move on</strong> — names a station and proposes evidence that would actually settle it. "The candle, because I would need to know if the wax could be re-melted."</p>
+      <p><strong>Watch in Lesson 2</strong> — names a station but proposes no test, or proposes one that would not settle anything.</p>
+      <p style="margin-bottom:0"><strong>Target directly</strong> — says nothing was hard, or names a station for a reason unrelated to evidence. These students are not yet distinguishing observing from deciding.</p>
+    </div>
+  </details>
+
+  <h3>Words we used today</h3>
+  <div class="vocab">
+    <span><b>reversible</b></span><span><b>irreversible</b></span><span><b>substance</b></span>
+    <span><b>dissolve</b></span><span><b>evidence</b></span><span><b>observation</b></span>
+    <span><b>rust</b></span><span><b>repeatable</b></span>
+  </div>
+
+  <div class="note teal tnote"><span class="lab">EAL/D</span>
+    Four of these words mean something different outside science. <em>Substance</em> in everyday English often means importance. <em>Change</em> means coins. <em>Solution</em> means an answer to a problem. <em>Observation</em> means a remark someone made. Chart the science meaning next to the everyday one rather than assuming the word is new — for many students the problem is that it is familiar and wrong.</div>
+
+  <div class="card">
+    <h4>Think back</h4>
+    <p>You wrote a goal at the start. Did you get there? Nothing here is saved.</p>
+    <textarea style="width:100%;min-height:68px;border:1px solid var(--line);border-radius:8px;padding:10px;font-family:inherit;font-size:16px" placeholder="What I would do differently next time…"></textarea>
+  </div>
+
+  <h3>Next week</h3>
+  <p>The scales come out. We find out whether anything actually disappears when it dissolves — and we weigh a gas.</p>
+</section>
+
+<!-- ============ RESOURCES ============ -->
+<section class="panel" id="p-resources">
+  <h2>Resources</h2>
+  <p class="lede">Print before the lesson. Everything here also lives in the repository as a separate file.</p>
+
+  <a class="dlitem all" href="resources/l1-00-all-student-sheets.pdf" download style="margin-bottom:6px">
+    <span class="ic">PDF</span>
+    <span><span class="tt">All student sheets</span>
+    <span class="ds">Every sheet below in one file. Print the lot, or pick pages.</span>
+    <span class="sz">10 pages · 63 KB</span></span>
+  </a>
+
+  <h3>Individual sheets</h3>
+  <div class="dl">
+    <a class="dlitem" href="resources/l1-01-card-sort.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Card sort — 12 cards</span>
+      <span class="ds">One set per pair. Cut and bag in advance; reused in Lesson 4.</span>
+      <span class="sz">1 page · 35 KB</span></span>
+    </a>
+    <a class="dlitem" href="resources/l1-02-card-sort-support.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Card sort — 8 cards</span>
+      <span class="ds">Support tier. The four hardest cards removed.</span>
+      <span class="sz">1 page · 35 KB</span></span>
+    </a>
+    <a class="dlitem" href="resources/l1-03-station-sheet.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Station observation sheet</span>
+      <span class="ds">Core version. One per student. Observation, classification, evidence.</span>
+      <span class="sz">2 pages · 38 KB</span></span>
+    </a>
+    <a class="dlitem" href="resources/l1-04-station-sheet-support.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Station sheet — supported</span>
+      <span class="ds">Tick-box grid against the criteria, then one written reason.</span>
+      <span class="sz">1 page · 36 KB</span></span>
+    </a>
+    <a class="dlitem" href="resources/l1-05-rust-setup-labels.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Rust setup and jar labels</span>
+      <span class="ds">One per group. Three cut-off labels, starting mass table, repeat sentence.</span>
+      <span class="sz">2 pages · 38 KB</span></span>
+    </a>
+    <a class="dlitem" href="resources/l1-06-exit-tickets.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Exit tickets</span>
+      <span class="ds">Six to a page. Which station was hardest, and what would settle it.</span>
+      <span class="sz">1 page · 35 KB</span></span>
+    </a>
+    <a class="dlitem" href="resources/l1-07-rust-coverage-log.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Rust coverage scale and log</span>
+      <span class="ds">Laminate one and keep it with the jars. Covers Weeks 2 to 5 and the final weigh-in.</span>
+      <span class="sz">2 pages · 37 KB</span></span>
+    </a>
+    <a class="dlitem doc" href="resources/l1-student-sheets-EDITABLE.docx" download>
+      <span class="ic">DOCX</span>
+      <span><span class="tt">Editable master</span>
+      <span class="ds">All sheets in one Word file. Change the card list, the station questions, anything.</span>
+      <span class="sz">17 KB</span></span>
+    </a>
+  </div>
+
+  <div class="note"><span class="lab">Before you print</span>
+    The card sort and the exit tickets need cutting up. The rust coverage scale is worth laminating once — it stays with the jars for five weeks and gets handled every lesson.</div>
+
+  <div class="note tnote"><span class="lab">Where these files live</span>
+    Links are relative, so the lesson folder has to carry its own <code>resources</code> folder. If a download 404s, the file has not been committed yet — check the structure below.</div>
+
+  <div class="tree tnote">can-we-get-it-back/
+├── index.html                    <b>unit menu</b>
+└── lessons/
+    └── 01-made-to-rust/
+        ├── lesson-01-made-to-rust.html   <b>this page</b>
+        └── resources/
+            ├── l1-00-all-student-sheets.pdf
+            ├── l1-01-card-sort.pdf
+            ├── l1-02-card-sort-support.pdf
+            ├── l1-03-station-sheet.pdf
+            ├── l1-04-station-sheet-support.pdf
+            ├── l1-05-rust-setup-labels.pdf
+            ├── l1-06-exit-tickets.pdf
+            ├── l1-07-rust-coverage-log.pdf
+            └── l1-student-sheets-EDITABLE.docx</div>
+
+  <div class="note teal tnote"><span class="lab">Keep for the whole term</span>
+    The criteria chart from today goes on the wall and stays there. Every lesson refers back to it, and in Lesson 4 students amend it in the light of what they have learnt. Do not take it down.</div>
+</section>
+
+</div></main>
+
+<!-- ============ TIMER ============ -->
+<div id="timer" role="region" aria-label="Lesson timer">
+  <div class="t-hd">
+    <span class="grip" aria-hidden="true"></span><span class="ttl">Lesson timer</span>
+    <span class="ctl">
+      <button class="iconbtn on" id="tSound" title="Sound on or off" aria-pressed="true">♪</button>
+      <button class="iconbtn" id="tMin" title="Shrink or expand">–</button>
+      <button class="iconbtn" id="tClose" title="Hide the timer">×</button>
+    </span>
+  </div>
+  <div class="t-body">
+    <div class="t-phase" id="tPhase">Hook — The cross</div>
+    <div class="t-sub" id="tSub">Phase 1 of 6</div>
+    <div class="t-clock" id="tClock">12:00</div>
+    <div class="t-rot" id="tRot">Station 1 of 6 · 4:30</div>
+    <div class="bar"><i id="tBar"></i></div>
+    <div class="t-btns">
+      <button class="btn go" id="tGo">Start</button>
+      <button class="btn" id="tNext">Next</button>
+      <button class="btn" id="tReset">Reset</button>
+    </div>
+    <div class="t-list" id="tList"></div>
+    <div class="t-foot"><span id="tElapsed">Elapsed 0:00</span><span id="tLeft">90 min total</span></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- teacher mode ---------- */
+  var tm = document.getElementById('tmToggle');
+  tm.addEventListener('click', function(){
+    var on = document.body.classList.toggle('teacher');
+    tm.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if(!on){
+      var cur = document.querySelector('.tab[aria-selected="true"]');
+      if(cur && cur.classList.contains('tonly')) show('overview');
+    }
+  });
+
+  /* ---------- timer visibility (independent of teacher mode) ---------- */
+  document.body.classList.add('timer-on');
+  var tv = document.getElementById('timerToggle');
+  function setTimerVisible(on){
+    document.body.classList.toggle('timer-on', on);
+    tv.setAttribute('aria-pressed', on ? 'true' : 'false');
+    tv.classList.toggle('lit', on);
+  }
+  tv.classList.add('lit');
+  tv.addEventListener('click', function(){
+    setTimerVisible(!document.body.classList.contains('timer-on'));
+  });
+
+  /* ---------- tabs ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function show(id){
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.p===id ? 'true':'false'); });
+    document.querySelectorAll('.panel').forEach(function(p){
+      p.classList.toggle('active', p.id==='p-'+id);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.p); }); });
+
+  /* ---------- timer ---------- */
+  var PHASES = [
+    {name:'Hook — The cross',            mins:12, tab:'hook'},
+    {name:'Card sort — diagnostic',      mins:10, tab:'elicit'},
+    {name:'Build the criteria',          mins:18, tab:'criteria'},
+    {name:'Station circuit',             mins:28, tab:'stations', rotations:6},
+    {name:'Set up the investigation',    mins:17, tab:'setup'},
+    {name:'Review — exit ticket',        mins:5,  tab:'review'}
+  ];
+  var TOTAL = PHASES.reduce(function(a,p){ return a+p.mins; },0);
+
+  var idx=0, left=PHASES[0].mins*60, running=false, elapsed=0, sound=true, tick=null;
+  var rotLeft=0, rotIdx=0, rotLen=0;
+
+  var el = {
+    box:document.getElementById('timer'), phase:document.getElementById('tPhase'),
+    sub:document.getElementById('tSub'), clock:document.getElementById('tClock'),
+    rot:document.getElementById('tRot'), bar:document.getElementById('tBar'),
+    go:document.getElementById('tGo'), next:document.getElementById('tNext'),
+    reset:document.getElementById('tReset'), list:document.getElementById('tList'),
+    elapsed:document.getElementById('tElapsed'), left:document.getElementById('tLeft'),
+    snd:document.getElementById('tSound'), min:document.getElementById('tMin')
+  };
+
+  function mmss(s){
+    var neg = s<0; s = Math.abs(s);
+    var m = Math.floor(s/60), r = s%60;
+    return (neg?'+':'') + m + ':' + (r<10?'0':'') + r;
+  }
+
+  function beep(times){
+    if(!sound) return;
+    try{
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if(!Ctx) return;
+      var ac = new Ctx();
+      for(var i=0;i<times;i++){
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.connect(g); g.connect(ac.destination);
+        o.frequency.value = 784;
+        var t0 = ac.currentTime + i*0.28;
+        g.gain.setValueAtTime(0.0001,t0);
+        g.gain.exponentialRampToValueAtTime(0.25,t0+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,t0+0.22);
+        o.start(t0); o.stop(t0+0.24);
+      }
+      setTimeout(function(){ try{ac.close();}catch(e){} }, times*300+500);
+    }catch(e){}
+  }
+
+  function buildList(){
+    el.list.innerHTML='';
+    PHASES.forEach(function(p,i){
+      var row=document.createElement('div');
+      row.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+      row.innerHTML='<span>'+p.name+'</span><span class="d">'+p.mins+'m</span>';
+      row.addEventListener('click',function(){ goTo(i); });
+      el.list.appendChild(row);
+    });
+  }
+
+  function render(){
+    var p = PHASES[idx];
+    el.phase.textContent = p.name;
+    el.sub.textContent = 'Phase '+(idx+1)+' of '+PHASES.length+' · '+p.mins+' min';
+    el.clock.textContent = mmss(left);
+    var pct = Math.max(0, Math.min(100, ((p.mins*60-left)/(p.mins*60))*100));
+    el.bar.style.width = pct+'%';
+    el.box.classList.toggle('over', left<0);
+    el.box.classList.toggle('warn', left>=0 && left<=120);
+    el.box.classList.toggle('rotating', !!p.rotations);
+    if(p.rotations){
+      el.rot.textContent = 'Station '+Math.min(rotIdx+1,p.rotations)+' of '+p.rotations+' · '+mmss(rotLeft);
+    }
+    el.elapsed.textContent = 'Elapsed '+mmss(elapsed);
+    var rem = TOTAL*60 - elapsed;
+    el.left.textContent = rem>=0 ? mmss(rem)+' of lesson left' : mmss(rem)+' over';
+    el.go.textContent = running ? 'Pause' : (elapsed===0 && left===PHASES[0].mins*60 ? 'Start' : 'Resume');
+    Array.prototype.forEach.call(el.list.children,function(r,i){
+      r.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+    });
+  }
+
+  function setPhase(i){
+    idx = Math.max(0, Math.min(PHASES.length-1, i));
+    var p = PHASES[idx];
+    left = p.mins*60;
+    if(p.rotations){ rotLen = Math.floor(p.mins*60/p.rotations); rotIdx=0; rotLeft=rotLen; }
+    if(p.tab) show(p.tab);
+    render();
+  }
+
+  function goTo(i){ setPhase(i); }
+
+  function step(){
+    left--; elapsed++;
+    var p = PHASES[idx];
+    if(p.rotations){
+      rotLeft--;
+      if(rotLeft<=0 && rotIdx < p.rotations-1){ rotIdx++; rotLeft=rotLen; beep(1); }
+    }
+    if(left===0){ beep(2); }
+    render();
+  }
+
+  function toggle(){
+    running = !running;
+    if(running){ tick = setInterval(step,1000); } else { clearInterval(tick); }
+    render();
+  }
+
+  el.go.addEventListener('click', toggle);
+  el.next.addEventListener('click', function(){ setPhase(idx+1); });
+  el.reset.addEventListener('click', function(){
+    running=false; clearInterval(tick); elapsed=0; setPhase(0);
+  });
+  el.snd.addEventListener('click', function(){
+    sound=!sound;
+    el.snd.classList.toggle('on',sound);
+    el.snd.setAttribute('aria-pressed', sound?'true':'false');
+    if(sound) beep(1);
+  });
+  el.min.addEventListener('click', function(){
+    var m = el.box.classList.toggle('min');
+    el.min.textContent = m ? '+' : '–';
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(!document.body.classList.contains('teacher')) return;
+    if(/^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if(e.code==='Space'){ e.preventDefault(); toggle(); }
+    if(e.code==='ArrowRight'){ setPhase(idx+1); }
+    if(e.code==='ArrowLeft'){ setPhase(idx-1); }
+  });
+
+  el.box.querySelector('#tClose').addEventListener('click', function(){
+    setTimerVisible(false);
+  });
+
+  /* ---------- drag ---------- */
+  (function(){
+    var hd = el.box.querySelector('.t-hd');
+    var dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+
+    function place(x, y){
+      var r = el.box.getBoundingClientRect();
+      var maxX = window.innerWidth  - r.width  - 6;
+      var maxY = window.innerHeight - r.height - 6;
+      x = Math.max(6, Math.min(x, Math.max(6, maxX)));
+      y = Math.max(6, Math.min(y, Math.max(6, maxY)));
+      el.box.style.left = x + 'px';
+      el.box.style.top  = y + 'px';
+      el.box.style.right = 'auto';
+      el.box.style.bottom = 'auto';
+    }
+
+    function reset(){
+      el.box.style.left = ''; el.box.style.top = '';
+      el.box.style.right = ''; el.box.style.bottom = '';
+    }
+
+    hd.addEventListener('pointerdown', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      var r = el.box.getBoundingClientRect();
+      dragging = true;
+      sx = e.clientX; sy = e.clientY; ox = r.left; oy = r.top;
+      place(r.left, r.top);
+      el.box.classList.add('dragging');
+      hd.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+
+    hd.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      place(ox + (e.clientX - sx), oy + (e.clientY - sy));
+    });
+
+    function stop(e){
+      if(!dragging) return;
+      dragging = false;
+      el.box.classList.remove('dragging');
+      try{ hd.releasePointerCapture(e.pointerId); }catch(err){}
+    }
+    hd.addEventListener('pointerup', stop);
+    hd.addEventListener('pointercancel', stop);
+    hd.addEventListener('dblclick', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      reset();
+    });
+
+    window.addEventListener('resize', function(){
+      if(el.box.style.left){
+        var r = el.box.getBoundingClientRect();
+        place(r.left, r.top);
+      }
+    });
+  })();
+
+  buildList(); render();
+})();
+</script>
+</body>
+</html>

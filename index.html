@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can we get it back? — Year 6 Chemical Sciences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1b2a4a; --navy-soft:#2c3f66; --amber:#e8930c; --amber-deep:#9a5f00;
+  --teal:#0e7c7b; --teal-soft:#e2f0ef; --paper:#fbf9f4; --line:#dcd9d0;
+  --ink:#23272e; --muted:#5a6478; --rust:#8a4a22; --rust-soft:#f3e4d8;
+  --sans:"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);font-size:17px;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+
+header{background:var(--navy);color:#fff;padding:38px 0 34px;border-bottom:3px solid var(--amber)}
+.meta{font-size:14px;color:#9fb0cd;margin-bottom:10px}
+h1{font-size:2.5rem;line-height:1.1;margin:0 0 10px;letter-spacing:-.015em}
+.q{font-size:1.2rem;color:#dbe3f1;margin:0 0 4px}
+.sub{color:#9fb0cd;font-size:.98rem;margin:0}
+
+main{padding:34px 0 70px}
+h2{font-size:1.3rem;color:var(--navy);margin:0 0 6px}
+.lede{color:var(--muted);margin:0 0 22px}
+
+/* ---- seven-week strip ---- */
+.strip{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 20px 16px;margin:0 0 36px}
+.weeks{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.wk{text-align:center;font-size:13px;color:var(--muted);font-weight:600}
+.lane{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px;align-items:center}
+.lane-label{font-size:12.5px;color:var(--muted);margin:14px 0 4px}
+.rust{grid-column:1 / span 5;background:var(--rust-soft);border:1px solid #e2c6ae;color:var(--rust);
+  border-radius:999px;padding:6px 14px;font-size:13.5px;font-weight:600}
+.rust2{grid-column:6 / span 2;background:#fdf0dc;border:1px solid #efd2a3;color:var(--amber-deep);
+  border-radius:999px;padding:6px 14px;font-size:13.5px;font-weight:600}
+.cp{display:flex;justify-content:center}
+.cp span{background:var(--amber);color:#2e2105;font-size:12.5px;font-weight:700;border-radius:6px;padding:4px 9px;white-space:nowrap}
+.cp.cp3 span{background:var(--navy);color:#fff}
+
+/* ---- lesson list ---- */
+.lessons{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.lesson a{display:grid;grid-template-columns:62px 1fr auto;gap:16px;align-items:center;
+  background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  text-decoration:none;color:inherit;border-left:5px solid var(--teal)}
+.lesson a:hover{border-color:var(--amber);border-left-color:var(--amber);background:#fffdf8}
+.lesson a:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.num{font-size:1.9rem;font-weight:700;color:var(--navy);text-align:center;line-height:1}
+.num small{display:block;font-size:11.5px;font-weight:600;color:var(--muted);margin-top:4px;letter-spacing:.02em}
+.t{font-weight:700;font-size:1.12rem;color:var(--navy);margin:0 0 2px}
+.d{font-size:15px;color:var(--muted);margin:0}
+.tagcp{font-size:12.5px;font-weight:700;background:var(--amber);color:#2e2105;border-radius:6px;padding:4px 9px;white-space:nowrap}
+.tagcp.navy{background:var(--navy);color:#fff}
+.go{color:var(--teal);font-size:1.3rem;font-weight:700}
+
+.note{margin-top:34px;border-left:4px solid var(--teal);background:var(--teal-soft);border-radius:0 10px 10px 0;padding:14px 18px;font-size:15.5px}
+.note b{color:var(--teal)}
+footer{color:var(--muted);font-size:13px;padding:20px 0 40px;border-top:1px solid var(--line)}
+
+@media (max-width:640px){
+  h1{font-size:1.9rem}
+  .lesson a{grid-template-columns:48px 1fr;row-gap:8px}
+  .lesson .side{grid-column:2}
+  .lesson .side:has(.go){display:none}
+  .weeks,.lane{gap:3px}
+  .wk{font-size:11.5px}
+  .rust,.rust2{font-size:12px;padding:5px 9px}
+  .cp span{font-size:11px;padding:3px 6px}
+}
+
+/* ---- house style typography ---- */
+:root{
+  --sans:"Atkinson Hyperlegible","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --display:"Space Grotesk","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter-spacing:-.01em}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="meta">Year 6 Science · Chemical Sciences · Term 4</div>
+    <h1>Can we get it back?</h1>
+    <p class="q">…and do we always want to?</p>
+    <p class="sub">Seven lessons on reversible and irreversible change, built around a real rusting problem at our school.</p>
+  </div>
+</header>
+
+<main><div class="wrap">
+
+  <h2>How the unit fits together</h2>
+  <p class="lede">A rust investigation runs quietly in the background from Week 1 to Week 5 while each lesson builds the ideas needed to understand it.</p>
+
+  <div class="strip" aria-label="Unit timeline">
+    <div class="weeks">
+      <div class="wk">Wk 1</div><div class="wk">Wk 2</div><div class="wk">Wk 3</div><div class="wk">Wk 4</div>
+      <div class="wk">Wk 5</div><div class="wk">Wk 6</div><div class="wk">Wk 7</div>
+    </div>
+    <div class="lane-label">The investigations</div>
+    <div class="lane">
+      <div class="rust">Nails in jars — five weeks of rust</div>
+      <div class="rust2">Steel wool test and report</div>
+    </div>
+    <div class="lane-label">Assessment</div>
+    <div class="lane">
+      <div></div><div></div><div></div>
+      <div class="cp"><span>CP1</span></div>
+      <div class="cp"><span>CP2</span></div>
+      <div></div>
+      <div class="cp cp3"><span>CP3</span></div>
+    </div>
+  </div>
+
+  <h2>Lessons</h2>
+  <p class="lede">Each lesson has its own page with everything needed to run it, and its printable sheets underneath.</p>
+
+  <ol class="lessons">
+    <li class="lesson"><a href="lessons/01-made-to-rust/">
+      <div class="num">1<small>WEEK 1</small></div>
+      <div><p class="t">Made to rust</p><p class="d">The cross at our entrance, a card sort, six stations, and the rust jars sealed for five weeks.</p></div>
+      <div class="side"><span class="go" aria-hidden="true">›</span></div>
+    </a></li>
+
+    <li class="lesson"><a href="lessons/02-does-stuff-disappear/">
+      <div class="num">2<small>WEEK 2</small></div>
+      <div><p class="t">Does stuff disappear?</p><p class="d">Weighing salt as it dissolves, and the same fizzing reaction in a sealed bag and an open beaker.</p></div>
+      <div class="side"><span class="go" aria-hidden="true">›</span></div>
+    </a></li>
+
+    <li class="lesson"><a href="lessons/03-get-it-back/">
+      <div class="num">3<small>WEEK 3</small></div>
+      <div><p class="t">Get it back</p><p class="d">Recovering eight grams of dissolved salt — filtering against decanting — and plant resin as a reversible glue.</p></div>
+      <div class="side"><span class="go" aria-hidden="true">›</span></div>
+    </a></li>
+
+    <li class="lesson"><a href="lessons/04-point-of-no-return/">
+      <div class="num">4<small>WEEK 4</small></div>
+      <div><p class="t">The point of no return</p><p class="d">Heating sugar until it stops being sugar, then chocolate against egg white on the thermometer.</p></div>
+      <div class="side"><span class="tagcp">CP1</span></div>
+    </a></li>
+
+    <li class="lesson"><a href="lessons/05-reading-the-evidence/">
+      <div class="num">5<small>WEEK 5</small></div>
+      <div><p class="t">Reading the evidence</p><p class="d">The nails come out heavier. Graphing both classes, pulling apart the other class's method, and why the cross was made to rust.</p></div>
+      <div class="side"><span class="tagcp">CP2</span></div>
+    </a></li>
+
+    <li class="lesson"><a href="lessons/06-run-it/">
+      <div class="num">6<small>WEEK 6</small></div>
+      <div><p class="t">Run it</p><p class="d">Your own investigation on steel wool — what protects metal from rusting — recorded as it happens.</p></div>
+      <div class="side"><span class="go" aria-hidden="true">›</span></div>
+    </a></li>
+
+    <li class="lesson"><a href="lessons/07-report-and-defence/">
+      <div class="num">7<small>WEEK 7</small></div>
+      <div><p class="t">Report and defence</p><p class="d">A one-page recommendation to the person responsible for the rusting — and answering their hardest questions.</p></div>
+      <div class="side"><span class="tagcp navy">CP3</span></div>
+    </a></li>
+  </ol>
+
+  <div class="note">
+    <b>On every lesson page</b> — a lesson timer you can drag anywhere on the screen or switch off, and a Resources tab with every sheet as a PDF and an editable Word version.
+  </div>
+
+</div></main>
+
+<footer>
+  <div class="wrap">Year 6 Science · Term 4 · St Joseph's Primary School, Corinda · Australian Curriculum v9.0 · AC9S6U04</div>
+</footer>
+
+</body>
+</html>

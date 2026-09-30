@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 6 · Run it — Year 6 Chemical Sciences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1b2a4a; --navy-soft:#2c3f66; --amber:#e8930c; --amber-deep:#9a5f00;
+  --teal:#0e7c7b; --teal-soft:#e2f0ef; --paper:#fbf9f4; --line:#dcd9d0;
+  --ink:#23272e; --muted:#5a6478; --white:#fff;
+  --rust:#8a4a22; --rust-soft:#f6e9e0;
+  --ok:#2e6b3f; --warn:#b4560a; --stop:#a32020;
+  --radius:10px;
+  --sans:"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:var(--sans); color:var(--ink); background:var(--paper);
+  font-size:17px; line-height:1.62; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+
+/* ---------- header ---------- */
+header.top{background:var(--navy);color:#fff;padding:22px 0 0}
+.crumb{font-size:14px;color:#a9b6cf;text-decoration:none;display:inline-block;margin-bottom:14px}
+.crumb:hover{color:#fff}
+.meta{font-size:13.5px;color:#9fb0cd;letter-spacing:.02em;margin-bottom:6px}
+h1{font-size:2.05rem;line-height:1.18;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.subtitle{color:#c3d0e6;font-size:1.02rem;margin:0 0 16px}
+.badges{display:flex;flex-wrap:wrap;gap:7px;padding-bottom:18px}
+.badge{font-size:12.5px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#e7edf7;border:1px solid rgba(255,255,255,.18)}
+.badge.code{background:var(--amber);color:#33240a;border-color:transparent;font-weight:600}
+
+/* teacher toggle */
+.tmrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:0 0 18px}
+.tmbtn{
+  display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.26);color:#fff;padding:8px 14px;border-radius:999px;
+  font-size:14px;cursor:pointer;font-family:inherit
+}
+.tmbtn:hover{background:rgba(255,255,255,.18)}
+.tmbtn .dot{width:9px;height:9px;border-radius:50%;background:#7c8aa5}
+body.teacher #tmToggle .dot{background:#5fd08a}
+body.teacher #tmToggle{background:var(--amber);color:#2e2105;border-color:transparent;font-weight:600}
+.tmbtn.lit .dot{background:#5fd08a}
+.tmbtn.lit{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4)}
+.tmhint{font-size:13px;color:#9fb0cd}
+
+/* ---------- tabs ---------- */
+nav.tabs{position:sticky;top:0;z-index:40;background:var(--navy-soft);border-bottom:2px solid var(--amber)}
+.tabscroll{max-width:880px;margin:0 auto;display:flex;overflow-x:auto;padding:0 12px;scrollbar-width:thin}
+.tab{
+  flex:0 0 auto;background:none;border:none;font-family:inherit;font-size:14px;color:#c6d2e6;
+  padding:12px 13px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap
+}
+.tab:hover{color:#fff}
+.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--amber);font-weight:600}
+.tab.tonly{display:none}
+body.teacher .tab.tonly{display:block}
+
+/* ---------- panels ---------- */
+main{padding:26px 0 170px}
+.panel{display:none}
+.panel.active{display:block}
+h2{font-size:1.45rem;color:var(--navy);margin:0 0 4px;letter-spacing:-.01em}
+h3{font-size:1.12rem;color:var(--teal);margin:26px 0 6px}
+h4{font-size:1rem;margin:20px 0 4px;color:var(--navy)}
+p{margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:5px 0}
+.lede{font-size:1.06rem;color:var(--muted);margin-bottom:20px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:16px 0}
+.card h4:first-child,.card h3:first-child{margin-top:0}
+
+.note{border-left:4px solid var(--amber);background:#fdf6e8;padding:13px 16px;margin:15px 0;border-radius:0 8px 8px 0}
+.note .lab{font-weight:700;color:var(--amber-deep);display:block;margin-bottom:3px;font-size:14.5px}
+.note.teal{border-left-color:var(--teal);background:var(--teal-soft)}
+.note.teal .lab{color:var(--teal)}
+.note.stop{border-left-color:var(--stop);background:#fbeaea}
+.note.stop .lab{color:var(--stop)}
+.tnote{display:none}
+body.teacher .tnote{display:block}
+.snote{display:block}
+body.teacher .snote{display:block}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15.5px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff;font-weight:600;font-size:14.5px}
+tbody tr:nth-child(even){background:#faf8f3}
+
+.timechip{display:inline-block;background:var(--teal);color:#fff;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:middle}
+
+details{border:1px solid var(--line);border-radius:8px;background:#fff;padding:0;margin:13px 0}
+summary{cursor:pointer;padding:11px 15px;font-weight:600;color:var(--navy);font-size:15.5px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"▸ ";color:var(--amber);font-weight:700}
+details[open] summary:before{content:"▾ "}
+details .body{padding:0 15px 14px;border-top:1px solid var(--line)}
+
+.paths{display:grid;gap:13px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin:16px 0}
+.path{border:1px solid var(--line);border-top:4px solid var(--teal);border-radius:8px;background:#fff;padding:14px 15px}
+.path.core{border-top-color:var(--navy)}
+.path.push{border-top-color:var(--amber)}
+.path .pt{font-weight:700;margin-bottom:5px;color:var(--navy);font-size:15.5px}
+.path ul{padding-left:19px;margin-bottom:0;font-size:15px}
+
+.stations{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.st{border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}
+.st .hd{background:var(--navy);color:#fff;padding:9px 13px;font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.st .hd .n{background:var(--amber);color:#33240a;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;font-size:13px;flex:0 0 auto}
+.st .bd{padding:12px 14px;font-size:15px}
+.st .bd p{margin-bottom:8px}
+.st .kit{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.st.teacherrun .hd{background:var(--stop)}
+
+.kitgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(245px,1fr))}
+.kit-col{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.kit-col h4{margin-top:0}
+.kit-col ul{font-size:15px;padding-left:19px;margin-bottom:0}
+.check{list-style:none;padding-left:0}
+.check li{position:relative;padding-left:26px}
+.check li:before{content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border:2px solid var(--teal);border-radius:3px}
+
+.vocab{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.vocab span{background:#fff;border:1px solid var(--line);border-radius:6px;padding:5px 11px;font-size:15px}
+.vocab b{color:var(--navy)}
+
+/* ---------- downloads ---------- */
+.dl{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));margin:16px 0}
+.dlitem{
+  display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:9px;padding:13px 14px;text-decoration:none;color:inherit;border-left:4px solid var(--teal)
+}
+.dlitem:hover{border-color:var(--amber);border-left-color:var(--amber);background:#fffdf7}
+.dlitem .ic{
+  flex:0 0 auto;width:38px;height:38px;border-radius:7px;background:var(--teal-soft);color:var(--teal);
+  display:grid;place-items:center;font-size:11px;font-weight:700;letter-spacing:.02em
+}
+.dlitem.doc .ic{background:#e8eefb;color:#2b4a8a}
+.dlitem.doc{border-left-color:#2b4a8a}
+.dlitem.all .ic{background:#fdf0dc;color:var(--amber-deep)}
+.dlitem.all{border-left-color:var(--amber)}
+.dlitem .tt{font-weight:700;font-size:15.5px;color:var(--navy);display:block;margin-bottom:2px;line-height:1.3}
+.dlitem .ds{font-size:13.5px;color:var(--muted);display:block;line-height:1.45}
+.dlitem .sz{font-size:12px;color:#8c95a8;display:block;margin-top:3px}
+.tree{
+  background:var(--navy);color:#dfe6f2;border-radius:9px;padding:15px 17px;margin:14px 0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.75;
+  overflow-x:auto;white-space:pre
+}
+.tree b{color:#ffc978;font-weight:600}
+
+/* ---------- TIMER ---------- */
+#timer{display:none}
+body.timer-on #timer{display:flex;flex-direction:column}
+#timer{
+  position:fixed;right:18px;bottom:18px;z-index:70;width:310px;
+  touch-action:none;
+  background:var(--navy);color:#fff;border-radius:14px;
+  box-shadow:0 10px 34px rgba(16,24,40,.34);overflow:hidden;
+  border:1px solid rgba(255,255,255,.14)
+}
+#timer.min{width:206px}
+.t-hd{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(0,0,0,.2);gap:8px;cursor:grab;user-select:none;-webkit-user-select:none}
+.t-hd:active{cursor:grabbing}
+#timer.dragging{transition:none;box-shadow:0 18px 46px rgba(16,24,40,.5)}
+#timer.dragging .bar i{transition:none}
+.t-hd .grip{display:inline-block;width:13px;height:13px;opacity:.5;flex:0 0 auto;
+  background-image:radial-gradient(currentColor 1px, transparent 1px);
+  background-size:4px 4px;background-position:0 1px}
+.t-hd .ttl{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.t-hd .ttl{font-size:13px;color:#b9c6dd;font-weight:600}
+.t-hd .ctl{display:flex;gap:4px}
+.iconbtn{background:rgba(255,255,255,.12);border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:13px;line-height:1;display:grid;place-items:center;font-family:inherit}
+.iconbtn:hover{background:rgba(255,255,255,.26)}
+.iconbtn.on{background:var(--amber);color:#2e2105}
+.t-body{padding:13px 14px 14px}
+.t-phase{font-size:14.5px;font-weight:600;margin-bottom:2px;line-height:1.3}
+.t-sub{font-size:12px;color:#9fb0cd;margin-bottom:9px}
+.t-clock{font-size:2.9rem;font-weight:700;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-bottom:3px}
+#timer.over .t-clock{color:#ff9a9a}
+#timer.warn .t-clock{color:#ffc978}
+.t-rot{font-size:13px;color:#ffd79a;margin-bottom:9px;display:none}
+#timer.rotating .t-rot{display:block}
+.bar{height:6px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;margin-bottom:11px}
+.bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .4s linear}
+#timer.over .bar i{background:#e06060}
+.t-btns{display:flex;gap:7px;margin-bottom:11px}
+.btn{flex:1;background:rgba(255,255,255,.14);border:none;color:#fff;padding:9px 6px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn:hover{background:rgba(255,255,255,.26)}
+.btn.go{background:var(--amber);color:#2e2105}
+.btn.go:hover{background:#f7a626}
+.t-list{max-height:184px;overflow-y:auto;border-top:1px solid rgba(255,255,255,.14);padding-top:9px}
+.t-row{display:flex;justify-content:space-between;gap:8px;padding:5px 7px;border-radius:6px;font-size:13px;color:#c2cfe4;cursor:pointer;align-items:baseline}
+.t-row:hover{background:rgba(255,255,255,.1)}
+.t-row.cur{background:rgba(232,147,12,.24);color:#fff;font-weight:600}
+.t-row.done{color:#7e8da8}
+.t-row .d{color:#9fb0cd;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.t-row.cur .d{color:#ffd79a}
+.t-foot{font-size:12px;color:#9fb0cd;border-top:1px solid rgba(255,255,255,.14);margin-top:9px;padding-top:8px;display:flex;justify-content:space-between}
+#timer.min .t-body>*:not(.t-clock):not(.t-phase):not(.t-btns){display:none}
+#timer.min .t-clock{font-size:2.1rem}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:1.6rem}
+  #timer{right:10px;bottom:10px;width:calc(100% - 20px);max-width:320px}
+  #timer.min{width:210px}
+  .t-list{max-height:120px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+@media print{
+  header.top,nav.tabs,#timer,.tmrow{display:none}
+  .panel{display:block!important;page-break-before:always}
+  body{background:#fff;font-size:12pt}
+  .card,.note,.st{break-inside:avoid}
+}
+
+/* ---- house style typography ---- */
+:root{
+  --sans:"Atkinson Hyperlegible","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --display:"Space Grotesk","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter-spacing:-.01em}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="crumb" href="../../index.html">← All lessons</a>
+    <div class="meta">Year 6 Science · Can we get it back? · Lesson 6 of 7</div>
+    <h1>Run it</h1>
+    <p class="subtitle">Your plan, your equipment, your data — and someone watching how you work</p>
+    <div class="badges">
+      <span class="badge code">AC9S6I02</span>
+      <span class="badge">AC9S6I03</span>
+      <span class="badge">AC9S6I04</span>
+      <span class="badge">90 minutes</span>
+      <span class="badge">Term 4 · Week 6</span>
+      <span class="badge">★ CP3 data</span>
+    </div>
+    <div class="tmrow">
+      <button class="tmbtn" id="tmToggle" aria-pressed="false"><span class="dot"></span> Teacher mode</button>
+      <button class="tmbtn" id="timerToggle" aria-pressed="true"><span class="dot"></span> Lesson timer</button>
+      <span class="tmhint">Drag the timer by its title bar to move it. Double-click the bar to send it back.</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabscroll" role="tablist">
+    <button class="tab tonly" role="tab" data-p="notes" aria-selected="false">Teaching notes</button>
+    <button class="tab" role="tab" data-p="overview" aria-selected="true">Overview</button>
+    <button class="tab" role="tab" data-p="intentions" aria-selected="false">Intentions</button>
+    <button class="tab" role="tab" data-p="safety" aria-selected="false">Sign-off</button>
+    <button class="tab" role="tab" data-p="setup" aria-selected="false">Set up</button>
+    <button class="tab" role="tab" data-p="run" aria-selected="false">Run and record</button>
+    <button class="tab" role="tab" data-p="report" aria-selected="false">Plan the report</button>
+    <button class="tab" role="tab" data-p="secure" aria-selected="false">Secure</button>
+    <button class="tab" role="tab" data-p="resources" aria-selected="false">Resources</button>
+  </div>
+</nav>
+
+<main><div class="wrap">
+
+<!-- ============ TEACHING NOTES ============ -->
+<section class="panel" id="p-notes">
+  <h2>Teaching notes</h2>
+  <p class="lede">Read before the lesson. Hidden from students when teacher mode is off.</p>
+
+  <div class="note teal"><span class="lab">Where this sits</span>
+    Students run the plans they wrote last week. Your job today is not to teach — it is to <strong>watch and record</strong>. The Finding criterion in CP3 is judged almost entirely from what you see at the bench, because whether a student reads a scale properly and writes down the unexpected does not survive into a write-up. The observation grid is the only evidence for it.</div>
+
+  <h3>Why steel wool and not nails</h3>
+  <p>A nail exposes about 1.3 cm² of steel per gram. Steel wool grade 0000 exposes around 200 cm² per gram — roughly <strong>160 times more surface</strong>. What takes a nail five weeks takes steel wool one lesson.</p>
+  <p>A short vinegar soak strips the protective oxide layer so the reaction starts immediately rather than after a delay. Rust is then visible within about twenty minutes, and the pads keep going over the following week for a second reading at the start of Lesson 7.</p>
+
+  <div class="note"><span class="lab">The bonus measurable</span>
+    Rusting is exothermic. A vinegar-soaked pad, squeezed out and sealed in a jar with a thermometer, warms by <strong>5 to 10 °C over fifteen minutes</strong>. Run this centrally as one demonstration with a thermometer and log the temperature on the board — you only have two thermometers, so six groups cannot each do it.<br><br>
+    It is worth the bench space because it turns "it got hot" from the Lesson 1 criteria list into a number, and because some students will not believe rusting is a reaction until they see the temperature move.</div>
+
+  <h3>The one instruction that matters most</h3>
+  <div class="card">
+    <h4>Resist rescuing</h4>
+    <p>A group whose method fails has generated genuine evidence for the evaluation criterion. Note what happened, let it run, and make sure they write it down <em>as it happens</em>. The written account of what went wrong is worth more in CP3 than a tidy result — and a group you quietly fixed has learnt nothing and given you nothing to assess.</p>
+    <p style="margin-bottom:0">The exception is safety. Step in immediately for anything unsafe, without discussion.</p>
+  </div>
+
+  <h3>Running the observation grid</h3>
+  <ul>
+    <li><strong>One page per group, on a clipboard.</strong> Print before the lesson with names filled in.</li>
+    <li>You are looking for four things: the safety statement before equipment is issued, whether the method is actually followed, precision of measurement and recording, and what they do when something goes wrong.</li>
+    <li><strong>Note evidence, not ratings, while you circulate.</strong> "Read 2.3 not 2.30, corrected when asked" is usable later. A circled letter with no note is not.</li>
+    <li>Rate afterwards, once you have the whole picture. Trying to grade live means missing the next group.</li>
+    <li>A student who says "wait, that one looks different from the other two" is demonstrating the criterion as clearly as one who reads a scale correctly. Write it down.</li>
+  </ul>
+
+  <div class="note stop"><span class="lab">No group starts without sign-off</span>
+    Every group states its own hazards and controls aloud before any equipment is issued, and you approve the plan on the spot. A plan you have not signed is a group that cannot start. This is assessable and it takes two minutes per group — do it while others are still settling.</div>
+
+  <h3>Method notes</h3>
+  <ul>
+    <li><strong>Tear pads into thirds.</strong> One pad makes three replicates. Two packs cover a class comfortably.</li>
+    <li><strong>Vinegar soak is 2 minutes, then squeeze out hard.</strong> Soaking longer does not help; leaving it dripping wet slows the reaction because the air cannot reach the metal.</li>
+    <li><strong>Treatments go on after the soak</strong> — that is the whole point of testing a protective coating.</li>
+    <li><strong>Same size pieces.</strong> A group that does not control this has an obvious flaw to write about, which is fine, but most will want to fix it once asked.</li>
+    <li><strong>Readings at 0, 10, 20 and 30 minutes.</strong> Use the same 0–4 coverage scale they have used for five weeks.</li>
+    <li>Photograph at every reading. Photos are the backup if a rating turns out to be inconsistent.</li>
+  </ul>
+
+  <div class="note"><span class="lab">If a group's variable does not suit steel wool</span>
+    Most will be testing coatings, which works perfectly. A group testing something structural — the effect of a gap or scratch in a coating, say — may find steel wool awkward. Let them use a nail alongside the wool and take the wool as their main data, or pair them with the whole-class temperature demo. Do not redesign their plan on the spot.</div>
+
+  <h3>What you should see</h3>
+  <table>
+    <thead><tr><th style="width:34%">Treatment</th><th>Expected over 30 minutes</th></tr></thead>
+    <tbody>
+      <tr><td>Bare control</td><td>Obvious orange within 20 min. Warm to the touch.</td></tr>
+      <tr><td>Petroleum jelly</td><td>Strong protection where coverage is complete.</td></tr>
+      <tr><td>Paint or nail polish</td><td>Good, but hard to coat wool evenly — patchy results are honest results.</td></tr>
+      <tr><td>Oil</td><td>Moderate. Thin and it migrates.</td></tr>
+      <tr><td>Tape or plastic wrap</td><td>Often worse than expected. Traps moisture against the metal.</td></tr>
+    </tbody>
+  </table>
+  <p>The patchy-coating result is the most useful thing that can happen. It is exactly what the client needs to hear: a coating only protects while it is complete.</p>
+
+  <h3>What comes next</h3>
+  <p>Week 7 is the write-up and the defence. Students take a final reading at the start of that lesson, so the pads must be stored somewhere safe and undisturbed. They will need their data, their graphs from Week 5, and the other class's dataset.</p>
+</section>
+
+<!-- ============ OVERVIEW ============ -->
+<section class="panel active" id="p-overview">
+  <h2>Overview</h2>
+  <p class="lede">You wrote the plan. Today you run it — and this time nobody is telling you what to do next.</p>
+
+  <h3>Shape of the lesson</h3>
+  <table>
+    <thead><tr><th style="width:30%">Phase</th><th style="width:14%">Time</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Sign-off</strong></td><td>10 min</td><td>Each group states its hazards and controls aloud. No equipment until then.</td></tr>
+      <tr><td><strong>Set up</strong></td><td>20 min</td><td>Steel wool soaked, treated, and started. First reading taken.</td></tr>
+      <tr><td><strong>Run and record</strong></td><td>35 min</td><td>Readings at 10, 20 and 30 minutes. Photograph every time.</td></tr>
+      <tr><td><strong>Plan the report</strong></td><td>15 min</td><td>What have we got, what is still missing, who is doing what.</td></tr>
+      <tr><td><strong>Secure</strong></td><td>10 min</td><td>Label, store for the week, clear the bench.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note tnote"><span class="lab">Your job today is to watch</span>
+    The Finding criterion is judged almost entirely from the observation grid. Circulate with the clipboard from the moment setup begins, and note evidence rather than ratings — you can grade afterwards, but you cannot re-watch the lesson.</div>
+
+  <h3>Everything you need</h3>
+
+  <div class="kitgrid">
+    <div class="kit-col">
+      <h4>Prepare before the lesson</h4>
+      <ul class="check">
+        <li><strong>Print the observation grid, one page per group, names filled in</strong></li>
+        <li>Read every group's approved CP2 plan and pull the equipment they asked for</li>
+        <li>Tear steel wool pads into thirds — three per group plus spares</li>
+        <li>Decant vinegar into bench containers</li>
+        <li>Set up the central temperature demonstration jar</li>
+        <li>Clear labelled shelf space for a week of storage</li>
+        <li>Print the investigation record sheets</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Per group of four</h4>
+      <ul class="check">
+        <li>Steel wool grade 0000 — three equal pieces</li>
+        <li>Three jars or clear cups, labelled</li>
+        <li>White vinegar for the soak — about 100 mL</li>
+        <li>Their chosen treatment materials</li>
+        <li>Scales, if their plan uses them</li>
+        <li>Tray, paper towel, safety glasses</li>
+        <li>Camera or tablet for photographs</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Treatments available</h4>
+      <ul class="check">
+        <li>Petroleum jelly</li>
+        <li>Clear nail polish</li>
+        <li>Sample pot of paint</li>
+        <li>Cooking oil</li>
+        <li>Electrical tape, plastic wrap</li>
+        <li>Nothing — the control</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Teacher bench</h4>
+      <ul class="check">
+        <li>Observation grid on a clipboard</li>
+        <li>One jar, one steel wool piece, one thermometer — the temperature demonstration</li>
+        <li>Board space to log the temperature</li>
+        <li>Laminated 0–4 coverage scale</li>
+        <li>Spare steel wool and jars</li>
+        <li>Spill kit, broken-glass bin</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Printed sheets</h4>
+      <ul class="check">
+        <li>Investigation record — one per student</li>
+        <li>Group role cards — support tier</li>
+        <li>Teacher observation grid — one per group</li>
+        <li>Their own CP2 plans, returned</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Not needed today</h4>
+      <ul>
+        <li>Nails — steel wool replaces them for speed</li>
+        <li>Frypan, kettle, basins, funnels</li>
+        <li>The 0.01 g scales, unless a group's plan needs them</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTENTIONS ============ -->
+<section class="panel" id="p-intentions">
+  <h2>What we are learning</h2>
+
+  <div class="card">
+    <h4>Learning intention</h4>
+    <p style="font-size:1.1rem;margin-bottom:0">We are learning to carry out a repeatable investigation and record data precisely enough to be trusted.</p>
+  </div>
+
+  <h3>I will be successful when I can…</h3>
+  <ul>
+    <li>follow my own plan, and adjust it when something does not work</li>
+    <li>measure and record with the precision the equipment allows</li>
+    <li>keep a record another person could check</li>
+    <li>work so that my results are repeatable</li>
+  </ul>
+
+  <h3>Stretch</h3>
+  <ul>
+    <li>I can run a second trial with one deliberate change, to test whether my first result holds.</li>
+    <li>I can spot an odd result while it is happening and write down why I think it happened.</li>
+  </ul>
+
+  <div class="note teal"><span class="lab">Curriculum</span>
+    <strong>AC9S6I02</strong> — plan and conduct repeatable investigations, including planning for the safe use of equipment and materials.<br>
+    <strong>AC9S6I03</strong> — use equipment to observe, measure and record data with reasonable precision.<br>
+    <strong>AC9S6I04</strong> — construct and use appropriate representations to organise and process data.</div>
+
+  <div class="note"><span class="lab">You are being watched today, and that is deliberate</span>
+    Part of your assessment is <em>how you work</em>, not just what you write afterwards. Whether you read the scale properly, whether you write things down as they happen, and what you do when something goes wrong — none of that survives into a report, so it gets noticed here instead.</div>
+
+  <div class="card">
+    <h4>Your goal for today</h4>
+    <textarea style="width:100%;min-height:74px;border:1px solid var(--line);border-radius:8px;padding:10px;font-family:inherit;font-size:16px" placeholder="Today I want to…"></textarea>
+  </div>
+</section>
+
+<!-- ============ SIGN-OFF ============ -->
+<section class="panel" id="p-safety">
+  <h2>Sign-off <span class="timechip">10 min</span></h2>
+  <p class="lede">No group gets equipment until it has done this.</p>
+
+  <div class="card">
+    <p style="margin-bottom:0">Before you are given anything, your group says out loud: <strong>what could cause harm in your method, and what you are doing about each one.</strong> Not the class rules. Yours.</p>
+  </div>
+
+  <h3>What counts</h3>
+  <table>
+    <thead><tr><th style="width:44%">Not good enough</th><th>Good enough</th></tr></thead>
+    <tbody>
+      <tr><td>"We'll be careful."</td><td>"Steel wool has sharp fibres, so we're handling it with tongs and washing hands after."</td></tr>
+      <tr><td>"Wear safety glasses."</td><td>"We're pouring vinegar, so glasses on and we pour over the tray, not the bench."</td></tr>
+      <tr><td>"Don't break the glass."</td><td>"We check our jars for chips first, and carry one at a time with two hands."</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Then check your plan is ready</h3>
+  <ol>
+    <li>Do you have everything on your equipment list?</li>
+    <li>Does everyone know which step they are doing?</li>
+    <li>Is your recording sheet ready <em>before</em> you start, not after?</li>
+  </ol>
+
+  <div class="note stop"><span class="lab">Stop and raise a hand</span>
+    If anything unexpected happens — a jar cracks, something spills, something gets hot when you did not expect it to — stop and put a hand up. Do not investigate it yourself.</div>
+
+  <div class="note tnote"><span class="lab">Two minutes per group, done while others settle</span>
+    This is assessable and it is the first line on the observation grid. Listen for whether the hazards are the ones <em>this method</em> creates, or a generic list imported from another activity. Sign the plan on the spot and let them go.</div>
+</section>
+
+<!-- ============ SET UP ============ -->
+<section class="panel" id="p-setup">
+  <h2>Set up <span class="timechip">20 min</span></h2>
+  <p class="lede">Work quickly and identically. Three pieces, treated the same way except for the one thing you are changing.</p>
+
+  <div class="stations">
+    <div class="st"><div class="hd"><span>Soak</span><span class="n">1</span></div><div class="bd">
+      <p>Three equal pieces of steel wool. Soak all three in vinegar for <strong>two minutes</strong>.</p>
+      <p style="margin-bottom:0">Then squeeze each one out hard. Dripping wet is wrong — the air has to get at the metal.</p>
+      <div class="kit">Steel wool 0000, vinegar, tray</div></div></div>
+
+    <div class="st"><div class="hd"><span>Treat</span><span class="n">2</span></div><div class="bd">
+      <p>Apply your treatment <strong>after</strong> the soak, not before.</p>
+      <p style="margin-bottom:0">Keep one piece bare as your control. Same amount of treatment on every treated piece.</p>
+      <div class="kit">Your chosen materials</div></div></div>
+
+    <div class="st"><div class="hd"><span>Start</span><span class="n">3</span></div><div class="bd">
+      <p>Each piece into its own labelled jar. Label with group, treatment and time started.</p>
+      <p style="margin-bottom:0"><strong>Take your first reading now</strong> — before anything has changed. That is your zero.</p>
+      <div class="kit">Three jars, labels, marker</div></div></div>
+  </div>
+
+  <div class="note"><span class="lab">Why the vinegar first</span>
+    Steel has a thin protective layer on the outside that slows rusting down. A short vinegar soak strips it off, so the reaction starts straight away instead of taking days. It is the same thing you saw at the steel wool station in Lesson 1 — this time you are using it on purpose.</div>
+
+  <h3>Before you sit back</h3>
+  <ol>
+    <li>Are your three pieces the same size? Does it matter?</li>
+    <li>Is anything different between your three jars apart from the treatment?</li>
+    <li>What is your zero reading?</li>
+  </ol>
+
+  <details>
+    <summary>Why question 1 matters</summary>
+    <div class="body">
+      <p style="margin-bottom:0">A bigger piece has more surface, so it rusts faster — nothing to do with your treatment. If your pieces are noticeably different sizes, that is a real problem with your method. You can fix it now, or you can write about it honestly later. Both are acceptable. Pretending it did not happen is not.</p>
+    </div>
+  </details>
+
+  <div class="note tnote"><span class="lab">Watch the treatment step</span>
+    This is where most methods drift. Groups apply a generous smear of jelly to one piece and a thin one to another, then compare them as though the only difference was the coating type. Ask "how are you making sure that is the same each time?" — do not fix it for them, but make sure they notice.</div>
+</section>
+
+<!-- ============ RUN ============ -->
+<section class="panel" id="p-run">
+  <h2>Run and record <span class="timechip">35 min</span></h2>
+  <p class="lede">Readings at 10, 20 and 30 minutes. Photograph every time.</p>
+
+  <div class="card">
+    <p><strong>Rate each jar 0 to 4 against the scale you have been using for five weeks.</strong></p>
+    <p style="margin-bottom:0">Rate all three separately. Do not average them in your head. If they disagree, that is data.</p>
+  </div>
+
+  <h3>Every reading</h3>
+  <ol>
+    <li>Look at all three jars.</li>
+    <li>Rate each one, separately.</li>
+    <li>Photograph from the same angle each time.</li>
+    <li>Write anything odd in the notes column <em>now</em>, not later.</li>
+  </ol>
+
+  <div class="note"><span class="lab">Write it down as it happens</span>
+    If something surprises you, write it down while it is still surprising. Nobody remembers accurately at the end of a lesson, and a note you wrote at the time is evidence. A memory is not.</div>
+
+  <h3>Watch the front bench</h3>
+  <p>One jar at the front has a thermometer in it and one piece of untreated steel wool. The temperature goes on the board as it changes.</p>
+  <ol>
+    <li>What is happening to the temperature?</li>
+    <li>Nothing was heated. So where is the warmth coming from?</li>
+    <li>Which of our evidence criteria does this match?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> It rises, usually by 5 to 10 °C over about fifteen minutes.</p>
+      <p><strong>2.</strong> From the rusting itself. When iron and oxygen join, energy is released — the reaction makes its own heat.</p>
+      <p style="margin-bottom:0"><strong>3.</strong> "It got hot" — from the list you built in Lesson 1. Back then it was something you noticed. Now it is a number on the board, which is a much stronger piece of evidence.</p>
+    </div>
+  </details>
+
+  <div class="note teal tnote"><span class="lab">Why the temperature demo earns its bench space</span>
+    Some students still half-believe rusting is something that happens <em>to</em> metal rather than a reaction the metal takes part in. A thermometer climbing on its own, with no heat source anywhere near it, is hard to argue with. It also closes the loop on the Lesson 1 criteria chart — "it got hot" stops being a vague observation and becomes a measurement.</div>
+
+  <h3>If something goes wrong</h3>
+  <div class="card">
+    <p style="margin-bottom:0">Write down <strong>what happened, when, and what you did about it.</strong> A method that failed and was honestly described is worth more marks than a tidy result you cannot explain.</p>
+  </div>
+
+  <div class="paths">
+    <div class="path"><div class="pt">Need a hand</div><ul><li>Use your role card — everyone has a job.</li><li>Use the table with the reading times already filled in.</li></ul></div>
+    <div class="path core"><div class="pt">Keep going</div><ul><li>All four readings, all three jars, photographed.</li><li>Notes written as things happen.</li></ul></div>
+    <div class="path push"><div class="pt">Push me</div><ul><li>Set up a fourth jar with one deliberate change and see whether your result still holds.</li><li>Predict where each jar will be by next week, and write it down now.</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ REPORT ============ -->
+<section class="panel" id="p-report">
+  <h2>Plan the report <span class="timechip">15 min</span></h2>
+  <p class="lede">Next week you write to [CLIENT NAME]. Work out now what you are missing.</p>
+
+  <h3>What you will need</h3>
+  <ul>
+    <li>Today's data, all four readings</li>
+    <li>Next week's final reading — taken at the start of the lesson</li>
+    <li>Your graph from Week 5</li>
+    <li>The other class's data</li>
+    <li>Your photographs</li>
+  </ul>
+
+  <h3>Work it out as a group</h3>
+  <ol>
+    <li>Based on what you have seen so far, what are you going to recommend?</li>
+    <li>What is the strongest piece of evidence you have for that?</li>
+    <li>What is the weakest part of your method — the bit they could fairly attack?</li>
+    <li>What do you still need before you can write it?</li>
+  </ol>
+
+  <div class="note"><span class="lab">Question 3 is not a trap</span>
+    Every method has a weak point. Naming it yourself is worth marks; having it pointed out to you is not. You spent twenty minutes last week finding holes in another class's work — do the same to your own now, while you still have time to say something sensible about it.</div>
+
+  <h3>Agree who is doing what</h3>
+  <div class="card">
+    <p style="margin-bottom:0">You each write your own report, but the group shares the data and does the defence together. Decide now who is bringing what next week, and who is answering which challenge question.</p>
+  </div>
+
+  <div class="note tnote"><span class="lab">Use this phase to triage</span>
+    Circulate and listen for groups whose data will not support any recommendation — usually because every jar rusted the same, or nothing rusted at all. They need to know now, not next Tuesday. A group in that position should be pointed toward the class dataset and the other class's results, and should plan to write about why their own test was inconclusive. That is a legitimate report and it can score well on evaluation.</div>
+</section>
+
+<!-- ============ SECURE ============ -->
+<section class="panel" id="p-secure">
+  <h2>Secure <span class="timechip">10 min</span></h2>
+
+  <h3>Storing for the week</h3>
+  <ol>
+    <li>Check every jar is labelled: group, treatment, date.</li>
+    <li>Lids on the jars that had lids on today. Leave open the ones that were open.</li>
+    <li>Onto the shelf, together, out of the walkway.</li>
+    <li>Photograph the shelf so you know what it looked like when you left it.</li>
+  </ol>
+
+  <div class="note"><span class="lab">Do not change anything between now and next week</span>
+    If you move a jar, open it, or top it up, your final reading is measuring something different from your first. Leave them exactly as they are.</div>
+
+  <h3>Clearing up</h3>
+  <ul>
+    <li>Vinegar down the sink with the tap running.</li>
+    <li><strong>Steel wool into the bin, not the sink</strong> — it blocks drains and it rusts.</li>
+    <li>Benches wiped, trays stacked, glasses back.</li>
+    <li>Wash hands.</li>
+  </ul>
+
+  <h3>Before you go</h3>
+  <div class="card">
+    <p style="margin-bottom:0"><strong>Hand in your data sheet.</strong> You get it back next week. If it is in your bag, it will not be there when you need it.</p>
+  </div>
+
+  <div class="note tnote"><span class="lab">Collect the data sheets</span>
+    Do not let students take them home. A lost sheet in Week 7 means a student with no data and nothing to write, and there is no time to recover it. Photograph or photocopy the set if you want a backup.</div>
+
+  <h3>Next week</h3>
+  <p>Final reading first thing, then the report. You will present to the group and be asked hard questions about how you know what you claim to know.</p>
+
+  <div class="note teal tnote"><span class="lab">Before Lesson 7</span>
+    Have ready: each group's data sheets, the Week 5 graphs, both classes' rust datasets, the challenge question cards, and the client's contact details. Confirm the client is expecting the recommendations and knows a short reply is all that is needed.</div>
+</section>
+
+<!-- ============ RESOURCES ============ -->
+<section class="panel" id="p-resources">
+  <h2>Resources</h2>
+  <p class="lede">Print before the lesson.</p>
+
+  <a class="dlitem all" href="resources/l6-00-all-student-sheets.pdf" download style="margin-bottom:6px">
+    <span class="ic">PDF</span>
+    <span><span class="tt">All student sheets</span>
+    <span class="ds">Investigation record and role cards in one file.</span></span>
+  </a>
+
+  <h3>Student sheets</h3>
+  <div class="dl">
+    <a class="dlitem" href="resources/l6-01-investigation-record.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Investigation record</span>
+      <span class="ds">Four readings across three jars, notes column, temperature log, and the report planning questions.</span></span>
+    </a>
+    <a class="dlitem" href="resources/l6-02-group-role-cards.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Group role cards</span>
+      <span class="ds">Four defined jobs, cut up. Every student has a role that does not depend on writing.</span></span>
+    </a>
+    <a class="dlitem doc" href="resources/l6-student-sheets-EDITABLE.docx" download>
+      <span class="ic">DOCX</span>
+      <span><span class="tt">Editable master</span>
+      <span class="ds">Both sheets in one Word file. Tables import into OneNote as typeable cells.</span></span>
+    </a>
+  </div>
+
+  <h3>Teacher printable</h3>
+  <div class="dl">
+    <a class="dlitem" href="resources/l6-03-observation-grid.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Observation grid</span>
+      <span class="ds">One page per group, clipboard format. Four things to watch, evidence space per student, and the A–E descriptors on the page.</span></span>
+    </a>
+    <a class="dlitem doc" href="resources/l6-observation-grid-EDITABLE.docx" download>
+      <span class="ic">DOCX</span>
+      <span><span class="tt">Observation grid — editable</span>
+      <span class="ds">Fill in group names before printing.</span></span>
+    </a>
+  </div>
+
+  <div class="note"><span class="lab">Also needed</span>
+    Each group's approved CP2 plan, returned to them at the start. The laminated 0–4 coverage scale from the rust jars.</div>
+
+  <div class="tree tnote">lessons/
+└── 06-run-it/
+    ├── lesson-06-run-it.html   <b>this page</b>
+    └── resources/
+        ├── l6-00-all-student-sheets.pdf
+        ├── l6-01-investigation-record.pdf
+        ├── l6-02-group-role-cards.pdf
+        ├── l6-03-observation-grid.pdf
+        ├── l6-student-sheets-EDITABLE.docx
+        └── l6-observation-grid-EDITABLE.docx</div>
+</section>
+
+</div></main>
+
+<!-- ============ TIMER ============ -->
+<div id="timer" role="region" aria-label="Lesson timer">
+  <div class="t-hd">
+    <span class="grip" aria-hidden="true"></span><span class="ttl">Lesson timer</span>
+    <span class="ctl">
+      <button class="iconbtn on" id="tSound" title="Sound on or off" aria-pressed="true">♪</button>
+      <button class="iconbtn" id="tMin" title="Shrink or expand">–</button>
+      <button class="iconbtn" id="tClose" title="Hide the timer">×</button>
+    </span>
+  </div>
+  <div class="t-body">
+    <div class="t-phase" id="tPhase">Sign-off</div>
+    <div class="t-sub" id="tSub">Phase 1 of 5</div>
+    <div class="t-clock" id="tClock">10:00</div>
+    <div class="t-rot" id="tRot"></div>
+    <div class="bar"><i id="tBar"></i></div>
+    <div class="t-btns">
+      <button class="btn go" id="tGo">Start</button>
+      <button class="btn" id="tNext">Next</button>
+      <button class="btn" id="tReset">Reset</button>
+    </div>
+    <div class="t-list" id="tList"></div>
+    <div class="t-foot"><span id="tElapsed">Elapsed 0:00</span><span id="tLeft">90 min total</span></div>
+    <div class="t-foot" style="border-top:none;margin-top:2px;padding-top:0;justify-content:center"><span id="tDeadline">Reading due in 30:00</span></div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- teacher mode ---------- */
+  var tm = document.getElementById('tmToggle');
+  tm.addEventListener('click', function(){
+    var on = document.body.classList.toggle('teacher');
+    tm.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if(!on){
+      var cur = document.querySelector('.tab[aria-selected="true"]');
+      if(cur && cur.classList.contains('tonly')) show('overview');
+    }
+  });
+
+  /* ---------- timer visibility (independent of teacher mode) ---------- */
+  document.body.classList.add('timer-on');
+  var tv = document.getElementById('timerToggle');
+  function setTimerVisible(on){
+    document.body.classList.toggle('timer-on', on);
+    tv.setAttribute('aria-pressed', on ? 'true' : 'false');
+    tv.classList.toggle('lit', on);
+  }
+  tv.classList.add('lit');
+  tv.addEventListener('click', function(){
+    setTimerVisible(!document.body.classList.contains('timer-on'));
+  });
+
+  /* ---------- tabs ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function show(id){
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.p===id ? 'true':'false'); });
+    document.querySelectorAll('.panel').forEach(function(p){
+      p.classList.toggle('active', p.id==='p-'+id);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.p); }); });
+
+  /* ---------- timer ---------- */
+  var PHASES = [
+    {name:'Sign-off — hazards stated', mins:10, tab:'safety'},
+    {name:'Set up',                       mins:20, tab:'setup'},
+    {name:'Run and record',               mins:35, tab:'run', rotations:4},
+    {name:'Plan the report',              mins:15, tab:'report'},
+    {name:'Secure for the week',          mins:10, tab:'secure'}
+  ];
+  var TOTAL = PHASES.reduce(function(a,p){ return a+p.mins; },0);
+
+  var idx=0, left=PHASES[0].mins*60, running=false, elapsed=0, sound=true, tick=null;
+  var rotLeft=0, rotIdx=0, rotLen=0;
+
+  var el = {
+    box:document.getElementById('timer'), phase:document.getElementById('tPhase'),
+    sub:document.getElementById('tSub'), clock:document.getElementById('tClock'),
+    rot:document.getElementById('tRot'), bar:document.getElementById('tBar'),
+    go:document.getElementById('tGo'), next:document.getElementById('tNext'),
+    reset:document.getElementById('tReset'), list:document.getElementById('tList'),
+    elapsed:document.getElementById('tElapsed'), left:document.getElementById('tLeft'),
+    snd:document.getElementById('tSound'), min:document.getElementById('tMin')
+  };
+
+  function mmss(s){
+    var neg = s<0; s = Math.abs(s);
+    var m = Math.floor(s/60), r = s%60;
+    return (neg?'+':'') + m + ':' + (r<10?'0':'') + r;
+  }
+
+  function beep(times){
+    if(!sound) return;
+    try{
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if(!Ctx) return;
+      var ac = new Ctx();
+      for(var i=0;i<times;i++){
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.connect(g); g.connect(ac.destination);
+        o.frequency.value = 784;
+        var t0 = ac.currentTime + i*0.28;
+        g.gain.setValueAtTime(0.0001,t0);
+        g.gain.exponentialRampToValueAtTime(0.25,t0+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,t0+0.22);
+        o.start(t0); o.stop(t0+0.24);
+      }
+      setTimeout(function(){ try{ac.close();}catch(e){} }, times*300+500);
+    }catch(e){}
+  }
+
+  function buildList(){
+    el.list.innerHTML='';
+    PHASES.forEach(function(p,i){
+      var row=document.createElement('div');
+      row.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+      row.innerHTML='<span>'+p.name+'</span><span class="d">'+p.mins+'m</span>';
+      row.addEventListener('click',function(){ goTo(i); });
+      el.list.appendChild(row);
+    });
+  }
+
+  function render(){
+    var p = PHASES[idx];
+    el.phase.textContent = p.name;
+    el.sub.textContent = 'Phase '+(idx+1)+' of '+PHASES.length+' · '+p.mins+' min';
+    el.clock.textContent = mmss(left);
+    var pct = Math.max(0, Math.min(100, ((p.mins*60-left)/(p.mins*60))*100));
+    el.bar.style.width = pct+'%';
+    el.box.classList.toggle('over', left<0);
+    el.box.classList.toggle('warn', left>=0 && left<=120);
+    el.box.classList.toggle('rotating', !!p.rotations);
+    if(p.rotations){
+      el.rot.textContent = 'Reading '+Math.min(rotIdx+1,p.rotations)+' of '+p.rotations+' · '+mmss(rotLeft);
+    }
+    el.elapsed.textContent = 'Elapsed '+mmss(elapsed);
+    var dl = document.getElementById('tDeadline');
+    if(dl){
+      var toCp = 30*60 - elapsed;
+      if(idx >= 2){ dl.textContent = 'Test running'; dl.style.color = '#7fd6a0'; }
+      else if(toCp > 0){ dl.textContent = 'Zero reading due in ' + mmss(toCp); dl.style.color = toCp < 300 ? '#ffc978' : '#9fb0cd'; }
+      else { dl.textContent = 'Zero reading ' + mmss(toCp) + ' late'; dl.style.color = '#ff9a9a'; }
+    }
+    var rem = TOTAL*60 - elapsed;
+    el.left.textContent = rem>=0 ? mmss(rem)+' of lesson left' : mmss(rem)+' over';
+    el.go.textContent = running ? 'Pause' : (elapsed===0 && left===PHASES[0].mins*60 ? 'Start' : 'Resume');
+    Array.prototype.forEach.call(el.list.children,function(r,i){
+      r.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+    });
+  }
+
+  function setPhase(i){
+    idx = Math.max(0, Math.min(PHASES.length-1, i));
+    var p = PHASES[idx];
+    left = p.mins*60;
+    if(p.rotations){ rotLen = Math.floor(p.mins*60/p.rotations); rotIdx=0; rotLeft=rotLen; }
+    if(p.tab) show(p.tab);
+    render();
+  }
+
+  function goTo(i){ setPhase(i); }
+
+  function step(){
+    left--; elapsed++;
+    var p = PHASES[idx];
+    if(p.rotations){
+      rotLeft--;
+      if(rotLeft<=0 && rotIdx < p.rotations-1){ rotIdx++; rotLeft=rotLen; beep(1); }
+    }
+    if(left===0){ beep(2); }
+    render();
+  }
+
+  function toggle(){
+    running = !running;
+    if(running){ tick = setInterval(step,1000); } else { clearInterval(tick); }
+    render();
+  }
+
+  el.go.addEventListener('click', toggle);
+  el.next.addEventListener('click', function(){ setPhase(idx+1); });
+  el.reset.addEventListener('click', function(){
+    running=false; clearInterval(tick); elapsed=0; setPhase(0);
+  });
+  el.snd.addEventListener('click', function(){
+    sound=!sound;
+    el.snd.classList.toggle('on',sound);
+    el.snd.setAttribute('aria-pressed', sound?'true':'false');
+    if(sound) beep(1);
+  });
+  el.min.addEventListener('click', function(){
+    var m = el.box.classList.toggle('min');
+    el.min.textContent = m ? '+' : '–';
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(!document.body.classList.contains('teacher')) return;
+    if(/^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if(e.code==='Space'){ e.preventDefault(); toggle(); }
+    if(e.code==='ArrowRight'){ setPhase(idx+1); }
+    if(e.code==='ArrowLeft'){ setPhase(idx-1); }
+  });
+
+  el.box.querySelector('#tClose').addEventListener('click', function(){
+    setTimerVisible(false);
+  });
+
+  /* ---------- drag ---------- */
+  (function(){
+    var hd = el.box.querySelector('.t-hd');
+    var dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+
+    function place(x, y){
+      var r = el.box.getBoundingClientRect();
+      var maxX = window.innerWidth  - r.width  - 6;
+      var maxY = window.innerHeight - r.height - 6;
+      x = Math.max(6, Math.min(x, Math.max(6, maxX)));
+      y = Math.max(6, Math.min(y, Math.max(6, maxY)));
+      el.box.style.left = x + 'px';
+      el.box.style.top  = y + 'px';
+      el.box.style.right = 'auto';
+      el.box.style.bottom = 'auto';
+    }
+
+    function reset(){
+      el.box.style.left = ''; el.box.style.top = '';
+      el.box.style.right = ''; el.box.style.bottom = '';
+    }
+
+    hd.addEventListener('pointerdown', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      var r = el.box.getBoundingClientRect();
+      dragging = true;
+      sx = e.clientX; sy = e.clientY; ox = r.left; oy = r.top;
+      place(r.left, r.top);
+      el.box.classList.add('dragging');
+      hd.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+
+    hd.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      place(ox + (e.clientX - sx), oy + (e.clientY - sy));
+    });
+
+    function stop(e){
+      if(!dragging) return;
+      dragging = false;
+      el.box.classList.remove('dragging');
+      try{ hd.releasePointerCapture(e.pointerId); }catch(err){}
+    }
+    hd.addEventListener('pointerup', stop);
+    hd.addEventListener('pointercancel', stop);
+    hd.addEventListener('dblclick', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      reset();
+    });
+
+    window.addEventListener('resize', function(){
+      if(el.box.style.left){
+        var r = el.box.getBoundingClientRect();
+        place(r.left, r.top);
+      }
+    });
+  })();
+
+  buildList(); render();
+})();
+</script>
+</body>
+</html>

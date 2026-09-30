@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3 · Get it back — Year 6 Chemical Sciences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1b2a4a; --navy-soft:#2c3f66; --amber:#e8930c; --amber-deep:#9a5f00;
+  --teal:#0e7c7b; --teal-soft:#e2f0ef; --paper:#fbf9f4; --line:#dcd9d0;
+  --ink:#23272e; --muted:#5a6478; --white:#fff;
+  --rust:#8a4a22; --rust-soft:#f6e9e0;
+  --ok:#2e6b3f; --warn:#b4560a; --stop:#a32020;
+  --radius:10px;
+  --sans:"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:var(--sans); color:var(--ink); background:var(--paper);
+  font-size:17px; line-height:1.62; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+
+/* ---------- header ---------- */
+header.top{background:var(--navy);color:#fff;padding:22px 0 0}
+.crumb{font-size:14px;color:#a9b6cf;text-decoration:none;display:inline-block;margin-bottom:14px}
+.crumb:hover{color:#fff}
+.meta{font-size:13.5px;color:#9fb0cd;letter-spacing:.02em;margin-bottom:6px}
+h1{font-size:2.05rem;line-height:1.18;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.subtitle{color:#c3d0e6;font-size:1.02rem;margin:0 0 16px}
+.badges{display:flex;flex-wrap:wrap;gap:7px;padding-bottom:18px}
+.badge{font-size:12.5px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#e7edf7;border:1px solid rgba(255,255,255,.18)}
+.badge.code{background:var(--amber);color:#33240a;border-color:transparent;font-weight:600}
+
+/* teacher toggle */
+.tmrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:0 0 18px}
+.tmbtn{
+  display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.26);color:#fff;padding:8px 14px;border-radius:999px;
+  font-size:14px;cursor:pointer;font-family:inherit
+}
+.tmbtn:hover{background:rgba(255,255,255,.18)}
+.tmbtn .dot{width:9px;height:9px;border-radius:50%;background:#7c8aa5}
+body.teacher #tmToggle .dot{background:#5fd08a}
+body.teacher #tmToggle{background:var(--amber);color:#2e2105;border-color:transparent;font-weight:600}
+.tmbtn.lit .dot{background:#5fd08a}
+.tmbtn.lit{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4)}
+.tmhint{font-size:13px;color:#9fb0cd}
+
+/* ---------- tabs ---------- */
+nav.tabs{position:sticky;top:0;z-index:40;background:var(--navy-soft);border-bottom:2px solid var(--amber)}
+.tabscroll{max-width:880px;margin:0 auto;display:flex;overflow-x:auto;padding:0 12px;scrollbar-width:thin}
+.tab{
+  flex:0 0 auto;background:none;border:none;font-family:inherit;font-size:14px;color:#c6d2e6;
+  padding:12px 13px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap
+}
+.tab:hover{color:#fff}
+.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--amber);font-weight:600}
+.tab.tonly{display:none}
+body.teacher .tab.tonly{display:block}
+
+/* ---------- panels ---------- */
+main{padding:26px 0 170px}
+.panel{display:none}
+.panel.active{display:block}
+h2{font-size:1.45rem;color:var(--navy);margin:0 0 4px;letter-spacing:-.01em}
+h3{font-size:1.12rem;color:var(--teal);margin:26px 0 6px}
+h4{font-size:1rem;margin:20px 0 4px;color:var(--navy)}
+p{margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:5px 0}
+.lede{font-size:1.06rem;color:var(--muted);margin-bottom:20px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:16px 0}
+.card h4:first-child,.card h3:first-child{margin-top:0}
+
+.note{border-left:4px solid var(--amber);background:#fdf6e8;padding:13px 16px;margin:15px 0;border-radius:0 8px 8px 0}
+.note .lab{font-weight:700;color:var(--amber-deep);display:block;margin-bottom:3px;font-size:14.5px}
+.note.teal{border-left-color:var(--teal);background:var(--teal-soft)}
+.note.teal .lab{color:var(--teal)}
+.note.stop{border-left-color:var(--stop);background:#fbeaea}
+.note.stop .lab{color:var(--stop)}
+.tnote{display:none}
+body.teacher .tnote{display:block}
+.snote{display:block}
+body.teacher .snote{display:block}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15.5px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff;font-weight:600;font-size:14.5px}
+tbody tr:nth-child(even){background:#faf8f3}
+
+.timechip{display:inline-block;background:var(--teal);color:#fff;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:middle}
+
+details{border:1px solid var(--line);border-radius:8px;background:#fff;padding:0;margin:13px 0}
+summary{cursor:pointer;padding:11px 15px;font-weight:600;color:var(--navy);font-size:15.5px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"▸ ";color:var(--amber);font-weight:700}
+details[open] summary:before{content:"▾ "}
+details .body{padding:0 15px 14px;border-top:1px solid var(--line)}
+
+.paths{display:grid;gap:13px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin:16px 0}
+.path{border:1px solid var(--line);border-top:4px solid var(--teal);border-radius:8px;background:#fff;padding:14px 15px}
+.path.core{border-top-color:var(--navy)}
+.path.push{border-top-color:var(--amber)}
+.path .pt{font-weight:700;margin-bottom:5px;color:var(--navy);font-size:15.5px}
+.path ul{padding-left:19px;margin-bottom:0;font-size:15px}
+
+.stations{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.st{border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}
+.st .hd{background:var(--navy);color:#fff;padding:9px 13px;font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.st .hd .n{background:var(--amber);color:#33240a;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;font-size:13px;flex:0 0 auto}
+.st .bd{padding:12px 14px;font-size:15px}
+.st .bd p{margin-bottom:8px}
+.st .kit{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.st.teacherrun .hd{background:var(--stop)}
+
+.kitgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(245px,1fr))}
+.kit-col{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.kit-col h4{margin-top:0}
+.kit-col ul{font-size:15px;padding-left:19px;margin-bottom:0}
+.check{list-style:none;padding-left:0}
+.check li{position:relative;padding-left:26px}
+.check li:before{content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border:2px solid var(--teal);border-radius:3px}
+
+.vocab{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.vocab span{background:#fff;border:1px solid var(--line);border-radius:6px;padding:5px 11px;font-size:15px}
+.vocab b{color:var(--navy)}
+
+/* ---------- downloads ---------- */
+.dl{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));margin:16px 0}
+.dlitem{
+  display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:9px;padding:13px 14px;text-decoration:none;color:inherit;border-left:4px solid var(--teal)
+}
+.dlitem:hover{border-color:var(--amber);border-left-color:var(--amber);background:#fffdf7}
+.dlitem .ic{
+  flex:0 0 auto;width:38px;height:38px;border-radius:7px;background:var(--teal-soft);color:var(--teal);
+  display:grid;place-items:center;font-size:11px;font-weight:700;letter-spacing:.02em
+}
+.dlitem.doc .ic{background:#e8eefb;color:#2b4a8a}
+.dlitem.doc{border-left-color:#2b4a8a}
+.dlitem.all .ic{background:#fdf0dc;color:var(--amber-deep)}
+.dlitem.all{border-left-color:var(--amber)}
+.dlitem .tt{font-weight:700;font-size:15.5px;color:var(--navy);display:block;margin-bottom:2px;line-height:1.3}
+.dlitem .ds{font-size:13.5px;color:var(--muted);display:block;line-height:1.45}
+.dlitem .sz{font-size:12px;color:#8c95a8;display:block;margin-top:3px}
+.tree{
+  background:var(--navy);color:#dfe6f2;border-radius:9px;padding:15px 17px;margin:14px 0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.75;
+  overflow-x:auto;white-space:pre
+}
+.tree b{color:#ffc978;font-weight:600}
+
+/* ---------- TIMER ---------- */
+#timer{display:none}
+body.timer-on #timer{display:flex;flex-direction:column}
+#timer{
+  position:fixed;right:18px;bottom:18px;z-index:70;width:310px;
+  touch-action:none;
+  background:var(--navy);color:#fff;border-radius:14px;
+  box-shadow:0 10px 34px rgba(16,24,40,.34);overflow:hidden;
+  border:1px solid rgba(255,255,255,.14)
+}
+#timer.min{width:206px}
+.t-hd{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(0,0,0,.2);gap:8px;cursor:grab;user-select:none;-webkit-user-select:none}
+.t-hd:active{cursor:grabbing}
+#timer.dragging{transition:none;box-shadow:0 18px 46px rgba(16,24,40,.5)}
+#timer.dragging .bar i{transition:none}
+.t-hd .grip{display:inline-block;width:13px;height:13px;opacity:.5;flex:0 0 auto;
+  background-image:radial-gradient(currentColor 1px, transparent 1px);
+  background-size:4px 4px;background-position:0 1px}
+.t-hd .ttl{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.t-hd .ttl{font-size:13px;color:#b9c6dd;font-weight:600}
+.t-hd .ctl{display:flex;gap:4px}
+.iconbtn{background:rgba(255,255,255,.12);border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:13px;line-height:1;display:grid;place-items:center;font-family:inherit}
+.iconbtn:hover{background:rgba(255,255,255,.26)}
+.iconbtn.on{background:var(--amber);color:#2e2105}
+.t-body{padding:13px 14px 14px}
+.t-phase{font-size:14.5px;font-weight:600;margin-bottom:2px;line-height:1.3}
+.t-sub{font-size:12px;color:#9fb0cd;margin-bottom:9px}
+.t-clock{font-size:2.9rem;font-weight:700;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-bottom:3px}
+#timer.over .t-clock{color:#ff9a9a}
+#timer.warn .t-clock{color:#ffc978}
+.t-rot{font-size:13px;color:#ffd79a;margin-bottom:9px;display:none}
+#timer.rotating .t-rot{display:block}
+.bar{height:6px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;margin-bottom:11px}
+.bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .4s linear}
+#timer.over .bar i{background:#e06060}
+.t-btns{display:flex;gap:7px;margin-bottom:11px}
+.btn{flex:1;background:rgba(255,255,255,.14);border:none;color:#fff;padding:9px 6px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn:hover{background:rgba(255,255,255,.26)}
+.btn.go{background:var(--amber);color:#2e2105}
+.btn.go:hover{background:#f7a626}
+.t-list{max-height:184px;overflow-y:auto;border-top:1px solid rgba(255,255,255,.14);padding-top:9px}
+.t-row{display:flex;justify-content:space-between;gap:8px;padding:5px 7px;border-radius:6px;font-size:13px;color:#c2cfe4;cursor:pointer;align-items:baseline}
+.t-row:hover{background:rgba(255,255,255,.1)}
+.t-row.cur{background:rgba(232,147,12,.24);color:#fff;font-weight:600}
+.t-row.done{color:#7e8da8}
+.t-row .d{color:#9fb0cd;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.t-row.cur .d{color:#ffd79a}
+.t-foot{font-size:12px;color:#9fb0cd;border-top:1px solid rgba(255,255,255,.14);margin-top:9px;padding-top:8px;display:flex;justify-content:space-between}
+#timer.min .t-body>*:not(.t-clock):not(.t-phase):not(.t-btns){display:none}
+#timer.min .t-clock{font-size:2.1rem}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:1.6rem}
+  #timer{right:10px;bottom:10px;width:calc(100% - 20px);max-width:320px}
+  #timer.min{width:210px}
+  .t-list{max-height:120px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+@media print{
+  header.top,nav.tabs,#timer,.tmrow{display:none}
+  .panel{display:block!important;page-break-before:always}
+  body{background:#fff;font-size:12pt}
+  .card,.note,.st{break-inside:avoid}
+}
+
+/* ---- house style typography ---- */
+:root{
+  --sans:"Atkinson Hyperlegible","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --display:"Space Grotesk","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter-spacing:-.01em}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="crumb" href="../../index.html">← All lessons</a>
+    <div class="meta">Year 6 Science · Can we get it back? · Lesson 3 of 7</div>
+    <h1>Get it back</h1>
+    <p class="subtitle">Recovering a dissolved substance, and accounting for what is missing</p>
+    <div class="badges">
+      <span class="badge code">AC9S6U04</span>
+      <span class="badge">AC9S6I02</span>
+      <span class="badge">AC9S6I03</span>
+      <span class="badge">AC9S6I05</span>
+      <span class="badge">90 minutes</span>
+      <span class="badge">Term 4 · Week 3</span>
+    </div>
+    <div class="tmrow">
+      <button class="tmbtn" id="tmToggle" aria-pressed="false"><span class="dot"></span> Teacher mode</button>
+      <button class="tmbtn" id="timerToggle" aria-pressed="true"><span class="dot"></span> Lesson timer</button>
+      <span class="tmhint">Drag the timer by its title bar to move it. Double-click the bar to send it back.</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabscroll" role="tablist">
+    <button class="tab tonly" role="tab" data-p="notes" aria-selected="false">Teaching notes</button>
+    <button class="tab" role="tab" data-p="overview" aria-selected="true">Overview</button>
+    <button class="tab" role="tab" data-p="intentions" aria-selected="false">Intentions</button>
+    <button class="tab" role="tab" data-p="rust" aria-selected="false">Rust check</button>
+    <button class="tab" role="tab" data-p="challenge" aria-selected="false">The challenge</button>
+    <button class="tab" role="tab" data-p="plan" aria-selected="false">Plan</button>
+    <button class="tab" role="tab" data-p="recover" aria-selected="false">Separate</button>
+    <button class="tab" role="tab" data-p="resin" aria-selected="false">Resin</button>
+    <button class="tab" role="tab" data-p="yield" aria-selected="false">Yield</button>
+    <button class="tab" role="tab" data-p="error" aria-selected="false">Compare</button>
+    <button class="tab" role="tab" data-p="resources" aria-selected="false">Resources</button>
+  </div>
+</nav>
+
+<main><div class="wrap">
+
+<!-- ============ TEACHING NOTES ============ -->
+<section class="panel" id="p-notes">
+  <h2>Teaching notes</h2>
+  <p class="lede">Read before the lesson. Hidden from students when teacher mode is off.</p>
+
+  <div class="note teal"><span class="lab">Where this sits</span>
+    Last week students said the salt was still in the water. Today they have to prove it, and the proof is a number on a scale. This lesson also does the quiet work of the whole unit: it is the first time students meet the idea that a measurement can be wrong without anybody having done anything stupid.</div>
+
+  <h3>The one thing to protect</h3>
+  <p>Do not give them the method. The challenge is stated, the equipment is on the bench, and they work it out. Filtering then evaporating is not a difficult sequence to reason toward if you have seen sand and seen a kettle — but it has to be theirs, because in Week 5 they plan an investigation with nobody holding their hand and this is the rehearsal.</p>
+
+  <div class="note stop"><span class="lab">Timing is the real risk in this lesson</span>
+    Evaporating 50 mL takes 22 to 36 minutes depending on how much heat actually reaches the basin. The lesson is built so heating starts at about the 25-minute mark and the resin discussion fills the wait. <strong>If heating has not started by the 40-minute mark, you will not get a dry basin.</strong> Push groups through the planning phase and get liquid onto heat.</div>
+
+  <h3>Why 50 mL and 8 g</h3>
+  <ul>
+    <li><strong>50 mL</strong> is the most that will evaporate inside the lesson. The original plan said 100 mL — that would take the best part of an hour and the lesson would die waiting.</li>
+    <li><strong>8 g</strong> is enough that a realistic loss of half a gram to a gram is actually readable on 1 g scales. Any less and the losses vanish into rounding, and the yield discussion has nothing to work with.</li>
+    <li>8 g in 50 mL is comfortably below saturation, so nothing crystallises out on the filter paper while they work.</li>
+  </ul>
+
+  <h3>The two moments that matter</h3>
+  <div class="card">
+    <h4>1 · When the first basin comes off dry</h4>
+    <p>There is white solid in the bottom of a dish that had clear liquid in it. Hold it up. Ask what it is and how they could check. Taste is not available — but they can look at the crystals, and they can weigh them. This is the answer to the question they were left with last week.</p>
+  </div>
+  <div class="card">
+    <h4>2 · When nobody gets 8 g back</h4>
+    <p>Every group comes in under. The instinct is to feel they did it wrong. The move is to ask whether the salt was destroyed — no, it was measured badly or left behind. That distinction, between a chemistry problem and a measurement problem, is the whole of the error criterion in the assessment.</p>
+  </div>
+
+  <h3>Method notes that decide whether this works</h3>
+  <ul>
+    <li><strong>Weigh the empty basin first.</strong> Recovered salt = final mass minus empty mass. Groups that forget this have no result.</li>
+    <li><strong>Use a sand bath.</strong> The basins are round-bottomed, so on the flat frypan they touch at one point, heat poorly and rock. Put 1.5–2 cm of dry sand in the pan and twist each basin down into it. That gives contact across the whole curve, holds the basin steady, and buffers the heat so the porcelain is not shocked and the salt does not spit. Not a water bath — that caps at 100 °C and roughly doubles the time.</li>
+    <li><strong>Take the basin off while a damp crust remains.</strong> Residual heat finishes it. Left too long, the salt spits and you lose some over the side.</li>
+    <li><strong>Let the basin cool before weighing.</strong> A hot dish sets up convection over the pan and gives a false low reading. Five minutes on a heat mat. This is worth naming out loud as a source of error rather than just enforcing.</li>
+    <li><strong>You are the only person who touches the frypan.</strong> Basins placed and removed by you with tongs.</li>
+  </ul>
+
+  <div class="note"><span class="lab">If the basins are not dry when you need them</span>
+    Weigh whichever are ready, run the discussion on those, and put the rest on a sunny windowsill. Weigh them at the start of Lesson 4 and add the numbers to the board then. Say plainly why it happened. A teacher modelling "we ran out of time and the measurement was not ready" is worth more than a fudged number.</div>
+
+  <h3>What to expect</h3>
+  <table>
+    <thead><tr><th style="width:26%">Recovered</th><th style="width:20%">Yield</th><th>What it means</th></tr></thead>
+    <tbody>
+      <tr><td>7 g</td><td>about 88%</td><td>Typical good result. Losses on the filter paper and in transfer.</td></tr>
+      <tr><td>6 g</td><td>about 75%</td><td>Common. Solution left in the beaker or soaked into the filter paper.</td></tr>
+      <tr><td>5 g or less</td><td>under 63%</td><td>Something substantial was left behind. Ask where.</td></tr>
+      <tr><td>9 g or more</td><td>over 100%</td><td>Not dry. Water is being weighed as salt. Back on the heat.</td></tr>
+    </tbody>
+  </table>
+  <p>The over-100% result is the most useful one if it happens. It cannot be right, everyone can see it cannot be right, and working out why is better thinking than any correct answer on the sheet.</p>
+
+  <h3>On the resin content</h3>
+  <div class="note teal"><span class="lab">Handle with care and be accurate</span>
+    Plant resins used as adhesives are named explicitly in the v9 elaborations as an example of First Nations Australians' knowledges of reversible processes. Present it as technology — a material chosen deliberately because heating softens it and cooling sets it, which means a tool can be repaired in the field years later with nothing but a fire. Name the practice generally rather than attributing it to a particular group unless you have a sourced local reference. Do not invent a local attribution, and do not let it become a five-minute aside — it is a genuine example of the science in this lesson.</div>
+
+  <h3>Misconceptions to expect</h3>
+  <table>
+    <thead><tr><th style="width:27%">Misconception</th><th style="width:33%">How it shows today</th><th>Response</th></tr></thead>
+    <tbody>
+      <tr><td>Filtering separates dissolved salt</td><td>Expecting the salt to be caught in the filter paper with the sand</td><td>Look at the filtrate — it is clear but it is not water. The salt went straight through because it is in pieces far smaller than the holes.</td></tr>
+      <tr><td>A low yield means the salt was destroyed</td><td>"We lost some salt"</td><td>It is not lost, it is somewhere. On the paper, in the beaker, spat over the side. Name the place.</td></tr>
+      <tr><td>Evaporating is the same as boiling away the salt</td><td>Expecting the basin to end up empty</td><td>Only the water leaves. The salt cannot become a gas at these temperatures.</td></tr>
+      <tr><td>The white solid might be something new</td><td>Reasonable question, actually</td><td>Good question. How would you check? It weighs about what went in, it looks like salt, and nothing was added. Weak evidence individually, strong together.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>What comes next</h3>
+  <p>Lesson 4 turns the heat up. Same equipment, but this time the heating goes past the point where anything can be recovered. Carry forward the yield numbers — they are referred to in CP1 as evidence students collected themselves.</p>
+</section>
+
+<!-- ============ OVERVIEW ============ -->
+<section class="panel active" id="p-overview">
+  <h2>Overview</h2>
+  <p class="lede">Last week you said the salt was still in there. Today you have to prove it — and you will be weighed.</p>
+
+  <h3>Shape of the lesson</h3>
+  <table>
+    <thead><tr><th style="width:30%">Phase</th><th style="width:15%">Time</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rust check</strong></td><td>5 min</td><td>Week 2 reading. Photograph, rate, record.</td></tr>
+      <tr><td><strong>The challenge</strong></td><td>8 min</td><td>8 g of salt, 50 mL of water, a spoon of sand. Get the salt back. No method supplied.</td></tr>
+      <tr><td><strong>Plan and critique</strong></td><td>12 min</td><td>Groups draft a method, then read someone else's and find the flaw.</td></tr>
+      <tr><td><strong>Separate and heat</strong></td><td>15 min</td><td>Sand out by filtering or decanting, liquid onto the frypan. Must happen by the 40-minute mark.</td></tr>
+      <tr><td><strong>Resin</strong></td><td>12 min</td><td>While it evaporates — a reversible change chosen deliberately, for thousands of years.</td></tr>
+      <tr><td><strong>Weigh and work out the yield</strong></td><td>18 min</td><td>Basins cooled, weighed. How much came back?</td></tr>
+      <tr><td><strong>Which method won?</strong></td><td>20 min</td><td>Filtering against decanting. Both lost salt — in different places.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note stop tnote"><span class="lab">The one deadline in this lesson</span>
+    Liquid must be on heat by the 40-minute mark or the basins will not be dry. If planning is running long, stop it and move — a rough method that gets heating started beats a polished one that does not.</div>
+
+  <h3>Everything you need</h3>
+
+  <div class="kitgrid">
+    <div class="kit-col">
+      <h4>Prepare before the lesson</h4>
+      <ul class="check">
+        <li>Weigh 8.0 g of salt per group into labelled cups — do this accurately, it is the number everything is measured against</li>
+        <li>Make up the mixtures: 8 g salt + 50 mL warm water + 1 tsp sand per group, stirred</li>
+        <li>Put 1.5–2 cm of dry sand in the frypan and turn it to medium ten minutes before the lesson</li>
+        <li>Fold filter papers into cones ready to go</li>
+        <li>Print the recovery record sheets, both versions</li>
+        <li>Clear a heat-resistant cooling area away from the bench traffic</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Per group of four</h4>
+      <ul class="check">
+        <li>Porcelain evaporating basin</li>
+        <li>Filter funnel and two filter papers <em>(filtering groups)</em></li>
+        <li>Three beakers — mixture, separated liquid, and a spare <em>(decanting groups need the extra)</em></li>
+        <li>Stirring rod</li>
+        <li>Scales — 1 g resolution is fine</li>
+        <li>Whiteboard and marker for the method draft</li>
+        <li>Safety glasses for every student</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Teacher bench</h4>
+      <ul class="check">
+        <li>Electric frypan with a 1.5–2 cm sand bath, on medium — <strong>you operate it</strong></li>
+        <li>Tongs for placing and removing basins</li>
+        <li>Heat-resistant mat for cooling</li>
+        <li>Heat-resistant gloves</li>
+        <li>Marked exclusion line, one metre</li>
+        <li>Cold running water available</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Consumables per group</h4>
+      <ul class="check">
+        <li>Salt — 8.0 g, accurately weighed</li>
+        <li>Warm water — 50 mL</li>
+        <li>Sand — about a teaspoon</li>
+        <li>Filter papers — two, filtering groups only</li>
+        <li>Paper towel</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Printed sheets</h4>
+      <ul class="check">
+        <li>Recovery record sheet — one per student</li>
+        <li>Supported version — method steps to sequence</li>
+        <li>Exit ticket slips</li>
+        <li>Rust log (already with the jars)</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Not needed today</h4>
+      <ul>
+        <li>The 0.01 g scales — Week 5</li>
+        <li>Thermometers — Lesson 4</li>
+        <li>Zip-lock bags, bicarbonate, vinegar — finished with</li>
+        <li>Test tubes and racks</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTENTIONS ============ -->
+<section class="panel" id="p-intentions">
+  <h2>What we are learning</h2>
+
+  <div class="card">
+    <h4>Learning intention</h4>
+    <p style="font-size:1.1rem;margin-bottom:0">We are learning to recover a dissolved substance, and to account for how much of it we get back.</p>
+  </div>
+
+  <h3>I will be successful when I can…</h3>
+  <ul>
+    <li>separate an insoluble solid from a mixture by filtering</li>
+    <li>recover a dissolved solid by evaporating the water</li>
+    <li>compare what I started with to what I recovered</li>
+    <li>give a reason for the difference between the two</li>
+  </ul>
+
+  <h3>Stretch</h3>
+  <ul>
+    <li>I can work out my recovery as a percentage of what I started with.</li>
+    <li>I can propose one specific change to the method that would improve it, and say why.</li>
+  </ul>
+
+  <div class="note teal"><span class="lab">Curriculum</span>
+    <strong>AC9S6U04</strong> — compare reversible changes, including dissolving and changes of state… <em>Elaboration: describing how dissolved substances are reclaimed from solutions.</em><br>
+    <strong>AC9S6I02</strong> — plan and conduct repeatable investigations, including describing potential risks and planning for the safe use of equipment.<br>
+    <strong>AC9S6I05</strong> — recognise possible sources of error and select evidence to support reasoned conclusions.</div>
+
+  <div class="card">
+    <h4>Your goal for today</h4>
+    <textarea style="width:100%;min-height:74px;border:1px solid var(--line);border-radius:8px;padding:10px;font-family:inherit;font-size:16px" placeholder="Today I want to…"></textarea>
+  </div>
+</section>
+
+<!-- ============ RUST CHECK ============ -->
+<section class="panel" id="p-rust">
+  <h2>Rust check <span class="timechip">5 min</span></h2>
+  <p class="lede">Week 2 reading. Photograph, rate, record. Five minutes.</p>
+
+  <div class="card">
+    <p style="margin-bottom:0">Rate all three jars separately against the laminated scale. Write anything you notice in the last column.</p>
+  </div>
+
+  <div class="note tnote"><span class="lab">What you should be seeing by now</span>
+    Two weeks in, the differences are becoming obvious. Jar B is usually clearly ahead. Students will want to talk about it. Let them notice and write it down; do not start the analysis. Week 5 is where the pattern gets explained, and it needs three more weeks of separation to be worth explaining.</div>
+
+  <div class="note tnote"><span class="lab">Check the jars physically</span>
+    Two weeks of standing water. Look for leaks, mould, and any jar that has been knocked. Remove and replace anything that has failed — and record that you did, because a replaced jar is not comparable and that matters in Week 5.</div>
+</section>
+
+<!-- ============ CHALLENGE ============ -->
+<section class="panel" id="p-challenge">
+  <h2>The challenge <span class="timechip">8 min</span></h2>
+
+  <div class="card">
+    <p style="font-size:1.12rem">In this beaker there is <strong>8 grams of salt</strong>, <strong>50 millilitres of water</strong>, and <strong>a spoonful of sand</strong>. They are all mixed together.</p>
+    <p style="font-size:1.12rem;margin-bottom:0"><strong>Get the salt back. All of it, dry, in the dish. You will be weighed.</strong></p>
+  </div>
+
+  <h3>Two ways to get the sand out</h3>
+  <p>Half the class will use one, half the other. <strong>We are going to find out which one loses less salt.</strong></p>
+
+  <div class="stations">
+    <div class="st"><div class="hd"><span>Filtering</span><span class="n">1</span></div><div class="bd">
+      <p style="margin-bottom:0">Pour the whole mixture through a paper cone in a funnel. The sand stays on the paper, the liquid runs through.</p>
+      <div class="kit">Funnel, filter paper, second beaker</div></div></div>
+    <div class="st"><div class="hd"><span>Decanting</span><span class="n">2</span></div><div class="bd">
+      <p style="margin-bottom:0">Let the sand settle to the bottom, then carefully pour the liquid off it into a second beaker. No paper at all.</p>
+      <div class="kit">Two beakers, patience</div></div></div>
+  </div>
+
+  <h3>Before you plan</h3>
+  <ol>
+    <li>Which of the three things in that beaker is dissolved, and which is not?</li>
+    <li>Why does that difference matter for getting the salt out?</li>
+    <li>A funnel on its own, with no paper in it — would that separate anything? Why not?</li>
+    <li>Which method do you think will lose more salt, and where would it be lost?</li>
+    <li>What is the one thing you have to do first, and why does the order matter?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> The salt is dissolved. The sand is not — you can still see it sitting there.</p>
+      <p><strong>2.</strong> Anything still in visible pieces can be caught by a filter or left behind when you pour. Anything dissolved travels with the water wherever the water goes.</p>
+      <p><strong>3.</strong> No. A funnel is just a cone that directs liquid into a narrow opening. It has nothing in it to hold anything back, so the sand would pour straight through with the water. The paper is what does the separating.</p>
+      <p><strong>4.</strong> Open question — that is what we are finding out. Filtering loses salt in the solution soaked into the paper. Decanting loses salt in the liquid you have to leave behind so the sand does not come with it.</p>
+      <p style="margin-bottom:0"><strong>5.</strong> Get the sand out first, then evaporate. The other way round and you end up with salt and sand mixed in the dish, and no way to separate them.</p>
+    </div>
+  </details>
+
+  <div class="note tnote"><span class="lab">Question 3 is worth pressing on</span>
+    Students often assume a funnel filters. It does not — it is a shape, not a barrier. Getting this said out loud means the filter paper is understood as the working part rather than an accessory, which matters when they explain their losses later.</div>
+
+  <div class="note tnote"><span class="lab">Do not reveal which method wins</span>
+    Most students predict the paper loses more, because they can see it getting wet. The data usually says the opposite — decanting forces you to abandon five to ten millilitres of solution, while the paper holds back one or two. Let the numbers do it.</div>
+
+  <div class="note stop"><span class="lab">Before any equipment moves</span>
+    Safety glasses on. Nothing is tasted, at any point, for any reason. The frypan is teacher-only and you stay behind the line.</div>
+</section>
+
+<!-- ============ PLAN ============ -->
+<section class="panel" id="p-plan">
+  <h2>Plan and critique <span class="timechip">12 min</span></h2>
+
+  <div class="note teal"><span class="lab">Your method is assigned, not chosen</span>
+    Half the groups filter and half decant. That is what makes the comparison fair — if everyone picked their favourite we would learn nothing about which one actually loses less.</div>
+
+  <h3>Draft it — 6 minutes</h3>
+  <p>On your whiteboard, number the steps for <strong>your</strong> method. Someone from another group has to be able to follow it.</p>
+  <div class="note"><span class="lab">Do not forget</span>
+    Somewhere in your method there needs to be a step that says <strong>weigh the empty basin</strong>. If you do not know what the dish weighs by itself, you cannot work out how much salt is in it at the end.</div>
+
+  <h3>Swap — 6 minutes</h3>
+  <div class="card">
+    <p>Pass your whiteboard to another group. Read their method as if you had to carry it out.</p>
+    <p style="margin-bottom:0"><strong>Write one question about a step that would not work, or that you could not follow.</strong> Not a compliment. A question.</p>
+  </div>
+
+  <ol>
+    <li>Is there a step missing?</li>
+    <li>Is anything in the wrong order?</li>
+    <li>Is there a point where salt could get left behind without them noticing?</li>
+  </ol>
+
+  <p>Get your board back. Fix what they found. <strong>Then you get your equipment.</strong></p>
+
+  <div class="note teal tnote"><span class="lab">This is the rehearsal for Week 5</span>
+    The same protocol — draft, swap, critique in writing, revise — is how CP2 is assessed. Doing it here on a low-stakes task means that in Week 5 the procedure is familiar and students can spend their attention on the science instead of on what you are asking them to do.</div>
+
+  <div class="note tnote"><span class="lab">Keep this to twelve minutes</span>
+    It will want to run long and it cannot. Heating has to start by the 40-minute mark. If a group's method is still wrong at the end of the swap, let them run it — a method that fails produces better evidence for the error discussion than one you corrected for them.</div>
+
+  <div class="paths">
+    <div class="path"><div class="pt">Need a hand</div><ul><li>Use the cut-up steps and put them in order.</li><li>Then check your order against a partner's.</li></ul></div>
+    <div class="path core"><div class="pt">Keep going</div><ul><li>Draft the method from scratch.</li><li>Write one critique question on another group's.</li></ul></div>
+    <div class="path push"><div class="pt">Push me</div><ul><li>Predict how much salt you will get back, in grams, before you start.</li><li>Name the step where you expect to lose the most.</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ RECOVER ============ -->
+<section class="panel" id="p-recover">
+  <h2>Separate and heat <span class="timechip">15 min</span></h2>
+  <p class="lede">Move quickly. The water needs as long as possible on the heat.</p>
+
+  <div class="stations">
+    <div class="st"><div class="hd"><span>Step 1 — weigh the empty basin</span><span class="n">1</span></div><div class="bd">
+      <p style="margin-bottom:0">Before anything goes in it. Write the number down. Without this you have no result at all.</p>
+      <div class="kit">Evaporating basin, scales</div></div></div>
+
+    <div class="st"><div class="hd"><span>Step 2 — your method</span><span class="n">2</span></div><div class="bd">
+      <p><strong>Filtering:</strong> fold the paper into a cone, sit it in the funnel, funnel over the empty beaker. Pour slowly and keep the liquid below the top of the paper — overfill it and liquid runs down the outside and misses the paper entirely.</p>
+      <p style="margin-bottom:0"><strong>Decanting:</strong> let the sand settle completely first. Then tip slowly and steadily, and stop the moment sand starts moving toward the lip. Do not chase the last drop.</p>
+      <div class="kit">Filter: funnel + paper. Decant: two beakers and a steady hand.</div></div></div>
+
+    <div class="st"><div class="hd"><span>Step 3 — into the basin</span><span class="n">3</span></div><div class="bd">
+      <p>Pour your separated liquid into the weighed basin. It should be clear.</p>
+      <p style="margin-bottom:0">Get every drop across. Anything left in the beaker is salt you will never see again.</p>
+      <div class="kit">Basin, separated liquid</div></div></div>
+
+    <div class="st teacherrun"><div class="hd"><span>Step 4 — onto the heat</span><span class="n">4</span></div><div class="bd">
+      <p>Bring your basin to the line and hand it over. <strong>The teacher sets it into the sand and takes it out.</strong></p>
+      <p style="margin-bottom:0">Then sit down. It takes about twenty-five minutes.</p>
+      <div class="kit">Teacher operates the frypan throughout. Students stay behind the line.</div></div></div>
+  </div>
+
+  <div class="note"><span class="lab">Look at what you have got</span>
+    Your liquid is clear. The sand is gone — either on the paper or left in the bottom of the first beaker. But the salt came with the water. It is still in there, invisible, exactly as it was last week. Separating the sand did not touch it.</div>
+
+  <h3>Before you sit down</h3>
+  <ol>
+    <li>Where is the sand now?</li>
+    <li>The liquid that came through is clear. Is it just water?</li>
+    <li>Look at what you left behind. Is any of it wet? What is in that liquid?</li>
+    <li>Why did the sand get separated out but the salt did not?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> Filtering — on the paper. Decanting — in the bottom of the first beaker.</p>
+      <p><strong>2.</strong> No. It is a salt solution. Clear does not mean pure, and you proved that last week when the mass did not change.</p>
+      <p><strong>3.</strong> Yes — the paper is soaked, or there is liquid sitting on the sand. That liquid is salt solution, and every millilitre of it is salt you are not going to recover.</p>
+      <p style="margin-bottom:0"><strong>4.</strong> The sand is in pieces big enough to be caught by paper or to sink to the bottom. The dissolved salt is spread through the water in pieces far too small for either. Both methods sort by size — and dissolved things are below the cut.</p>
+    </div>
+  </details>
+
+  <div class="note stop tnote"><span class="lab">The two failures to watch for</span>
+    Filtering groups overfilling the cone, so liquid runs between the paper and the funnel and takes sand with it. Decanting groups being impatient and pouring before the sand has settled. Walk the room — both are visible from across the bench.</div>
+</section>
+
+<!-- ============ RESIN ============ -->
+<section class="panel" id="p-resin">
+  <h2>While it evaporates <span class="timechip">12 min</span></h2>
+  <p class="lede">A reversible change that people chose on purpose, and used for thousands of years.</p>
+
+  <div class="card">
+    <p style="font-size:1.1rem">Across Australia, First Nations peoples made adhesives from plant resin — including resin from spinifex and from grass trees.</p>
+    <p style="font-size:1.1rem;margin-bottom:0">The resin was worked with heat. <strong>Warm it and it softens. Let it cool and it sets hard.</strong> It holds a stone point onto a spear shaft, a blade into a handle, a barb onto a hook.</p>
+  </div>
+
+  <h3>The part that matters</h3>
+  <p>Years later, out on Country, a long way from anywhere, the tool breaks.</p>
+  <p>You do not need a new one. You warm the resin again, it softens again, you reset the point, and it hardens again. <strong>The same material, as many times as you need.</strong></p>
+
+  <ol>
+    <li>Is softening and resetting resin a reversible or an irreversible change?</li>
+    <li>Which change we have studied is it most like — melting chocolate, or toasting bread?</li>
+    <li>Why would being reversible be exactly the property you would want in a glue?</li>
+    <li>Superglue cannot be undone. When would that be better, and when would it be worse?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> Reversible. Nothing new is made — the same resin goes soft and hard, over and over.</p>
+      <p><strong>2.</strong> Melting chocolate. A change of state driven by heat, with the substance unchanged.</p>
+      <p><strong>3.</strong> Because it can be repaired anywhere, with a fire, using the glue that is already on the tool. An irreversible glue means a broken tool is finished, and you need new materials to replace it.</p>
+      <p style="margin-bottom:0"><strong>4.</strong> Irreversible is better when you never want it to come apart — a boat, a building. It is worse when the thing will need maintaining, or when you are a long way from replacements.</p>
+    </div>
+  </details>
+
+  <div class="note teal"><span class="lab">The point</span>
+    This is not a simpler version of glue. The reversibility is the engineering. A material was selected because of a property we have spent three weeks learning to identify — and it was selected a very long time before anybody wrote it down in a science book.</div>
+
+  <div class="note tnote"><span class="lab">Keep it accurate</span>
+    Name the practice generally — First Nations peoples across Australia used plant resins as adhesives — rather than attributing it to a particular group unless you have a sourced local reference to hand. Present it as technology and materials science, which is what it is. Resist turning it into a story.</div>
+
+  <div class="note tnote"><span class="lab">Watch the pans while this runs</span>
+    You are talking and the basins are heating. Check them every few minutes. Pull any basin that is down to a damp crust — the residual heat finishes the job and leaving it on causes the salt to spit over the side.</div>
+</section>
+
+<!-- ============ YIELD ============ -->
+<section class="panel" id="p-yield">
+  <h2>Weigh it <span class="timechip">18 min</span></h2>
+
+  <div class="note stop"><span class="lab">Cool it first</span>
+    A hot basin gives a false reading on the scale — the warm air moving off it pushes up against the pan. Five minutes on the mat before it goes anywhere near the scales.</div>
+
+  <h3>Work it out</h3>
+  <table>
+    <thead><tr><th style="width:56%"></th><th>Mass (g)</th></tr></thead>
+    <tbody>
+      <tr><td>Basin with dry salt in it</td><td></td></tr>
+      <tr><td>Empty basin (from step 1)</td><td></td></tr>
+      <tr><td><strong>Salt recovered</strong></td><td></td></tr>
+      <tr><td>Salt we started with</td><td>8</td></tr>
+      <tr><td><strong>Difference</strong></td><td></td></tr>
+      <tr><td>Our method (filter or decant)</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <ol>
+    <li>How much salt did you get back?</li>
+    <li>How much is missing?</li>
+    <li>Look at what is in the dish. What is it, and how do you know?</li>
+    <li>Did the missing salt get destroyed?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1–2.</strong> Most groups recover 6 to 7 grams. Everybody is under 8.</p>
+      <p><strong>3.</strong> Salt. It looks like salt, it appeared where a salt solution used to be, nothing was added, and it weighs roughly what went in. No single one of those settles it — together they are strong.</p>
+      <p style="margin-bottom:0"><strong>4.</strong> No. Mass does not vanish — you proved that last week. It is somewhere in this room: on the filter paper, in a beaker, spat over the side of a basin.</p>
+    </div>
+  </details>
+
+  <div class="note tnote"><span class="lab">If a group gets more than 8 g</span>
+    They are weighing water. It is not dry. Do not hide this — put it on the board with the rest. A result that is obviously impossible is the best thinking prompt in the lesson, and every student can see why it cannot be right.</div>
+
+  <div class="paths">
+    <div class="path"><div class="pt">Need a hand</div><ul><li>Fill in the table row by row.</li><li>Subtract: what was in the dish, minus the empty dish.</li></ul></div>
+    <div class="path core"><div class="pt">Keep going</div><ul><li>Complete the table and answer all four questions.</li></ul></div>
+    <div class="path push"><div class="pt">Push me</div><ul><li>Work out your recovery as a percentage of 8 g.</li><li>Whose method got the highest percentage, and what did they do differently?</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ ERROR ============ -->
+<section class="panel" id="p-error">
+  <h2>Which method won? <span class="timechip">20 min</span></h2>
+
+  <h3>Both columns go on the board</h3>
+  <p>Filtering groups on one side, decanting groups on the other. Nobody got 8 grams.</p>
+
+  <table>
+    <thead><tr><th style="width:34%">Method</th><th>Typical recovery</th><th>Where the salt went</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Filtering</strong></td><td>7.4 – 7.8 g</td><td>Soaked into the paper and the wet sand on it.</td></tr>
+      <tr><td><strong>Decanting</strong></td><td>6.1 – 7.4 g</td><td>Left behind in the liquid sitting on the sand.</td></tr>
+    </tbody>
+  </table>
+
+  <ol>
+    <li>Which method got more salt back?</li>
+    <li>Was that what you predicted? Why did you think the other one?</li>
+    <li>Name the exact place each method loses its salt.</li>
+    <li>Two groups used the same method and got different numbers. Does that mean one did it wrong?</li>
+    <li>What one change would improve <em>either</em> method?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> Filtering, usually by half a gram to a gram.</p>
+      <p><strong>2.</strong> Most people predict the paper loses more, because you can see it getting wet. But a filter paper only holds a millilitre or two. Decanting makes you abandon five to ten millilitres, or the sand comes across with the liquid.</p>
+      <p><strong>3.</strong> Filtering — in the paper and the damp sand on it. Decanting — in the liquid you deliberately left in the first beaker.</p>
+      <p><strong>4.</strong> No. Different hands, different pouring, different patience. A different number is a reason to ask what they did differently, not to assume somebody failed.</p>
+      <p style="margin-bottom:0"><strong>5.</strong> <strong>Rinse.</strong> Pour a little clean water through the paper, or over the settled sand, and add that to the basin too. It sounds like cheating. It is not — the salt in that rinse was always yours, and you are only adding water, which is going to evaporate anyway.</p>
+    </div>
+  </details>
+
+  <div class="note teal"><span class="lab">The big idea</span>
+    Neither method is wrong. They lose salt in <strong>different places</strong>, and until you compared them you had no way of knowing which place costs more. A number being off does not mean somebody was careless — it means the method lost some, and the job is to say where.</div>
+
+  <div class="note tnote"><span class="lab">This is the skill CP3 marks</span>
+    Students have just compared methods with those of others and identified where each one loses material. That is the Interpreting and Evaluating criterion, in miniature, on a task where they can actually see the mechanism. Use the phrase <em>source of error</em> out loud. In Week 5 they do the same thing to another class's rust data, where the mechanism is invisible and they have to reason about it.</div>
+
+  <div class="note tnote"><span class="lab">If the class result comes out the other way</span>
+    It can. A careful decanting group can beat a sloppy filtering group, and if your filter papers are large and thick they hold more. Do not bend the discussion toward the expected answer — ask what would explain the result you actually got. That is a better lesson than the tidy one.</div>
+
+  <h3>Words we used today</h3>
+  <div class="vocab">
+    <span><b>filter</b></span><span><b>filtrate</b></span><span><b>decant</b></span>
+    <span><b>evaporate</b></span><span><b>recover</b></span><span><b>residue</b></span>
+    <span><b>yield</b></span><span><b>source of error</b></span><span><b>insoluble</b></span>
+  </div>
+
+  <div class="note teal tnote"><span class="lab">EAL/D</span>
+    <em>Recover</em> is the one to chart — in everyday English it means getting better after being unwell. <em>Yield</em> outside science means giving way. <em>Decant</em> will be new to nearly everyone, which is actually easier: no wrong meaning to unlearn.</div>
+
+  <h3>Exit ticket</h3>
+  <div class="card">
+    <p style="margin-bottom:0"><strong>Two groups both started with 8 g of salt. The group that filtered got 7.5 g back. The group that decanted got 6.5 g. Neither group did anything wrong. Explain how that is possible.</strong></p>
+  </div>
+
+  <details class="tnote">
+    <summary>Sorting the exit tickets into piles</summary>
+    <div class="body">
+      <p><strong>Ready to move on</strong> — names where each method loses salt and says mass is not destroyed. Bonus for noting the decanting group had to leave more liquid behind.</p>
+      <p><strong>Watch in Lesson 4</strong> — knows nothing was destroyed but cannot name a place, or says one method is "just better" without a mechanism.</p>
+      <p style="margin-bottom:0"><strong>Target directly</strong> — says the decanting group must have made a mistake, or that a gram of salt was destroyed. Both mean the Lesson 2 idea has not carried, and CP1 is two weeks away.</p>
+    </div>
+  </details>
+
+  <h3>Next week</h3>
+  <p>Same frypan, more heat. This time the heating goes past the point where anything can be brought back — and your job is to say exactly when that happened.</p>
+</section>
+
+<!-- ============ RESOURCES ============ -->
+<section class="panel" id="p-resources">
+  <h2>Resources</h2>
+  <p class="lede">Print before the lesson. Everything here also lives in the repository as a separate file.</p>
+
+  <a class="dlitem all" href="resources/l3-00-all-student-sheets.pdf" download style="margin-bottom:6px">
+    <span class="ic">PDF</span>
+    <span><span class="tt">All student sheets</span>
+    <span class="ds">Every sheet below in one file.</span></span>
+  </a>
+
+  <h3>Individual sheets</h3>
+  <div class="dl">
+    <a class="dlitem" href="resources/l3-01-recovery-record.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Recovery record</span>
+      <span class="ds">Core version. Method draft, critique, results, yield, and where the missing salt went.</span></span>
+    </a>
+    <a class="dlitem" href="resources/l3-02-method-steps-support.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Method steps to sequence</span>
+      <span class="ds">Support tier. Cut-up steps including two that do not belong.</span></span>
+    </a>
+    <a class="dlitem" href="resources/l3-03-exit-tickets.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Exit tickets</span>
+      <span class="ds">Six to a page. Eight grams in, six grams out.</span></span>
+    </a>
+    <a class="dlitem doc" href="resources/l3-student-sheets-EDITABLE.docx" download>
+      <span class="ic">DOCX</span>
+      <span><span class="tt">Editable master</span>
+      <span class="ds">All sheets in one Word file.</span></span>
+    </a>
+  </div>
+
+  <div class="note"><span class="lab">Already with the jars</span>
+    The rust coverage scale and weekly log stay with the jars until Week 5. No need to reprint.</div>
+
+  <div class="tree tnote">lessons/
+└── 03-get-it-back/
+    ├── lesson-03-get-it-back.html   <b>this page</b>
+    └── resources/
+        ├── l3-00-all-student-sheets.pdf
+        ├── l3-01-recovery-record.pdf
+        ├── l3-02-method-steps-support.pdf
+        ├── l3-03-exit-tickets.pdf
+        └── l3-student-sheets-EDITABLE.docx</div>
+</section>
+
+</div></main>
+
+<!-- ============ TIMER ============ -->
+<div id="timer" role="region" aria-label="Lesson timer">
+  <div class="t-hd">
+    <span class="grip" aria-hidden="true"></span><span class="ttl">Lesson timer</span>
+    <span class="ctl">
+      <button class="iconbtn on" id="tSound" title="Sound on or off" aria-pressed="true">♪</button>
+      <button class="iconbtn" id="tMin" title="Shrink or expand">–</button>
+      <button class="iconbtn" id="tClose" title="Hide the timer">×</button>
+    </span>
+  </div>
+  <div class="t-body">
+    <div class="t-phase" id="tPhase">Rust check</div>
+    <div class="t-sub" id="tSub">Phase 1 of 7</div>
+    <div class="t-clock" id="tClock">5:00</div>
+    <div class="t-rot" id="tRot"></div>
+    <div class="bar"><i id="tBar"></i></div>
+    <div class="t-btns">
+      <button class="btn go" id="tGo">Start</button>
+      <button class="btn" id="tNext">Next</button>
+      <button class="btn" id="tReset">Reset</button>
+    </div>
+    <div class="t-list" id="tList"></div>
+    <div class="t-foot"><span id="tElapsed">Elapsed 0:00</span><span id="tLeft">90 min total</span></div>
+    <div class="t-foot" style="border-top:none;margin-top:2px;padding-top:0;justify-content:center"><span id="tDeadline">Heat on in 40:00</span></div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- teacher mode ---------- */
+  var tm = document.getElementById('tmToggle');
+  tm.addEventListener('click', function(){
+    var on = document.body.classList.toggle('teacher');
+    tm.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if(!on){
+      var cur = document.querySelector('.tab[aria-selected="true"]');
+      if(cur && cur.classList.contains('tonly')) show('overview');
+    }
+  });
+
+  /* ---------- timer visibility (independent of teacher mode) ---------- */
+  document.body.classList.add('timer-on');
+  var tv = document.getElementById('timerToggle');
+  function setTimerVisible(on){
+    document.body.classList.toggle('timer-on', on);
+    tv.setAttribute('aria-pressed', on ? 'true' : 'false');
+    tv.classList.toggle('lit', on);
+  }
+  tv.classList.add('lit');
+  tv.addEventListener('click', function(){
+    setTimerVisible(!document.body.classList.contains('timer-on'));
+  });
+
+  /* ---------- tabs ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function show(id){
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.p===id ? 'true':'false'); });
+    document.querySelectorAll('.panel').forEach(function(p){
+      p.classList.toggle('active', p.id==='p-'+id);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.p); }); });
+
+  /* ---------- timer ---------- */
+  var PHASES = [
+    {name:'Rust check — week 2 reading', mins:5,  tab:'rust'},
+    {name:'The challenge',               mins:8,  tab:'challenge'},
+    {name:'Plan and critique',           mins:12, tab:'plan'},
+    {name:'Separate and heat',           mins:15, tab:'recover'},
+    {name:'Resin — while it evaporates', mins:12, tab:'resin'},
+    {name:'Weigh it — yield',            mins:18, tab:'yield'},
+    {name:'Which method won?',           mins:20, tab:'error'}
+  ];
+  var TOTAL = PHASES.reduce(function(a,p){ return a+p.mins; },0);
+
+  var idx=0, left=PHASES[0].mins*60, running=false, elapsed=0, sound=true, tick=null;
+  var rotLeft=0, rotIdx=0, rotLen=0;
+
+  var el = {
+    box:document.getElementById('timer'), phase:document.getElementById('tPhase'),
+    sub:document.getElementById('tSub'), clock:document.getElementById('tClock'),
+    rot:document.getElementById('tRot'), bar:document.getElementById('tBar'),
+    go:document.getElementById('tGo'), next:document.getElementById('tNext'),
+    reset:document.getElementById('tReset'), list:document.getElementById('tList'),
+    elapsed:document.getElementById('tElapsed'), left:document.getElementById('tLeft'),
+    snd:document.getElementById('tSound'), min:document.getElementById('tMin')
+  };
+
+  function mmss(s){
+    var neg = s<0; s = Math.abs(s);
+    var m = Math.floor(s/60), r = s%60;
+    return (neg?'+':'') + m + ':' + (r<10?'0':'') + r;
+  }
+
+  function beep(times){
+    if(!sound) return;
+    try{
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if(!Ctx) return;
+      var ac = new Ctx();
+      for(var i=0;i<times;i++){
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.connect(g); g.connect(ac.destination);
+        o.frequency.value = 784;
+        var t0 = ac.currentTime + i*0.28;
+        g.gain.setValueAtTime(0.0001,t0);
+        g.gain.exponentialRampToValueAtTime(0.25,t0+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,t0+0.22);
+        o.start(t0); o.stop(t0+0.24);
+      }
+      setTimeout(function(){ try{ac.close();}catch(e){} }, times*300+500);
+    }catch(e){}
+  }
+
+  function buildList(){
+    el.list.innerHTML='';
+    PHASES.forEach(function(p,i){
+      var row=document.createElement('div');
+      row.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+      row.innerHTML='<span>'+p.name+'</span><span class="d">'+p.mins+'m</span>';
+      row.addEventListener('click',function(){ goTo(i); });
+      el.list.appendChild(row);
+    });
+  }
+
+  function render(){
+    var p = PHASES[idx];
+    el.phase.textContent = p.name;
+    el.sub.textContent = 'Phase '+(idx+1)+' of '+PHASES.length+' · '+p.mins+' min';
+    el.clock.textContent = mmss(left);
+    var pct = Math.max(0, Math.min(100, ((p.mins*60-left)/(p.mins*60))*100));
+    el.bar.style.width = pct+'%';
+    el.box.classList.toggle('over', left<0);
+    el.box.classList.toggle('warn', left>=0 && left<=120);
+    el.box.classList.toggle('rotating', !!p.rotations);
+    if(p.rotations){
+      el.rot.textContent = 'Part '+Math.min(rotIdx+1,p.rotations)+' of '+p.rotations+' · '+mmss(rotLeft);
+    }
+    el.elapsed.textContent = 'Elapsed '+mmss(elapsed);
+    var dl = document.getElementById('tDeadline');
+    if(dl){
+      var toHeat = 40*60 - elapsed;
+      if(idx >= 3){ dl.textContent = 'Heating started'; dl.style.color = '#7fd6a0'; }
+      else if(toHeat > 0){ dl.textContent = 'Heat on in ' + mmss(toHeat); dl.style.color = toHeat < 300 ? '#ffc978' : '#9fb0cd'; }
+      else { dl.textContent = 'Heat on ' + mmss(toHeat) + ' late'; dl.style.color = '#ff9a9a'; }
+    }
+    var rem = TOTAL*60 - elapsed;
+    el.left.textContent = rem>=0 ? mmss(rem)+' of lesson left' : mmss(rem)+' over';
+    el.go.textContent = running ? 'Pause' : (elapsed===0 && left===PHASES[0].mins*60 ? 'Start' : 'Resume');
+    Array.prototype.forEach.call(el.list.children,function(r,i){
+      r.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+    });
+  }
+
+  function setPhase(i){
+    idx = Math.max(0, Math.min(PHASES.length-1, i));
+    var p = PHASES[idx];
+    left = p.mins*60;
+    if(p.rotations){ rotLen = Math.floor(p.mins*60/p.rotations); rotIdx=0; rotLeft=rotLen; }
+    if(p.tab) show(p.tab);
+    render();
+  }
+
+  function goTo(i){ setPhase(i); }
+
+  function step(){
+    left--; elapsed++;
+    var p = PHASES[idx];
+    if(p.rotations){
+      rotLeft--;
+      if(rotLeft<=0 && rotIdx < p.rotations-1){ rotIdx++; rotLeft=rotLen; beep(1); }
+    }
+    if(left===0){ beep(2); }
+    render();
+  }
+
+  function toggle(){
+    running = !running;
+    if(running){ tick = setInterval(step,1000); } else { clearInterval(tick); }
+    render();
+  }
+
+  el.go.addEventListener('click', toggle);
+  el.next.addEventListener('click', function(){ setPhase(idx+1); });
+  el.reset.addEventListener('click', function(){
+    running=false; clearInterval(tick); elapsed=0; setPhase(0);
+  });
+  el.snd.addEventListener('click', function(){
+    sound=!sound;
+    el.snd.classList.toggle('on',sound);
+    el.snd.setAttribute('aria-pressed', sound?'true':'false');
+    if(sound) beep(1);
+  });
+  el.min.addEventListener('click', function(){
+    var m = el.box.classList.toggle('min');
+    el.min.textContent = m ? '+' : '–';
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(!document.body.classList.contains('teacher')) return;
+    if(/^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if(e.code==='Space'){ e.preventDefault(); toggle(); }
+    if(e.code==='ArrowRight'){ setPhase(idx+1); }
+    if(e.code==='ArrowLeft'){ setPhase(idx-1); }
+  });
+
+  el.box.querySelector('#tClose').addEventListener('click', function(){
+    setTimerVisible(false);
+  });
+
+  /* ---------- drag ---------- */
+  (function(){
+    var hd = el.box.querySelector('.t-hd');
+    var dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+
+    function place(x, y){
+      var r = el.box.getBoundingClientRect();
+      var maxX = window.innerWidth  - r.width  - 6;
+      var maxY = window.innerHeight - r.height - 6;
+      x = Math.max(6, Math.min(x, Math.max(6, maxX)));
+      y = Math.max(6, Math.min(y, Math.max(6, maxY)));
+      el.box.style.left = x + 'px';
+      el.box.style.top  = y + 'px';
+      el.box.style.right = 'auto';
+      el.box.style.bottom = 'auto';
+    }
+
+    function reset(){
+      el.box.style.left = ''; el.box.style.top = '';
+      el.box.style.right = ''; el.box.style.bottom = '';
+    }
+
+    hd.addEventListener('pointerdown', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      var r = el.box.getBoundingClientRect();
+      dragging = true;
+      sx = e.clientX; sy = e.clientY; ox = r.left; oy = r.top;
+      place(r.left, r.top);
+      el.box.classList.add('dragging');
+      hd.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+
+    hd.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      place(ox + (e.clientX - sx), oy + (e.clientY - sy));
+    });
+
+    function stop(e){
+      if(!dragging) return;
+      dragging = false;
+      el.box.classList.remove('dragging');
+      try{ hd.releasePointerCapture(e.pointerId); }catch(err){}
+    }
+    hd.addEventListener('pointerup', stop);
+    hd.addEventListener('pointercancel', stop);
+    hd.addEventListener('dblclick', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      reset();
+    });
+
+    window.addEventListener('resize', function(){
+      if(el.box.style.left){
+        var r = el.box.getBoundingClientRect();
+        place(r.left, r.top);
+      }
+    });
+  })();
+
+  buildList(); render();
+})();
+</script>
+</body>
+</html>

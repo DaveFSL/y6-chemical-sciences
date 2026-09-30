@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2 · Does stuff disappear? — Year 6 Chemical Sciences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1b2a4a; --navy-soft:#2c3f66; --amber:#e8930c; --amber-deep:#9a5f00;
+  --teal:#0e7c7b; --teal-soft:#e2f0ef; --paper:#fbf9f4; --line:#dcd9d0;
+  --ink:#23272e; --muted:#5a6478; --white:#fff;
+  --rust:#8a4a22; --rust-soft:#f6e9e0;
+  --ok:#2e6b3f; --warn:#b4560a; --stop:#a32020;
+  --radius:10px;
+  --sans:"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:var(--sans); color:var(--ink); background:var(--paper);
+  font-size:17px; line-height:1.62; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+
+/* ---------- header ---------- */
+header.top{background:var(--navy);color:#fff;padding:22px 0 0}
+.crumb{font-size:14px;color:#a9b6cf;text-decoration:none;display:inline-block;margin-bottom:14px}
+.crumb:hover{color:#fff}
+.meta{font-size:13.5px;color:#9fb0cd;letter-spacing:.02em;margin-bottom:6px}
+h1{font-size:2.05rem;line-height:1.18;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.subtitle{color:#c3d0e6;font-size:1.02rem;margin:0 0 16px}
+.badges{display:flex;flex-wrap:wrap;gap:7px;padding-bottom:18px}
+.badge{font-size:12.5px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#e7edf7;border:1px solid rgba(255,255,255,.18)}
+.badge.code{background:var(--amber);color:#33240a;border-color:transparent;font-weight:600}
+
+/* teacher toggle */
+.tmrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:0 0 18px}
+.tmbtn{
+  display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.26);color:#fff;padding:8px 14px;border-radius:999px;
+  font-size:14px;cursor:pointer;font-family:inherit
+}
+.tmbtn:hover{background:rgba(255,255,255,.18)}
+.tmbtn .dot{width:9px;height:9px;border-radius:50%;background:#7c8aa5}
+body.teacher #tmToggle .dot{background:#5fd08a}
+body.teacher #tmToggle{background:var(--amber);color:#2e2105;border-color:transparent;font-weight:600}
+.tmbtn.lit .dot{background:#5fd08a}
+.tmbtn.lit{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4)}
+.tmhint{font-size:13px;color:#9fb0cd}
+
+/* ---------- tabs ---------- */
+nav.tabs{position:sticky;top:0;z-index:40;background:var(--navy-soft);border-bottom:2px solid var(--amber)}
+.tabscroll{max-width:880px;margin:0 auto;display:flex;overflow-x:auto;padding:0 12px;scrollbar-width:thin}
+.tab{
+  flex:0 0 auto;background:none;border:none;font-family:inherit;font-size:14px;color:#c6d2e6;
+  padding:12px 13px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap
+}
+.tab:hover{color:#fff}
+.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--amber);font-weight:600}
+.tab.tonly{display:none}
+body.teacher .tab.tonly{display:block}
+
+/* ---------- panels ---------- */
+main{padding:26px 0 170px}
+.panel{display:none}
+.panel.active{display:block}
+h2{font-size:1.45rem;color:var(--navy);margin:0 0 4px;letter-spacing:-.01em}
+h3{font-size:1.12rem;color:var(--teal);margin:26px 0 6px}
+h4{font-size:1rem;margin:20px 0 4px;color:var(--navy)}
+p{margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:5px 0}
+.lede{font-size:1.06rem;color:var(--muted);margin-bottom:20px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:16px 0}
+.card h4:first-child,.card h3:first-child{margin-top:0}
+
+.note{border-left:4px solid var(--amber);background:#fdf6e8;padding:13px 16px;margin:15px 0;border-radius:0 8px 8px 0}
+.note .lab{font-weight:700;color:var(--amber-deep);display:block;margin-bottom:3px;font-size:14.5px}
+.note.teal{border-left-color:var(--teal);background:var(--teal-soft)}
+.note.teal .lab{color:var(--teal)}
+.note.stop{border-left-color:var(--stop);background:#fbeaea}
+.note.stop .lab{color:var(--stop)}
+.tnote{display:none}
+body.teacher .tnote{display:block}
+.snote{display:block}
+body.teacher .snote{display:block}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15.5px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff;font-weight:600;font-size:14.5px}
+tbody tr:nth-child(even){background:#faf8f3}
+
+.timechip{display:inline-block;background:var(--teal);color:#fff;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:middle}
+
+details{border:1px solid var(--line);border-radius:8px;background:#fff;padding:0;margin:13px 0}
+summary{cursor:pointer;padding:11px 15px;font-weight:600;color:var(--navy);font-size:15.5px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"▸ ";color:var(--amber);font-weight:700}
+details[open] summary:before{content:"▾ "}
+details .body{padding:0 15px 14px;border-top:1px solid var(--line)}
+
+.paths{display:grid;gap:13px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin:16px 0}
+.path{border:1px solid var(--line);border-top:4px solid var(--teal);border-radius:8px;background:#fff;padding:14px 15px}
+.path.core{border-top-color:var(--navy)}
+.path.push{border-top-color:var(--amber)}
+.path .pt{font-weight:700;margin-bottom:5px;color:var(--navy);font-size:15.5px}
+.path ul{padding-left:19px;margin-bottom:0;font-size:15px}
+
+.stations{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.st{border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}
+.st .hd{background:var(--navy);color:#fff;padding:9px 13px;font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.st .hd .n{background:var(--amber);color:#33240a;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;font-size:13px;flex:0 0 auto}
+.st .bd{padding:12px 14px;font-size:15px}
+.st .bd p{margin-bottom:8px}
+.st .kit{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.st.teacherrun .hd{background:var(--stop)}
+
+.kitgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(245px,1fr))}
+.kit-col{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.kit-col h4{margin-top:0}
+.kit-col ul{font-size:15px;padding-left:19px;margin-bottom:0}
+.check{list-style:none;padding-left:0}
+.check li{position:relative;padding-left:26px}
+.check li:before{content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border:2px solid var(--teal);border-radius:3px}
+
+.vocab{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.vocab span{background:#fff;border:1px solid var(--line);border-radius:6px;padding:5px 11px;font-size:15px}
+.vocab b{color:var(--navy)}
+
+/* ---------- downloads ---------- */
+.dl{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));margin:16px 0}
+.dlitem{
+  display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:9px;padding:13px 14px;text-decoration:none;color:inherit;border-left:4px solid var(--teal)
+}
+.dlitem:hover{border-color:var(--amber);border-left-color:var(--amber);background:#fffdf7}
+.dlitem .ic{
+  flex:0 0 auto;width:38px;height:38px;border-radius:7px;background:var(--teal-soft);color:var(--teal);
+  display:grid;place-items:center;font-size:11px;font-weight:700;letter-spacing:.02em
+}
+.dlitem.doc .ic{background:#e8eefb;color:#2b4a8a}
+.dlitem.doc{border-left-color:#2b4a8a}
+.dlitem.all .ic{background:#fdf0dc;color:var(--amber-deep)}
+.dlitem.all{border-left-color:var(--amber)}
+.dlitem .tt{font-weight:700;font-size:15.5px;color:var(--navy);display:block;margin-bottom:2px;line-height:1.3}
+.dlitem .ds{font-size:13.5px;color:var(--muted);display:block;line-height:1.45}
+.dlitem .sz{font-size:12px;color:#8c95a8;display:block;margin-top:3px}
+.tree{
+  background:var(--navy);color:#dfe6f2;border-radius:9px;padding:15px 17px;margin:14px 0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.75;
+  overflow-x:auto;white-space:pre
+}
+.tree b{color:#ffc978;font-weight:600}
+
+/* ---------- TIMER ---------- */
+#timer{display:none}
+body.timer-on #timer{display:flex;flex-direction:column}
+#timer{
+  position:fixed;right:18px;bottom:18px;z-index:70;width:310px;
+  touch-action:none;
+  background:var(--navy);color:#fff;border-radius:14px;
+  box-shadow:0 10px 34px rgba(16,24,40,.34);overflow:hidden;
+  border:1px solid rgba(255,255,255,.14)
+}
+#timer.min{width:206px}
+.t-hd{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(0,0,0,.2);gap:8px;cursor:grab;user-select:none;-webkit-user-select:none}
+.t-hd:active{cursor:grabbing}
+#timer.dragging{transition:none;box-shadow:0 18px 46px rgba(16,24,40,.5)}
+#timer.dragging .bar i{transition:none}
+.t-hd .grip{display:inline-block;width:13px;height:13px;opacity:.5;flex:0 0 auto;
+  background-image:radial-gradient(currentColor 1px, transparent 1px);
+  background-size:4px 4px;background-position:0 1px}
+.t-hd .ttl{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.t-hd .ttl{font-size:13px;color:#b9c6dd;font-weight:600}
+.t-hd .ctl{display:flex;gap:4px}
+.iconbtn{background:rgba(255,255,255,.12);border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:13px;line-height:1;display:grid;place-items:center;font-family:inherit}
+.iconbtn:hover{background:rgba(255,255,255,.26)}
+.iconbtn.on{background:var(--amber);color:#2e2105}
+.t-body{padding:13px 14px 14px}
+.t-phase{font-size:14.5px;font-weight:600;margin-bottom:2px;line-height:1.3}
+.t-sub{font-size:12px;color:#9fb0cd;margin-bottom:9px}
+.t-clock{font-size:2.9rem;font-weight:700;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-bottom:3px}
+#timer.over .t-clock{color:#ff9a9a}
+#timer.warn .t-clock{color:#ffc978}
+.t-rot{font-size:13px;color:#ffd79a;margin-bottom:9px;display:none}
+#timer.rotating .t-rot{display:block}
+.bar{height:6px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;margin-bottom:11px}
+.bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .4s linear}
+#timer.over .bar i{background:#e06060}
+.t-btns{display:flex;gap:7px;margin-bottom:11px}
+.btn{flex:1;background:rgba(255,255,255,.14);border:none;color:#fff;padding:9px 6px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn:hover{background:rgba(255,255,255,.26)}
+.btn.go{background:var(--amber);color:#2e2105}
+.btn.go:hover{background:#f7a626}
+.t-list{max-height:184px;overflow-y:auto;border-top:1px solid rgba(255,255,255,.14);padding-top:9px}
+.t-row{display:flex;justify-content:space-between;gap:8px;padding:5px 7px;border-radius:6px;font-size:13px;color:#c2cfe4;cursor:pointer;align-items:baseline}
+.t-row:hover{background:rgba(255,255,255,.1)}
+.t-row.cur{background:rgba(232,147,12,.24);color:#fff;font-weight:600}
+.t-row.done{color:#7e8da8}
+.t-row .d{color:#9fb0cd;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.t-row.cur .d{color:#ffd79a}
+.t-foot{font-size:12px;color:#9fb0cd;border-top:1px solid rgba(255,255,255,.14);margin-top:9px;padding-top:8px;display:flex;justify-content:space-between}
+#timer.min .t-body>*:not(.t-clock):not(.t-phase):not(.t-btns){display:none}
+#timer.min .t-clock{font-size:2.1rem}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:1.6rem}
+  #timer{right:10px;bottom:10px;width:calc(100% - 20px);max-width:320px}
+  #timer.min{width:210px}
+  .t-list{max-height:120px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+@media print{
+  header.top,nav.tabs,#timer,.tmrow{display:none}
+  .panel{display:block!important;page-break-before:always}
+  body{background:#fff;font-size:12pt}
+  .card,.note,.st{break-inside:avoid}
+}
+
+/* ---- house style typography ---- */
+:root{
+  --sans:"Atkinson Hyperlegible","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --display:"Space Grotesk","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter-spacing:-.01em}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="crumb" href="../../index.html">← All lessons</a>
+    <div class="meta">Year 6 Science · Can we get it back? · Lesson 2 of 7</div>
+    <h1>Does stuff disappear?</h1>
+    <p class="subtitle">Using mass to find out whether anything new has been made</p>
+    <div class="badges">
+      <span class="badge code">AC9S6U04</span>
+      <span class="badge">AC9S6I03</span>
+      <span class="badge">AC9S6I01</span>
+      <span class="badge">90 minutes</span>
+      <span class="badge">Term 4 · Week 2</span>
+      <span class="badge">Measurement</span>
+    </div>
+    <div class="tmrow">
+      <button class="tmbtn" id="tmToggle" aria-pressed="false"><span class="dot"></span> Teacher mode</button>
+      <button class="tmbtn" id="timerToggle" aria-pressed="true"><span class="dot"></span> Lesson timer</button>
+      <span class="tmhint">Drag the timer by its title bar to move it. Double-click the bar to send it back.</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabscroll" role="tablist">
+    <button class="tab tonly" role="tab" data-p="notes" aria-selected="false">Teaching notes</button>
+    <button class="tab" role="tab" data-p="overview" aria-selected="true">Overview</button>
+    <button class="tab" role="tab" data-p="intentions" aria-selected="false">Intentions</button>
+    <button class="tab" role="tab" data-p="rust" aria-selected="false">Rust check</button>
+    <button class="tab" role="tab" data-p="predict" aria-selected="false">Predict</button>
+    <button class="tab" role="tab" data-p="dissolve" aria-selected="false">Dissolving</button>
+    <button class="tab" role="tab" data-p="fizz" aria-selected="false">Fizzing</button>
+    <button class="tab" role="tab" data-p="summarise" aria-selected="false">Summarise</button>
+    <button class="tab" role="tab" data-p="review" aria-selected="false">Review</button>
+    <button class="tab" role="tab" data-p="resources" aria-selected="false">Resources</button>
+  </div>
+</nav>
+
+<main><div class="wrap">
+
+<!-- ============ TEACHING NOTES ============ -->
+<section class="panel" id="p-notes">
+  <h2>Teaching notes</h2>
+  <p class="lede">Read before the lesson. Hidden from students when teacher mode is off.</p>
+
+  <div class="note teal"><span class="lab">Where this sits</span>
+    This is the conceptual pivot of the whole unit. Students arrive believing two things that are both wrong — that dissolving destroys a substance, and that fizzing makes something out of nothing. Both are corrected today, by the same instrument, in the same lesson. Everything after this rests on it.</div>
+
+  <h3>The one thing to protect</h3>
+  <p>Students must commit a number <em>in writing</em> before anything is weighed. Not a guess said aloud, not a show of hands — a number on paper with their name on it. The learning comes from the gap between what they wrote and what the scale says, and if they never committed, there is no gap.</p>
+  <p>The corollary: do not tell them mass is conserved. That sentence is the answer to today's question and it is theirs to reach.</p>
+
+  <h3>The two moments that matter</h3>
+  <div class="card">
+    <h4>1 · When the salt result comes in</h4>
+    <p>Most of the class will have predicted lighter. The scale says the same. Do not resolve it quickly — sit in it. Ask: "so where is the salt?" Someone will say it is still in the water. Ask how they could prove that. Park the answer; Lesson 3 is them proving it.</p>
+  </div>
+  <div class="card">
+    <h4>2 · When the two containers disagree</h4>
+    <p>Same reaction, same ingredients, two containers. The sealed bag holds its mass; the open beaker loses about three grams. Students have to account for the difference themselves. The answer — that something left the open one — is only available to a class that has already accepted the gas is a real substance with real mass.</p>
+  </div>
+
+  <h3>Method that decides whether this works</h3>
+  <ul>
+    <li><strong>Weigh the whole system, including the containers.</strong> Beaker of water AND the cup of salt both go on the scale together. Tip the salt in, then put the empty cup back on. Same total. This is the same logic as the sealed bag, so use it in both — consistency between the two activities is what lets students transfer the idea.</li>
+    <li><strong>Cover the beaker.</strong> Warm water in an open container loses measurable mass to evaporation inside twenty minutes. A drifting reading in a lesson about conserved mass is the worst possible confound. Cling film or a lid.</li>
+    <li><strong>Keep everything under 400 g.</strong> The scales max out at 500 g including the container.</li>
+    <li><strong>Let the fizzing finish.</strong> The visible reaction stops in about a minute but degassing continues. Swirl gently, wait five minutes, then reweigh.</li>
+  </ul>
+
+  <div class="note stop"><span class="lab">Bag size and quantities are not negotiable</span>
+    The sealed bag gets <strong>50 mL of vinegar and 2 g of bicarbonate, in a 2-litre freezer bag</strong> — that produces about 0.6 L of gas, which inflates the bag clearly without stressing the seal. Do not scale it up. The open-beaker quantities (100 mL and 6 g) would make about 1.6 litres, which would burst a sandwich bag. Those quantities are only ever used in an open container.</div>
+
+  <h3>Reading the results</h3>
+  <table>
+    <thead><tr><th style="width:34%">What they do</th><th style="width:22%">Expect</th><th>What it tells you</th></tr></thead>
+    <tbody>
+      <tr><td>Salt into water</td><td>No change</td><td>Nothing was destroyed. Dissolving is a reversible change.</td></tr>
+      <tr><td>Sealed bag fizzing</td><td>No change, bag inflates</td><td>The gas is inside and it weighs something. Nothing was created either.</td></tr>
+      <tr><td>Open beaker fizzing</td><td>About 3 g lighter</td><td>Something left. It went into the room.</td></tr>
+    </tbody>
+  </table>
+  <p>Groups will not all land on exactly 3 g — expect 2.2 to 2.9. Some carbon dioxide stays dissolved in the liquid, and a little is lost as spray. That spread is useful: it is the first time this unit that students see real measurements disagreeing, and it previews the error discussion in Week 5.</p>
+
+  <h3>On precision</h3>
+  <div class="note"><span class="lab">Worth explicit teaching</span>
+    The elaboration asks for data recorded <em>with appropriate precision</em> — appropriate to the instrument, not the maximum number of decimal places available. A student writing 120.00 g off a scale that reads whole grams has made an error, not shown rigour. Say it out loud today; it is assessed in CP3 under Finding.</div>
+
+  <h3>Misconceptions to expect</h3>
+  <table>
+    <thead><tr><th style="width:27%">Misconception</th><th style="width:33%">How it shows today</th><th>Response</th></tr></thead>
+    <tbody>
+      <tr><td>Dissolving destroys the substance</td><td>Predicting the salt solution will weigh less than the total</td><td>The scale. Then ask how they would prove the salt is still there — and let Lesson 3 answer it.</td></tr>
+      <tr><td>Gas is nothing</td><td>"It turned into nothing" when the bag is discussed</td><td>The inflated bag is clearly full of something, and the sealed mass has not dropped. It is in there and it weighs something.</td></tr>
+      <tr><td>Mass is created by the reaction</td><td>Predicting the fizzing container will get heavier</td><td>Neither container gains. One holds, one loses.</td></tr>
+      <tr><td>Bubbles always mean a new substance</td><td>Carried over from Lesson 1's boiling water card</td><td>Boiling makes bubbles of the same stuff. This makes bubbles of something that was not there before — and you can tell because the mass drops.</td></tr>
+      <tr><td>More decimal places is more accurate</td><td>Writing 118.00 g from a whole-gram scale</td><td>Precision belongs to the instrument. Record what it actually gives you.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>What comes next</h3>
+  <p>Lesson 3 answers the question this lesson opens. Students are told the salt is still in the water; next week they have to get it back out and weigh it. Carry forward the class's own sentence about where the mass went, and the criteria chart.</p>
+</section>
+
+<!-- ============ OVERVIEW ============ -->
+<section class="panel active" id="p-overview">
+  <h2>Overview</h2>
+  <p class="lede">The scales come out. Two things that look like disappearing turn out to be nothing of the sort.</p>
+
+  <h3>Shape of the lesson</h3>
+  <table>
+    <thead><tr><th style="width:30%">Phase</th><th style="width:15%">Time</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rust check</strong></td><td>5 min</td><td>Week 1 reading. Photograph, rate, record. No discussion.</td></tr>
+      <tr><td><strong>Predict</strong></td><td>10 min</td><td>Salt into water. Everyone commits a number in writing.</td></tr>
+      <tr><td><strong>Dissolving test</strong></td><td>20 min</td><td>Weigh the whole system, dissolve, weigh again.</td></tr>
+      <tr><td><strong>Fizzing test</strong></td><td>25 min</td><td>Two containers, same reaction. One sealed, one open.</td></tr>
+      <tr><td><strong>Summarise</strong></td><td>20 min</td><td>Where did the mass go? Amend the criteria chart.</td></tr>
+      <tr><td><strong>Review</strong></td><td>10 min</td><td>Exit ticket.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note tnote"><span class="lab">If you are running behind</span>
+    Cut the summarise phase to ten minutes rather than dropping the second container. Both containers are the lesson. One on its own proves nothing.</div>
+
+  <h3>Everything you need</h3>
+  <p>The full kit, so you are not going back to the plan.</p>
+
+  <div class="kitgrid">
+    <div class="kit-col">
+      <h4>Prepare before the lesson</h4>
+      <ul class="check">
+        <li>Decant vinegar into labelled bench bottles — 150 mL per group</li>
+        <li>Pre-weigh bicarbonate into small cups: 2 g and 6 g, one pair per group</li>
+        <li>Fill jugs with warm water</li>
+        <li>Check every scale switches on and reads zero</li>
+        <li>Print the prediction sheets, both versions</li>
+        <li>Have the criteria chart from Lesson 1 on the wall</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Per group of four</h4>
+      <ul class="check">
+        <li>Scales — 1 g resolution is fine today</li>
+        <li>250 mL beaker, plus cling film or a lid</li>
+        <li>Tall beaker or conical flask for the open fizz (limits spray)</li>
+        <li>2-litre freezer zip-lock bag — <strong>not</strong> a sandwich bag</li>
+        <li>Two small cups for pre-weighed bicarbonate</li>
+        <li>Measuring cylinder, stirring rod, tray</li>
+        <li>Safety glasses for every student</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Consumables per group</h4>
+      <ul class="check">
+        <li>Salt — 20 g</li>
+        <li>Warm water — 100 mL</li>
+        <li>White vinegar — 150 mL total (50 sealed, 100 open)</li>
+        <li>Bicarbonate of soda — 8 g total (2 g sealed, 6 g open)</li>
+        <li>Paper towel</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Whole class</h4>
+      <ul class="check">
+        <li>Criteria chart from Lesson 1 — on display</li>
+        <li>Rust jars, accessible for the weekly reading</li>
+        <li>Laminated rust coverage scale</li>
+        <li>Board space for pooling group results</li>
+        <li>Spill kit at each bench</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Printed sheets</h4>
+      <ul class="check">
+        <li>Mass prediction and result sheet — one per student</li>
+        <li>Supported version — tick-box predictions, pre-filled table</li>
+        <li>Exit ticket slips — six to a page</li>
+        <li>Rust log (already with the jars from Lesson 1)</li>
+      </ul>
+    </div>
+
+    <div class="kit-col">
+      <h4>Not needed today</h4>
+      <ul>
+        <li>The 0.01 g scales — Week 5 only</li>
+        <li>Frypan, kettle, thermometers — Lessons 3 and 4</li>
+        <li>Funnels and evaporating basins — Lesson 3</li>
+        <li>Any heat source at all</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTENTIONS ============ -->
+<section class="panel" id="p-intentions">
+  <h2>What we are learning</h2>
+
+  <div class="card">
+    <h4>Learning intention</h4>
+    <p style="font-size:1.1rem;margin-bottom:0">We are learning to use mass to work out whether anything new has been made.</p>
+  </div>
+
+  <h3>I will be successful when I can…</h3>
+  <ul>
+    <li>use the scales accurately and record to the precision they actually allow</li>
+    <li>make a prediction, then say honestly whether my evidence supported it</li>
+    <li>explain why the mass stays the same when something dissolves</li>
+    <li>explain why the mass drops when a gas escapes from an open container</li>
+  </ul>
+
+  <h3>Stretch</h3>
+  <ul>
+    <li>I can predict the mass loss in grams before it happens, and account for the difference.</li>
+    <li>I can explain why writing more decimal places than my instrument gives is an error, not extra care.</li>
+  </ul>
+
+  <div class="note teal"><span class="lab">Curriculum</span>
+    <strong>AC9S6U04</strong> — compare reversible changes, including dissolving and changes of state, and irreversible changes, including cooking and rusting that produce new substances.<br>
+    <strong>AC9S6I03</strong> — use equipment to observe, measure and record data with reasonable precision, using digital tools as appropriate.<br>
+    <strong>AC9S6I01</strong> — pose investigable questions to identify patterns and test relationships and make reasoned predictions.</div>
+
+  <div class="card">
+    <h4>Your goal for today</h4>
+    <p>One thing you want to get better at. Nothing here is saved or sent anywhere.</p>
+    <textarea style="width:100%;min-height:74px;border:1px solid var(--line);border-radius:8px;padding:10px;font-family:inherit;font-size:16px" placeholder="Today I want to…"></textarea>
+  </div>
+
+  <div class="note tnote"><span class="lab">Link it back</span>
+    Last week the class built a list of evidence that something new has been made. Today adds the strongest item on that list, and it is one nobody suggested: <strong>the mass changed</strong>. Point at the chart before you start.</div>
+</section>
+
+<!-- ============ RUST CHECK ============ -->
+<section class="panel" id="p-rust">
+  <h2>Rust check <span class="timechip">5 min</span></h2>
+  <p class="lede">Week 1 reading. Five minutes, then we move on.</p>
+
+  <div class="card">
+    <p style="margin-bottom:0">Photograph your three jars. Rate each one 0 to 4 against the scale. Write it in the log. <strong>Rate all three separately — do not average them in your head.</strong></p>
+  </div>
+
+  <ol>
+    <li>Collect your log sheet and find your jars. Do not move them.</li>
+    <li>Photograph all three from the same angle as last week.</li>
+    <li>Rate each jar against the laminated scale.</li>
+    <li>Write anything you notice in the last column.</li>
+  </ol>
+
+  <div class="note"><span class="lab">If your three jars disagree</span>
+    That is data, not a mistake. Write all three numbers down and think about why they might differ.</div>
+
+  <div class="note tnote"><span class="lab">Keep this to five minutes</span>
+    No discussion of results yet. The temptation is to let a good conversation run, but the analysis belongs in Week 5 when there is a pattern to analyse. One week's data is noise. Photograph, rate, record, sit down.</div>
+
+  <div class="note tnote"><span class="lab">What you should be seeing</span>
+    After one week, jars B and E are usually showing traces or patches. A, C, D and F often read zero. Do not comment on it — students noticing early that B is ahead of C is exactly the surprise you want intact for Week 5.</div>
+</section>
+
+<!-- ============ PREDICT ============ -->
+<section class="panel" id="p-predict">
+  <h2>Predict <span class="timechip">10 min</span></h2>
+
+  <div class="card">
+    <p style="font-size:1.1rem">On the scale: a beaker holding <strong>100 g of warm water</strong>, and next to it a cup holding <strong>20 g of salt</strong>. Together they read a number.</p>
+    <p style="font-size:1.1rem;margin-bottom:0">Now the salt gets tipped in and stirred until it vanishes. The empty cup goes back on the scale.</p>
+  </div>
+
+  <h3 style="text-align:center">What will the scale read now?</h3>
+
+  <ol>
+    <li>Heavier, lighter, or the same?</li>
+    <li>Write the actual number you expect.</li>
+    <li>Write <em>why</em>. One sentence.</li>
+  </ol>
+
+  <div class="note"><span class="lab">Commit it in writing</span>
+    Write your number down with your name on it before anything is weighed. You are not being marked on whether you are right. You are being marked on whether you can say what happened to your idea afterwards.</div>
+
+  <div class="note tnote"><span class="lab">Do not take a show of hands</span>
+    A show of hands lets students change their mind silently once they see the room. Written, individual, before any equipment moves. Then walk the room and note roughly how the class has split — you will use that number in the summary.</div>
+
+  <div class="note tnote"><span class="lab">What to expect</span>
+    In most Year 6 classes, over half predict lighter. The reasoning is usually some version of "the salt disappeared, so it is gone". A few predict heavier. Almost nobody predicts the same without having been taught it. If your class predicts the same overwhelmingly, ask them to justify it — some will be guessing that the teacher wants that answer.</div>
+
+  <div class="paths">
+    <div class="path"><div class="pt">Need a hand</div><ul><li>Choose from heavier, lighter or the same.</li><li>Then finish: "I think this because…"</li></ul></div>
+    <div class="path core"><div class="pt">Keep going</div><ul><li>Write a number in grams.</li><li>Write one sentence of reasoning.</li></ul></div>
+    <div class="path push"><div class="pt">Push me</div><ul><li>Predict the fizzing results too, both containers, before you see either.</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ DISSOLVING ============ -->
+<section class="panel" id="p-dissolve">
+  <h2>Dissolving test <span class="timechip">20 min</span></h2>
+  <p class="lede">Safety glasses on. Everything stays on the bench.</p>
+
+  <h3>Method</h3>
+  <ol>
+    <li>Put the beaker of warm water on the scale. Put the cup of salt on beside it. <strong>Record the total.</strong></li>
+    <li>Take both off. Tip the salt into the water and stir until you cannot see it.</li>
+    <li>Cover the beaker.</li>
+    <li>Put the beaker back on the scale — <strong>and the empty cup with it</strong>. Record the total.</li>
+  </ol>
+
+  <div class="note"><span class="lab">Why the empty cup goes back on</span>
+    You are weighing everything you started with. If you leave the cup off, you are weighing less stuff than before and the test proves nothing. Nothing leaves the scale.</div>
+
+  <div class="note"><span class="lab">Why we cover it</span>
+    Warm water evaporates. Over twenty minutes that is enough mass to show up and it would ruin the result.</div>
+
+  <h3>Then answer</h3>
+  <ol>
+    <li>What did the scale read before? What did it read after?</li>
+    <li>Was your prediction right? Write what actually happened.</li>
+    <li>You cannot see the salt any more. So where is it?</li>
+    <li>How could you prove it is still there?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> The same number, both times. Small differences of a gram or two come from splashes and from the scale rounding.</p>
+      <p><strong>2.</strong> Most predictions will have been lighter. The honest answer is "I thought it would be lighter and it was not."</p>
+      <p><strong>3.</strong> Still in the water, in pieces far too small to see. Nothing was destroyed — it was spread out.</p>
+      <p style="margin-bottom:0"><strong>4.</strong> Get it back out. Take the water away and see whether the salt is still there. <em>That is next week.</em></p>
+    </div>
+  </details>
+
+  <div class="note teal tnote"><span class="lab">Do not answer question 4</span>
+    Take suggestions, write the best one on the board, and stop there. Boiling it off, leaving it in the sun, and filtering are all worth hearing. Next week they do it and weigh what comes back. Answering it now spends Lesson 3 before you get there.</div>
+
+  <div class="note stop tnote"><span class="lab">Watch for</span>
+    Groups who record a number that differs by more than about five grams have almost certainly left something off the scale. Check the cup is back on. This is a good live teaching point about weighing the whole system.</div>
+</section>
+
+<!-- ============ FIZZING ============ -->
+<section class="panel" id="p-fizz">
+  <h2>Fizzing test <span class="timechip">25 min</span></h2>
+  <p class="lede">Same reaction, two containers. Watch what the scale does differently.</p>
+
+  <div class="stations">
+    <div class="st"><div class="hd"><span>Container A — sealed</span><span class="n">A</span></div><div class="bd">
+      <p><strong>50 mL vinegar</strong> in one corner of the freezer bag. <strong>2 g bicarbonate</strong> in the other corner. Seal it, keeping them apart.</p>
+      <p>Weigh the whole sealed bag. Record.</p>
+      <p>Tip it so they mix — <strong>without opening it</strong>. Let it finish.</p>
+      <p style="margin-bottom:0">Weigh the whole sealed bag again. Record.</p>
+      <div class="kit">2 L freezer bag, 50 mL vinegar, 2 g bicarbonate</div></div></div>
+
+    <div class="st"><div class="hd"><span>Container B — open</span><span class="n">B</span></div><div class="bd">
+      <p><strong>100 mL vinegar</strong> in the tall beaker. <strong>6 g bicarbonate</strong> in its cup beside it, on the scale.</p>
+      <p>Weigh both together. Record.</p>
+      <p>Tip the bicarbonate in. Put the empty cup back on the scale. Leave it open.</p>
+      <p style="margin-bottom:0">Swirl gently. Wait five minutes. Weigh again. Record.</p>
+      <div class="kit">Tall beaker or flask, 100 mL vinegar, 6 g bicarbonate, cup</div></div></div>
+  </div>
+
+  <div class="note stop"><span class="lab">Do not open the bag</span>
+    Not to look, not to let the pressure out, not at the end. It stays sealed until after both readings are recorded. Use the 2-litre freezer bag, not a sandwich bag.</div>
+
+  <h3>What happened?</h3>
+  <table>
+    <thead><tr><th>Container</th><th>Mass before</th><th>Mass after</th><th>Difference</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A — sealed</strong></td><td></td><td></td><td></td></tr>
+      <tr><td><strong>B — open</strong></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <ol>
+    <li>Which container changed mass?</li>
+    <li>Both had exactly the same reaction happening. Why did only one change?</li>
+    <li>The bag puffed up. What is inside it, and does it weigh anything?</li>
+    <li>Where has the missing mass from container B actually gone?</li>
+  </ol>
+
+  <details>
+    <summary>Show the answers</summary>
+    <div class="body">
+      <p><strong>1.</strong> Only B, the open one. It loses roughly 2 to 3 grams.</p>
+      <p><strong>2.</strong> In A nothing could get out. In B the gas escaped into the room. The reaction was identical — the container was not.</p>
+      <p><strong>3.</strong> A gas, made by the reaction. It was not there before. And it weighs something, which is why A did not get lighter — the gas is still on the scale.</p>
+      <p style="margin-bottom:0"><strong>4.</strong> Into the air in the classroom. It has not been destroyed and it has not become nothing. It has moved somewhere we cannot weigh.</p>
+    </div>
+  </details>
+
+  <div class="note teal tnote"><span class="lab">This is the pairing that teaches</span>
+    Neither container proves anything alone. Sealed on its own looks like nothing happened. Open on its own looks like matter was destroyed. Side by side they force the only explanation that fits both: a new substance was made, it is a gas, and gas has mass.</div>
+
+  <div class="note tnote"><span class="lab">Expect a spread, and use it</span>
+    Groups will get between about 2.2 g and 2.9 g for container B rather than an identical figure. Some carbon dioxide stays dissolved in the liquid and a little is lost as spray. Pool the numbers on the board. This is the first time this unit that students see real measurements disagreeing — name it, and say that working out why measurements disagree is what Week 5 is about.</div>
+
+  <div class="paths">
+    <div class="path"><div class="pt">Need a hand</div><ul><li>A partner reads the scale aloud while you write.</li><li>Use the table with the steps already filled in.</li></ul></div>
+    <div class="path core"><div class="pt">Keep going</div><ul><li>Run both containers, record all four masses.</li><li>Answer all four questions.</li></ul></div>
+    <div class="path push"><div class="pt">Push me</div><ul><li>Predict B's loss in grams before you run it, then explain the difference from what you got.</li><li>If you did it again with half the bicarbonate, what would change?</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ SUMMARISE ============ -->
+<section class="panel" id="p-summarise">
+  <h2>Summarise <span class="timechip">20 min</span></h2>
+
+  <h3>Pool the numbers</h3>
+  <p>Every group's container B loss goes on the board.</p>
+  <ol>
+    <li>Are they all the same? Should they be?</li>
+    <li>What could make one group's number different from another's?</li>
+  </ol>
+
+  <div class="note tnote"><span class="lab">Do not tidy this up</span>
+    Resist averaging the numbers into one clean figure. The spread is real and it is the honest picture. Ask what could cause it — spray leaving the beaker, gas still dissolved, not waiting long enough, scale rounding. Every one of those is a source of error, which is the exact language of the Week 5 assessment.</div>
+
+  <h3>The two big ideas</h3>
+  <div class="card">
+    <h4>Nothing disappears</h4>
+    <p style="margin-bottom:0">When salt dissolves, the mass does not change. The salt is still there — spread through the water in pieces too small to see. Nothing was destroyed, so nothing new was made. <strong>That is a reversible change.</strong></p>
+  </div>
+  <div class="card">
+    <h4>If it got lighter, something left</h4>
+    <p style="margin-bottom:0">When the mass drops in an open container, a substance has escaped — usually as a gas. That gas was not there before, which means something new was made. <strong>That is an irreversible change.</strong></p>
+  </div>
+
+  <h3>Back to the chart</h3>
+  <p>Last week you listed the evidence that something new has been made. Add the one nobody suggested:</p>
+  <div class="card">
+    <p style="font-size:1.1rem;margin-bottom:0"><strong>The mass changed.</strong></p>
+  </div>
+  <ol>
+    <li>Where does this belong on our list — near the top or near the bottom?</li>
+    <li>Is it stronger evidence than colour change? Why?</li>
+  </ol>
+
+  <details>
+    <summary>Where this is going</summary>
+    <div class="body">
+      <p>Mass is stronger than colour, smell, or bubbles, for one reason: it is a <em>number</em>. Two people looking at the same brown liquid can disagree about how brown it is. Two people reading the same scale cannot.</p>
+      <p style="margin-bottom:0">It is not perfect — the spread on the board shows that. But it can be checked, repeated, and compared between groups in a way that "it looked different" never can.</p>
+    </div>
+  </details>
+
+  <div class="note tnote"><span class="lab">Amend the chart in front of them</span>
+    Physically write it on. Students need to see the list being changed by evidence they generated, because in Lesson 4 they amend it again. A chart that gets edited is a working tool; a chart that goes up in Week 1 and never changes is wallpaper.</div>
+
+  <h3>Words we used today</h3>
+  <div class="vocab">
+    <span><b>mass</b></span><span><b>dissolve</b></span><span><b>solution</b></span>
+    <span><b>conserved</b></span><span><b>gas</b></span><span><b>sealed</b></span>
+    <span><b>precision</b></span><span><b>prediction</b></span>
+  </div>
+
+  <div class="note teal tnote"><span class="lab">EAL/D</span>
+    <em>Solution</em> is the one to chart. In everyday English it means the answer to a problem; in science it means a substance dissolved evenly through a liquid. Students who know the everyday meaning are more likely to be confused than students meeting the word fresh. Do the same for <em>mass</em>, which many will only know from church.</div>
+</section>
+
+<!-- ============ REVIEW ============ -->
+<section class="panel" id="p-review">
+  <h2>Review <span class="timechip">10 min</span></h2>
+
+  <h3>Three things to take away</h3>
+  <ol>
+    <li>Dissolving does not destroy anything. The mass proves it.</li>
+    <li>If a sealed container keeps its mass, nothing has left — even if the reaction looks dramatic.</li>
+    <li>If an open container loses mass, something has escaped, and it was made by the reaction.</li>
+  </ol>
+
+  <h3>Exit ticket</h3>
+  <div class="card">
+    <p><strong>A sealed jar of fizzing tablets weighs exactly the same before and after the fizzing stops.</strong></p>
+    <p>A student says: <em>"That proves nothing happened."</em></p>
+    <p style="margin-bottom:0">Are they right? How do you know?</p>
+  </div>
+
+  <details class="tnote">
+    <summary>Sorting the exit tickets into piles</summary>
+    <div class="body">
+      <p><strong>Ready to move on</strong> — says the student is wrong, and explains that the gas is still inside the jar so it still counts on the scale. Bonus if they mention that opening it would drop the mass.</p>
+      <p><strong>Watch in Lesson 3</strong> — says the student is wrong but the reason is thin: "because something did happen" or "because we saw bubbles". Right conclusion, no mechanism.</p>
+      <p style="margin-bottom:0"><strong>Target directly</strong> — agrees with the student. These students have not yet accepted that a gas is a substance with mass, and Lesson 3's recovery work will not land until they do. Worth two minutes each next week.</p>
+    </div>
+  </details>
+
+  <div class="card">
+    <h4>Think back</h4>
+    <p>You wrote a goal at the start. Did you get there? Nothing here is saved.</p>
+    <textarea style="width:100%;min-height:68px;border:1px solid var(--line);border-radius:8px;padding:10px;font-family:inherit;font-size:16px" placeholder="What I would do differently next time…"></textarea>
+  </div>
+
+  <h3>Next week</h3>
+  <p>You said the salt is still in the water. Next week you have to prove it — get it back out, and weigh what you recover. You will be given eight grams. Nobody gets eight grams back.</p>
+</section>
+
+<!-- ============ RESOURCES ============ -->
+<section class="panel" id="p-resources">
+  <h2>Resources</h2>
+  <p class="lede">Print before the lesson. Everything here also lives in the repository as a separate file.</p>
+
+  <a class="dlitem all" href="resources/l2-00-all-student-sheets.pdf" download style="margin-bottom:6px">
+    <span class="ic">PDF</span>
+    <span><span class="tt">All student sheets</span>
+    <span class="ds">Every sheet below in one file.</span>
+    <span class="sz">5 pages</span></span>
+  </a>
+
+  <h3>Individual sheets</h3>
+  <div class="dl">
+    <a class="dlitem" href="resources/l2-01-mass-prediction-sheet.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Mass prediction and results</span>
+      <span class="ds">Core version. Prediction committed first, then both tests, then the pooled class data.</span>
+      <span class="sz">3 pages</span></span>
+    </a>
+    <a class="dlitem" href="resources/l2-02-mass-sheet-support.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Mass sheet — supported</span>
+      <span class="ds">Three-way prediction, pre-filled steps, sentence starters for the explanation.</span>
+      <span class="sz">1 page</span></span>
+    </a>
+    <a class="dlitem" href="resources/l2-03-exit-tickets.pdf" download>
+      <span class="ic">PDF</span>
+      <span><span class="tt">Exit tickets</span>
+      <span class="ds">Six to a page. The sealed jar of fizzing tablets.</span>
+      <span class="sz">1 page</span></span>
+    </a>
+    <a class="dlitem doc" href="resources/l2-student-sheets-EDITABLE.docx" download>
+      <span class="ic">DOCX</span>
+      <span><span class="tt">Editable master</span>
+      <span class="ds">All sheets in one Word file.</span></span>
+    </a>
+  </div>
+
+  <div class="note"><span class="lab">Already with the jars</span>
+    The rust coverage scale and weekly log went out with Lesson 1 and stay with the jars until Week 5. No need to reprint.</div>
+
+  <div class="tree tnote">lessons/
+└── 02-does-stuff-disappear/
+    ├── lesson-02-does-stuff-disappear.html   <b>this page</b>
+    └── resources/
+        ├── l2-00-all-student-sheets.pdf
+        ├── l2-01-mass-prediction-sheet.pdf
+        ├── l2-02-mass-sheet-support.pdf
+        ├── l2-03-exit-tickets.pdf
+        └── l2-student-sheets-EDITABLE.docx</div>
+</section>
+
+</div></main>
+
+<!-- ============ TIMER ============ -->
+<div id="timer" role="region" aria-label="Lesson timer">
+  <div class="t-hd">
+    <span class="grip" aria-hidden="true"></span><span class="ttl">Lesson timer</span>
+    <span class="ctl">
+      <button class="iconbtn on" id="tSound" title="Sound on or off" aria-pressed="true">♪</button>
+      <button class="iconbtn" id="tMin" title="Shrink or expand">–</button>
+      <button class="iconbtn" id="tClose" title="Hide the timer">×</button>
+    </span>
+  </div>
+  <div class="t-body">
+    <div class="t-phase" id="tPhase">Rust check</div>
+    <div class="t-sub" id="tSub">Phase 1 of 6</div>
+    <div class="t-clock" id="tClock">5:00</div>
+    <div class="t-rot" id="tRot"></div>
+    <div class="bar"><i id="tBar"></i></div>
+    <div class="t-btns">
+      <button class="btn go" id="tGo">Start</button>
+      <button class="btn" id="tNext">Next</button>
+      <button class="btn" id="tReset">Reset</button>
+    </div>
+    <div class="t-list" id="tList"></div>
+    <div class="t-foot"><span id="tElapsed">Elapsed 0:00</span><span id="tLeft">90 min total</span></div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- teacher mode ---------- */
+  var tm = document.getElementById('tmToggle');
+  tm.addEventListener('click', function(){
+    var on = document.body.classList.toggle('teacher');
+    tm.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if(!on){
+      var cur = document.querySelector('.tab[aria-selected="true"]');
+      if(cur && cur.classList.contains('tonly')) show('overview');
+    }
+  });
+
+  /* ---------- timer visibility (independent of teacher mode) ---------- */
+  document.body.classList.add('timer-on');
+  var tv = document.getElementById('timerToggle');
+  function setTimerVisible(on){
+    document.body.classList.toggle('timer-on', on);
+    tv.setAttribute('aria-pressed', on ? 'true' : 'false');
+    tv.classList.toggle('lit', on);
+  }
+  tv.classList.add('lit');
+  tv.addEventListener('click', function(){
+    setTimerVisible(!document.body.classList.contains('timer-on'));
+  });
+
+  /* ---------- tabs ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function show(id){
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.p===id ? 'true':'false'); });
+    document.querySelectorAll('.panel').forEach(function(p){
+      p.classList.toggle('active', p.id==='p-'+id);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.p); }); });
+
+  /* ---------- timer ---------- */
+  var PHASES = [
+    {name:'Rust check — week 1 reading', mins:5,  tab:'rust'},
+    {name:'Predict',                     mins:10, tab:'predict'},
+    {name:'Dissolving test',             mins:20, tab:'dissolve'},
+    {name:'Fizzing test — two containers', mins:25, tab:'fizz', rotations:2},
+    {name:'Summarise',                   mins:20, tab:'summarise'},
+    {name:'Review — exit ticket',        mins:10, tab:'review'}
+  ];
+  var TOTAL = PHASES.reduce(function(a,p){ return a+p.mins; },0);
+
+  var idx=0, left=PHASES[0].mins*60, running=false, elapsed=0, sound=true, tick=null;
+  var rotLeft=0, rotIdx=0, rotLen=0;
+
+  var el = {
+    box:document.getElementById('timer'), phase:document.getElementById('tPhase'),
+    sub:document.getElementById('tSub'), clock:document.getElementById('tClock'),
+    rot:document.getElementById('tRot'), bar:document.getElementById('tBar'),
+    go:document.getElementById('tGo'), next:document.getElementById('tNext'),
+    reset:document.getElementById('tReset'), list:document.getElementById('tList'),
+    elapsed:document.getElementById('tElapsed'), left:document.getElementById('tLeft'),
+    snd:document.getElementById('tSound'), min:document.getElementById('tMin')
+  };
+
+  function mmss(s){
+    var neg = s<0; s = Math.abs(s);
+    var m = Math.floor(s/60), r = s%60;
+    return (neg?'+':'') + m + ':' + (r<10?'0':'') + r;
+  }
+
+  function beep(times){
+    if(!sound) return;
+    try{
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if(!Ctx) return;
+      var ac = new Ctx();
+      for(var i=0;i<times;i++){
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.connect(g); g.connect(ac.destination);
+        o.frequency.value = 784;
+        var t0 = ac.currentTime + i*0.28;
+        g.gain.setValueAtTime(0.0001,t0);
+        g.gain.exponentialRampToValueAtTime(0.25,t0+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,t0+0.22);
+        o.start(t0); o.stop(t0+0.24);
+      }
+      setTimeout(function(){ try{ac.close();}catch(e){} }, times*300+500);
+    }catch(e){}
+  }
+
+  function buildList(){
+    el.list.innerHTML='';
+    PHASES.forEach(function(p,i){
+      var row=document.createElement('div');
+      row.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+      row.innerHTML='<span>'+p.name+'</span><span class="d">'+p.mins+'m</span>';
+      row.addEventListener('click',function(){ goTo(i); });
+      el.list.appendChild(row);
+    });
+  }
+
+  function render(){
+    var p = PHASES[idx];
+    el.phase.textContent = p.name;
+    el.sub.textContent = 'Phase '+(idx+1)+' of '+PHASES.length+' · '+p.mins+' min';
+    el.clock.textContent = mmss(left);
+    var pct = Math.max(0, Math.min(100, ((p.mins*60-left)/(p.mins*60))*100));
+    el.bar.style.width = pct+'%';
+    el.box.classList.toggle('over', left<0);
+    el.box.classList.toggle('warn', left>=0 && left<=120);
+    el.box.classList.toggle('rotating', !!p.rotations);
+    if(p.rotations){
+      el.rot.textContent = 'Container '+Math.min(rotIdx+1,p.rotations)+' of '+p.rotations+' · '+mmss(rotLeft);
+    }
+    el.elapsed.textContent = 'Elapsed '+mmss(elapsed);
+    var rem = TOTAL*60 - elapsed;
+    el.left.textContent = rem>=0 ? mmss(rem)+' of lesson left' : mmss(rem)+' over';
+    el.go.textContent = running ? 'Pause' : (elapsed===0 && left===PHASES[0].mins*60 ? 'Start' : 'Resume');
+    Array.prototype.forEach.call(el.list.children,function(r,i){
+      r.className='t-row'+(i===idx?' cur':'')+(i<idx?' done':'');
+    });
+  }
+
+  function setPhase(i){
+    idx = Math.max(0, Math.min(PHASES.length-1, i));
+    var p = PHASES[idx];
+    left = p.mins*60;
+    if(p.rotations){ rotLen = Math.floor(p.mins*60/p.rotations); rotIdx=0; rotLeft=rotLen; }
+    if(p.tab) show(p.tab);
+    render();
+  }
+
+  function goTo(i){ setPhase(i); }
+
+  function step(){
+    left--; elapsed++;
+    var p = PHASES[idx];
+    if(p.rotations){
+      rotLeft--;
+      if(rotLeft<=0 && rotIdx < p.rotations-1){ rotIdx++; rotLeft=rotLen; beep(1); }
+    }
+    if(left===0){ beep(2); }
+    render();
+  }
+
+  function toggle(){
+    running = !running;
+    if(running){ tick = setInterval(step,1000); } else { clearInterval(tick); }
+    render();
+  }
+
+  el.go.addEventListener('click', toggle);
+  el.next.addEventListener('click', function(){ setPhase(idx+1); });
+  el.reset.addEventListener('click', function(){
+    running=false; clearInterval(tick); elapsed=0; setPhase(0);
+  });
+  el.snd.addEventListener('click', function(){
+    sound=!sound;
+    el.snd.classList.toggle('on',sound);
+    el.snd.setAttribute('aria-pressed', sound?'true':'false');
+    if(sound) beep(1);
+  });
+  el.min.addEventListener('click', function(){
+    var m = el.box.classList.toggle('min');
+    el.min.textContent = m ? '+' : '–';
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(!document.body.classList.contains('teacher')) return;
+    if(/^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if(e.code==='Space'){ e.preventDefault(); toggle(); }
+    if(e.code==='ArrowRight'){ setPhase(idx+1); }
+    if(e.code==='ArrowLeft'){ setPhase(idx-1); }
+  });
+
+  el.box.querySelector('#tClose').addEventListener('click', function(){
+    setTimerVisible(false);
+  });
+
+  /* ---------- drag ---------- */
+  (function(){
+    var hd = el.box.querySelector('.t-hd');
+    var dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+
+    function place(x, y){
+      var r = el.box.getBoundingClientRect();
+      var maxX = window.innerWidth  - r.width  - 6;
+      var maxY = window.innerHeight - r.height - 6;
+      x = Math.max(6, Math.min(x, Math.max(6, maxX)));
+      y = Math.max(6, Math.min(y, Math.max(6, maxY)));
+      el.box.style.left = x + 'px';
+      el.box.style.top  = y + 'px';
+      el.box.style.right = 'auto';
+      el.box.style.bottom = 'auto';
+    }
+
+    function reset(){
+      el.box.style.left = ''; el.box.style.top = '';
+      el.box.style.right = ''; el.box.style.bottom = '';
+    }
+
+    hd.addEventListener('pointerdown', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      var r = el.box.getBoundingClientRect();
+      dragging = true;
+      sx = e.clientX; sy = e.clientY; ox = r.left; oy = r.top;
+      place(r.left, r.top);
+      el.box.classList.add('dragging');
+      hd.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+
+    hd.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      place(ox + (e.clientX - sx), oy + (e.clientY - sy));
+    });
+
+    function stop(e){
+      if(!dragging) return;
+      dragging = false;
+      el.box.classList.remove('dragging');
+      try{ hd.releasePointerCapture(e.pointerId); }catch(err){}
+    }
+    hd.addEventListener('pointerup', stop);
+    hd.addEventListener('pointercancel', stop);
+    hd.addEventListener('dblclick', function(e){
+      if(e.target.closest('.iconbtn')) return;
+      reset();
+    });
+
+    window.addEventListener('resize', function(){
+      if(el.box.style.left){
+        var r = el.box.getBoundingClientRect();
+        place(r.left, r.top);
+      }
+    });
+  })();
+
+  buildList(); render();
+})();
+</script>
+</body>
+</html>
