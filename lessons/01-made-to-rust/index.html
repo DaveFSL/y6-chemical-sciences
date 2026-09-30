@@ -230,6 +230,58 @@ body.timer-on #timer{display:flex;flex-direction:column}
   --display:"Space Grotesk","Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
 }
 h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter-spacing:-.01em}
+
+/* ---------- interactive card sort ---------- */
+.sortwrap{margin:18px 0 6px}
+.sortbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.sbtn{font:600 14px/1 var(--sans);background:var(--navy);color:#fff;border:0;border-radius:8px;
+  padding:9px 13px;cursor:pointer}
+.sbtn:hover{background:var(--navy-soft)}
+.sbtn[aria-pressed="true"]{background:var(--teal)}
+.sbtn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line)}
+.sbtn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.snames{font:400 14px/1 var(--sans);padding:9px 11px;border:1px solid var(--line);border-radius:8px;
+  background:#fff;color:var(--ink);width:150px}
+.scount{font-size:13.5px;color:var(--muted);margin-left:auto}
+.shint{font-size:14.5px;color:var(--muted);margin:0 0 10px}
+
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:64px;padding:12px;border:2px dashed var(--line);
+  border-radius:12px;background:#fff;margin-bottom:14px}
+.pool:empty::after{content:"All cards placed.";color:var(--muted);font-size:14px}
+
+.zones{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.zone{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;min-height:150px;
+  display:flex;flex-direction:column}
+.zone h4{margin:0 0 9px;font-size:15px;color:var(--navy)}
+.zone .drop{display:flex;flex-direction:column;gap:8px;flex:1}
+.zone.back{border-top:4px solid var(--teal)}
+.zone.unsure{border-top:4px solid var(--line)}
+.zone.gone{border-top:4px solid var(--rust)}
+.zone.over{background:#fffdf3;border-color:var(--amber)}
+
+.scard{font-size:14.5px;line-height:1.35;background:var(--paper);border:1px solid var(--line);
+  border-radius:9px;padding:9px 11px;cursor:grab;touch-action:none;user-select:none;
+  box-shadow:0 1px 0 rgba(27,42,74,.05)}
+.pool .scard{max-width:230px}
+.scard:hover{border-color:var(--amber)}
+.scard.sel{border-color:var(--amber);box-shadow:0 0 0 3px #fbe7c2}
+.scard.drag{position:fixed;z-index:9999;pointer-events:none;cursor:grabbing;
+  box-shadow:0 10px 24px rgba(27,42,74,.22);opacity:.96}
+
+.locked{margin-top:16px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:16px}
+.locked h4{margin:0 0 12px;color:var(--navy)}
+.lockcols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.lockcols h5{margin:0 0 6px;font-size:14px;color:var(--teal)}
+.lockcols ul{margin:0;padding-left:18px;font-size:14px}
+.lockfoot{font-size:14px;color:var(--muted);margin:14px 0 10px}
+
+@media (max-width:700px){
+  .zones,.lockcols{grid-template-columns:1fr}
+  .pool .scard{max-width:none}
+  .scount{margin-left:0}
+}
+
+.muted{color:var(--muted);font-size:13px}
 </style>
 </head>
 <body>
@@ -262,7 +314,7 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
     <button class="tab" role="tab" data-p="intentions" aria-selected="false">Intentions</button>
     <button class="tab" role="tab" data-p="hook" aria-selected="false">Hook</button>
     <button class="tab" role="tab" data-p="elicit" aria-selected="false">Card sort</button>
-    <button class="tab" role="tab" data-p="criteria" aria-selected="false">Criteria</button>
+    <button class="tab" role="tab" data-p="criteria" aria-selected="false">Evidence list</button>
     <button class="tab" role="tab" data-p="stations" aria-selected="false">Stations</button>
     <button class="tab" role="tab" data-p="setup" aria-selected="false">Set up</button>
     <button class="tab" role="tab" data-p="review" aria-selected="false">Review</button>
@@ -340,7 +392,7 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
     <tbody>
       <tr><td><strong>Hook</strong></td><td>12 min</td><td>Walk to the cross. It was made to rust. Someone chose that.</td></tr>
       <tr><td><strong>Card sort</strong></td><td>10 min</td><td>Twelve changes sorted in pairs. No teaching. This is the diagnostic.</td></tr>
-      <tr><td><strong>Build the criteria</strong></td><td>18 min</td><td>Students name what they actually looked at. Class list compiled in their words.</td></tr>
+      <tr><td><strong>Agree what counts as evidence</strong></td><td>18 min</td><td>Straight after the card sort, before the stations. Ask what they were looking at when they decided. Build one class list, in their words, on chart paper. It stays on the wall all term.</td></tr>
       <tr><td><strong>Station circuit</strong></td><td>28 min</td><td>Six benches, six changes, roughly four and a half minutes each.</td></tr>
       <tr><td><strong>Set up the investigation</strong></td><td>17 min</td><td>Rust jars built, nails weighed, labelled, sealed.</td></tr>
       <tr><td><strong>Review</strong></td><td>5 min</td><td>Exit ticket.</td></tr>
@@ -350,6 +402,36 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
   <div class="note tnote"><span class="lab">Timing is tight</span>
     Ninety minutes with an outdoor visit and a practical setup has no slack. If you are running behind at the 60-minute mark, shorten the station circuit to four benches rather than cutting the rust setup. The setup is the only part that cannot be done next week.</div>
 
+
+  <h3>If you are teaching this cold</h3>
+  <p>The whole lesson in order. Each step has its own tab above with the detail.</p>
+  <table>
+    <thead><tr><th style="width:26%">Step</th><th style="width:37%">You do</th><th>Students do</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Hook</strong><br><span class="muted">12 min, outside</span></td>
+        <td>Walk them to the rusted cross at the entrance. Ask the four questions on the Hook tab. Do not answer the last one — it gets answered in Week 5. Back inside, show the photograph of the client&rsquo;s rusting item and name the client.</td>
+        <td>Look, answer, argue. Nothing written.</td></tr>
+      <tr><td><strong>2. Card sort</strong><br><span class="muted">10 min, in pairs</span></td>
+        <td>Say nothing. No hints, no vocabulary, no correcting — this is a diagnostic and steering it destroys the data. Walk around and photograph, or collect the locked-in screens.</td>
+        <td>Sort twelve everyday changes into &ldquo;could get it back&rdquo; and &ldquo;gone for good&rdquo;, on screen or with the printed cards. Unsure cards go in the middle.</td></tr>
+      <tr><td><strong>3. Agree what counts as evidence</strong><br><span class="muted">18 min, whole class</span></td>
+        <td>Ask: <em>what were you actually looking at when you decided?</em> Write their answers on chart paper in their words. Then press with the three questions on that tab.</td>
+        <td>Contribute, argue, land on the idea that one observation is a clue and several agreeing is evidence.</td></tr>
+      <tr><td><strong>4. Station circuit</strong><br><span class="muted">28 min, six benches</span></td>
+        <td>Safety glasses on. Run the candle bench yourself. Call the rotation every four and a half minutes.</td>
+        <td>Observe each change against the class list, then commit: could you get it back, and what decided it?</td></tr>
+      <tr><td><strong>5. Set up the investigation</strong><br><span class="muted">17 min, in groups</span></td>
+        <td>Hand out jars and labels. Check every lid before they go on the shelf. This part cannot be done next week.</td>
+        <td>Build and seal the rust jars, weigh the nails, label them, write the one sentence that would let another group repeat it.</td></tr>
+      <tr><td><strong>6. Review</strong><br><span class="muted">5 min</span></td>
+        <td>Collect the exit tickets.</td>
+        <td>Answer: which station was hardest to classify, and what would settle it?</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note"><span class="lab">Two placeholders to fill in before you teach this</span>
+    <b>The client</b> is a real person at school who has a rusting problem — the groundsman, the facilities officer, the sports coordinator, whoever it is. <b>The rusting asset</b> is their actual rusting item: a gate, a handrail, the goalposts, a bike rack, a shed door. Students write to that person in Week 7 with a recommendation, and the person writes back. The cross at the entrance is the opposite case — rust that was chosen on purpose and nobody wants stopped. The contrast between the two is what the unit runs on. Search the page for <b>[CLIENT NAME]</b> to find every place it appears.</div>
+
   <h3>Everything you need</h3>
   <p>The full kit for this lesson, so you are not going back to the plan.</p>
 
@@ -358,10 +440,10 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
       <h4>Prepare before the lesson</h4>
       <ul class="check">
         <li>Toast three slices of bread — untoasted, golden, blackened. Plate them.</li>
-        <li>Photograph the client's rusting asset. Load it.</li>
+        <li>Photograph the client&rsquo;s rusting item — the gate, handrail, goalposts or whatever you chose. Load it ready to show.</li>
         <li>Take a backup photo of the cross in case of rain.</li>
         <li>Set steel wool in vinegar going before the class arrives.</li>
-        <li>Print the card sort, station sheets and rust labels.</li>
+        <li>Print the station sheets and rust labels. The card sort only needs printing if you would rather they used physical cards — it runs on screen on this page.</li>
         <li>Dispense vinegar, salt and bicarbonate into labelled bench containers.</li>
         <li>Check jars for chips. Set aside any that are cracked.</li>
       </ul>
@@ -372,7 +454,7 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
       <ul class="check">
         <li>Safety glasses — one per student, worn from the station circuit onwards</li>
         <li>Board or chart paper for the criteria list (stays on display all term)</li>
-        <li>Camera or tablet for photographing card sorts</li>
+        <li>Camera or tablet for photographing card sorts, if using the printed cards</li>
         <li>Paper towel and a spill kit at each bench</li>
         <li>Dustpan, brush and a broken-glass bin</li>
         <li>Water and a fire blanket near the candle</li>
@@ -491,7 +573,7 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
     Take the answer nowhere today. Write the question on the board and leave it there for five weeks. Students will return to it in Lesson 5 with a mass reading in front of them that explains it. Answering it now costs you the best payoff in the unit.</div>
 
   <h3>Then, inside</h3>
-  <p>Show the photograph of the rusting asset.</p>
+  <p>Show the photograph of the client&rsquo;s rusting item — the one with rust nobody wants.</p>
   <div class="card">
     <p><strong>Same reaction. Completely different problem.</strong></p>
     <p style="margin-bottom:0">[CLIENT NAME] looks after this and would like it to stop. In seven weeks you are going to write to them and tell them what to do. Today you start finding out.</p>
@@ -508,6 +590,7 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
 <section class="panel" id="p-elicit">
   <h2>Card sort <span class="timechip">10 min</span></h2>
   <p class="lede">In pairs. Two piles. No talking to other pairs.</p>
+  <p>Sort the cards below on screen, or use the printed set from the Resources tab — whichever suits the class. On screen, drag a card into a column, or tap a card and then tap a column. When your pair has finished, press <strong>Lock in our sort</strong> and screenshot it.</p>
 
   <div class="card">
     <p style="margin-bottom:6px"><strong>Could get it back</strong> — you could return it to what it was.</p>
@@ -525,6 +608,34 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
       <tr><td>Butter melting in a pan</td><td>Concrete setting</td></tr>
     </tbody>
   </table>
+
+  <div class="sortwrap" id="sortApp">
+    <div class="sortbar">
+      <button class="sbtn" id="sShuffle" type="button">Shuffle</button>
+      <button class="sbtn" id="sEight" type="button" aria-pressed="false">Use 8 cards</button>
+      <button class="sbtn" id="sLock" type="button">Lock in our sort</button>
+      <button class="sbtn ghost" id="sReset" type="button">Start again</button>
+      <input class="snames" id="sNames" type="text" placeholder="Your names" aria-label="Your names">
+      <span class="scount" id="sCount">0 of 12 placed</span>
+    </div>
+
+    <p class="shint" id="sHint">Drag a card into a column — or tap a card, then tap a column.</p>
+
+    <div class="pool" id="sPool" data-zone="pool" aria-label="Cards still to sort"></div>
+
+    <div class="zones">
+      <div class="zone back"   id="zBack"   data-zone="back"><h4>Could get it back</h4><div class="drop" aria-label="Could get it back"></div></div>
+      <div class="zone unsure" id="zUnsure" data-zone="unsure"><h4>Not sure yet</h4><div class="drop" aria-label="Not sure yet"></div></div>
+      <div class="zone gone"   id="zGone"   data-zone="gone"><h4>Gone for good</h4><div class="drop" aria-label="Gone for good"></div></div>
+    </div>
+
+    <div class="locked" id="sLocked" hidden>
+      <h4 id="sLockTitle">Our sort</h4>
+      <div class="lockcols" id="sLockCols"></div>
+      <p class="lockfoot">Screenshot this and put it in your OneNote. We come back to it in Week 4.</p>
+      <button class="sbtn ghost" id="sUnlock" type="button">Go back and change it</button>
+    </div>
+  </div>
 
   <div class="note"><span class="lab">If you get stuck</span>
     Put it in the middle and move on. A pile of "not sure" is a useful answer, not a failure.</div>
@@ -544,7 +655,7 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
 
 <!-- ============ CRITERIA ============ -->
 <section class="panel" id="p-criteria">
-  <h2>Build the criteria <span class="timechip">18 min</span></h2>
+  <h2>Agree what counts as evidence <span class="timechip">18 min</span></h2>
   <p class="lede">You have all made decisions. Now we work out how you made them.</p>
 
   <h3>The question</h3>
@@ -908,7 +1019,7 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
   var PHASES = [
     {name:'Hook — The cross',            mins:12, tab:'hook'},
     {name:'Card sort — diagnostic',      mins:10, tab:'elicit'},
-    {name:'Build the criteria',          mins:18, tab:'criteria'},
+    {name:'Agree what counts as evidence', mins:18, tab:'criteria'},
     {name:'Station circuit',             mins:28, tab:'stations', rotations:6},
     {name:'Set up the investigation',    mins:17, tab:'setup'},
     {name:'Review — exit ticket',        mins:5,  tab:'review'}
@@ -1104,6 +1215,157 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
 
   buildList(); render();
 })();
+
+  /* ---------- interactive card sort ---------- */
+  (function(){
+    var app = document.getElementById('sortApp');
+    if(!app) return;
+    var CARDS = [
+      {id:1,  t:'Ice cubes left on the bench',   core:true},
+      {id:2,  t:'Salt stirred into warm water',  core:true},
+      {id:3,  t:'A banana skin going brown',     core:false},
+      {id:4,  t:'Chocolate melting in your hand',core:true},
+      {id:5,  t:'A candle burning down',         core:false},
+      {id:6,  t:'Wet clothes drying on the line',core:false},
+      {id:7,  t:'Bread being toasted',           core:true},
+      {id:8,  t:'A nail left outside for a year',core:true},
+      {id:9,  t:'Water boiling in a kettle',     core:true},
+      {id:10, t:'Fireworks going off',           core:true},
+      {id:11, t:'Butter melting in a pan',       core:false},
+      {id:12, t:'Concrete setting',              core:true}
+    ];
+    var pool = document.getElementById('sPool');
+    var zones = Array.prototype.slice.call(app.querySelectorAll('.zone'));
+    var eight = false, sel = null, skipClick = false;
+
+    function deck(){ return eight ? CARDS.filter(function(c){return c.core;}) : CARDS.slice(); }
+
+    function build(shuffle){
+      var d = deck();
+      if(shuffle){ for(var i=d.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=d[i]; d[i]=d[j]; d[j]=t; } }
+      pool.innerHTML=''; zones.forEach(function(z){ z.querySelector('.drop').innerHTML=''; });
+      d.forEach(function(c){
+        var el=document.createElement('div');
+        el.className='scard'; el.textContent=c.t; el.dataset.id=c.id; el.tabIndex=0;
+        pool.appendChild(el);
+      });
+      sel=null; count();
+    }
+
+    function count(){
+      var total = deck().length;
+      var placed = app.querySelectorAll('.zone .scard').length;
+      document.getElementById('sCount').textContent = placed+' of '+total+' placed';
+    }
+
+    function place(card, target){
+      (target.dataset.zone==='pool' ? target : target.querySelector('.drop')).appendChild(card);
+      card.classList.remove('sel'); sel=null; count();
+    }
+
+    function zoneFromPoint(x,y){
+      var e = document.elementFromPoint(x,y);
+      while(e && e!==document.body){
+        if(e.dataset && e.dataset.zone) return e;
+        e = e.parentElement;
+      }
+      return null;
+    }
+
+    /* pointer drag, with tap-to-select fallback */
+    var drag=null;
+    app.addEventListener('pointerdown', function(ev){
+      var card = ev.target.closest('.scard');
+      if(!card || document.getElementById('sLocked').hidden===false) return;
+      var r = card.getBoundingClientRect();
+      drag = {card:card, dx:ev.clientX-r.left, dy:ev.clientY-r.top, x:ev.clientX, y:ev.clientY,
+              w:r.width, moved:false, home:card.parentElement};
+      card.setPointerCapture(ev.pointerId);
+    });
+    app.addEventListener('pointermove', function(ev){
+      if(!drag) return;
+      if(!drag.moved && Math.abs(ev.clientX-drag.x)+Math.abs(ev.clientY-drag.y) < 6) return;
+      if(!drag.moved){
+        drag.moved=true;
+        drag.card.classList.add('drag');
+        drag.card.style.width = drag.w+'px';
+      }
+      drag.card.style.left = (ev.clientX-drag.dx)+'px';
+      drag.card.style.top  = (ev.clientY-drag.dy)+'px';
+      var z = zoneFromPoint(ev.clientX, ev.clientY);
+      zones.forEach(function(q){ q.classList.toggle('over', q===z); });
+    });
+    app.addEventListener('pointerup', function(ev){
+      if(!drag) return;
+      var card = drag.card, moved = drag.moved;
+      card.classList.remove('drag'); card.style.width=''; card.style.left=''; card.style.top='';
+      zones.forEach(function(q){ q.classList.remove('over'); });
+      if(moved){
+        var z = zoneFromPoint(ev.clientX, ev.clientY);
+        place(card, z || drag.home.closest('[data-zone]') || pool);
+      } else {
+        if(sel===card){ card.classList.remove('sel'); sel=null; }
+        else { if(sel) sel.classList.remove('sel'); sel=card; card.classList.add('sel'); }
+        skipClick = true;
+      }
+      drag=null;
+    });
+    app.addEventListener('pointercancel', function(){
+      if(drag){ drag.card.classList.remove('drag'); drag.card.style.cssText=''; drag=null; }
+      zones.forEach(function(q){ q.classList.remove('over'); });
+    });
+
+    /* tap a zone to drop the selected card */
+    app.addEventListener('click', function(ev){
+      if(skipClick){ skipClick = false; return; }
+      if(!sel) return;
+      var z = ev.target.closest('[data-zone]');
+      if(z) place(sel, z);
+    });
+    /* keyboard: 1, 2, 3 place the selected card */
+    app.addEventListener('keydown', function(ev){
+      var card = ev.target.closest('.scard');
+      if(card && (ev.key==='Enter'||ev.key===' ')){
+        ev.preventDefault();
+        if(sel) sel.classList.remove('sel');
+        sel = (sel===card) ? null : card;
+        if(sel) sel.classList.add('sel');
+      }
+      if(sel && '123'.indexOf(ev.key)>-1){
+        ev.preventDefault();
+        place(sel, zones[parseInt(ev.key,10)-1]);
+      }
+    });
+
+    document.getElementById('sShuffle').addEventListener('click', function(){ build(true); });
+    document.getElementById('sReset').addEventListener('click', function(){ build(false); });
+    document.getElementById('sEight').addEventListener('click', function(){
+      eight = !eight; this.setAttribute('aria-pressed', eight?'true':'false');
+      this.textContent = eight ? 'Use 12 cards' : 'Use 8 cards';
+      build(false);
+    });
+
+    var lock = document.getElementById('sLocked');
+    document.getElementById('sLock').addEventListener('click', function(){
+      var names = document.getElementById('sNames').value.trim();
+      document.getElementById('sLockTitle').textContent = names ? 'Our sort — '+names : 'Our sort';
+      var titles = ['Could get it back','Not sure yet','Gone for good'];
+      var html = '';
+      zones.forEach(function(z,i){
+        var items = Array.prototype.slice.call(z.querySelectorAll('.scard'))
+                    .map(function(c){ return '<li>'+c.textContent+'</li>'; }).join('');
+        html += '<div><h5>'+titles[i]+'</h5><ul>'+(items||'<li>—</li>')+'</ul></div>';
+      });
+      var leftOver = pool.querySelectorAll('.scard').length;
+      document.getElementById('sLockCols').innerHTML = html;
+      lock.hidden = false;
+      if(leftOver){ document.getElementById('sHint').textContent = leftOver+' card(s) still unsorted — that is allowed, but say why.'; }
+      lock.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+    document.getElementById('sUnlock').addEventListener('click', function(){ lock.hidden = true; });
+
+    build(true);
+  })();
 </script>
 </body>
 </html>
