@@ -232,7 +232,9 @@ body.timer-on #timer{display:flex;flex-direction:column}
 h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter-spacing:-.01em}
 
 /* ---------- interactive card sort ---------- */
-.sortwrap{margin:18px 0 6px}
+.sortwrap{margin:18px 0 6px;-webkit-user-select:none;user-select:none}
+body.dragging{-webkit-user-select:none;user-select:none;cursor:grabbing}
+.sph{border:1px dashed var(--line);border-radius:9px;background:#f4f1ea}
 .sortbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
 .sbtn{font:600 14px/1 var(--sans);background:var(--navy);color:#fff;border:0;border-radius:8px;
   padding:9px 13px;cursor:pointer}
@@ -597,17 +599,6 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
     <p style="margin-bottom:0"><strong>Gone for good</strong> — there is no way back.</p>
   </div>
 
-  <h3>The twelve changes</h3>
-  <table>
-    <tbody>
-      <tr><td>Ice cubes left on the bench</td><td>Salt stirred into warm water</td></tr>
-      <tr><td>A banana skin going brown</td><td>Chocolate melting in your hand</td></tr>
-      <tr><td>A candle burning down</td><td>Wet clothes drying on the line</td></tr>
-      <tr><td>Bread being toasted</td><td>A nail left outside for a year</td></tr>
-      <tr><td>Water boiling in a kettle</td><td>Fireworks going off</td></tr>
-      <tr><td>Butter melting in a pan</td><td>Concrete setting</td></tr>
-    </tbody>
-  </table>
 
   <div class="sortwrap" id="sortApp">
     <div class="sortbar">
@@ -1277,9 +1268,10 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
     app.addEventListener('pointerdown', function(ev){
       var card = ev.target.closest('.scard');
       if(!card || document.getElementById('sLocked').hidden===false) return;
+      ev.preventDefault();
       var r = card.getBoundingClientRect();
       drag = {card:card, dx:ev.clientX-r.left, dy:ev.clientY-r.top, x:ev.clientX, y:ev.clientY,
-              w:r.width, moved:false, home:card.parentElement};
+              w:r.width, h:r.height, moved:false, home:card.parentElement, ph:null};
       card.setPointerCapture(ev.pointerId);
     });
     app.addEventListener('pointermove', function(ev){
@@ -1287,6 +1279,13 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
       if(!drag.moved && Math.abs(ev.clientX-drag.x)+Math.abs(ev.clientY-drag.y) < 6) return;
       if(!drag.moved){
         drag.moved=true;
+        var ph = document.createElement('div');
+        ph.className = 'sph';
+        ph.style.width = drag.w+'px';
+        ph.style.height = drag.h+'px';
+        drag.card.parentElement.insertBefore(ph, drag.card);
+        drag.ph = ph;
+        document.body.classList.add('dragging');
         drag.card.classList.add('drag');
         drag.card.style.width = drag.w+'px';
       }
@@ -1298,6 +1297,8 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
     app.addEventListener('pointerup', function(ev){
       if(!drag) return;
       var card = drag.card, moved = drag.moved;
+      if(drag.ph && drag.ph.parentElement) drag.ph.parentElement.removeChild(drag.ph);
+      document.body.classList.remove('dragging');
       card.classList.remove('drag'); card.style.width=''; card.style.left=''; card.style.top='';
       zones.forEach(function(q){ q.classList.remove('over'); });
       if(moved){
@@ -1311,7 +1312,11 @@ h1,h2,h3,h4,h5,.t,.num,.tab,.phase-name,.badge{font-family:var(--display);letter
       drag=null;
     });
     app.addEventListener('pointercancel', function(){
-      if(drag){ drag.card.classList.remove('drag'); drag.card.style.cssText=''; drag=null; }
+      if(drag){
+        if(drag.ph && drag.ph.parentElement) drag.ph.parentElement.removeChild(drag.ph);
+        document.body.classList.remove('dragging');
+        drag.card.classList.remove('drag'); drag.card.style.cssText=''; drag=null;
+      }
       zones.forEach(function(q){ q.classList.remove('over'); });
     });
 
